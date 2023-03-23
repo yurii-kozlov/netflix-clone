@@ -17,6 +17,11 @@
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/anchor-is-valid": 0,
     "eol-last": ["error", "always"],
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
     "no-unused-expressions": [
       "error",
       { "allowShortCircuit": true, "allowTernary": true }

@@ -5,3 +5,35 @@
 /*region fonts */
   $mainFontFamily: 'Roboto', sans-serif;
 /*#endregion*/
+
+
+/*region colorWhite */
+  $colorWhite: #fff;
+/*#endregion*/
+
+/*region colorBlack */
+  $colorBlack: #000;
+  $colorBlack1: rgba(0, 0, 0, 0.7);
+/*#endregion*/
+
+/*region colorRed */
+  $colorDanger: rgb(235, 57, 66);
+  $colorRed: #e50914;
+  $colorRed1: #ba1018;
+  $colorRed2: #9d0e16;
+/*#endregion*/
+
+/*region colorGrey */
+  $colorGrey1: rgba(255, 255, 255, 0.7);
+  $colorGrey2: rgba(255, 255, 255, 0.3);
+  $colorGrey3: rgba(39, 34, 34, 0.577);
+/*#endregion*/
+
+/*#region fontWeight */
+  $fontWeightExtaLight: 200;
+  $fontWeightLight: 300;
+  $fontWeightRegular: 400;
+  $fontWeightMedium: 500;
+  $fontWeightSemiBold: 600;
+  $fontWeightBold: 700;
+/*#endregion */
