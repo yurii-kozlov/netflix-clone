@@ -3,19 +3,7 @@
   font-size: 1.8rem;
   @extend %smooth-transition;
   font-weight: $fontWeightRegular;
-
-  @include onDesktop {
-    font-size: 2.4rem;
-  }
-
-  margin-bottom: 1.8rem;
-}
-
-.subtitle {
-  color: $colorWhite;
-  font-size: 1.8rem;
-  @extend %smooth-transition;
-  font-weight: $fontWeightRegular;
+  text-align: center;
 
   @include onDesktop {
     font-size: 2.4rem;
@@ -39,7 +27,7 @@
 .inputAndLabelWrapper {
   height: 100%;
   width: 37rem;
-  min-width: 10rem;
+  min-width: 3rem;
   border: 0.1rem solid $colorGrey2;
   border-radius: 0.7rem;
 
@@ -79,15 +67,31 @@
   padding: 1.7rem 1.8rem 0.5rem;
   color: $colorWhite;
   font-size: 1.7rem;
-}
+  border-radius: 0.7rem;
 
-.emailInputError {
-  border: 0.1rem solid $colorDanger;
+  @include onMobile {
+    height: 4.9rem;
+  }
 }
 
 .emailInput:focus {
   border-color: $colorWhite;
-  border-radius: 0.7rem;
+}
+
+.emailInputError {
+  border-color: $colorDanger;
+}
+
+.emailInputError:focus {
+  border-color: $colorDanger;
+}
+
+.emailInputSuccess {
+  border-color: $colorGreen;
+}
+
+.emailInputSuccess:focus {
+  border-color: $colorGreen;
 }
 
 .emailLabel {
@@ -107,7 +111,6 @@
   }
 }
 
-
 .activeEmailLabel {
   @extend %smooth-transition;
   position: absolute;
@@ -125,9 +128,14 @@
 }
 
 .error {
+  @extend %smooth-transition;
   color: $colorDanger;
   font-size: 1.7rem;
   position: absolute;
   transform: translateY(20%);
   font-weight: $fontWeightRegular;
+
+  @include onMobile {
+    font-size: 1.4rem;
+  }
 }

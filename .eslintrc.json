@@ -168,12 +168,7 @@
       "LabeledStatement",
       "WithStatement"
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": []
-      }
-    ],
+    "import/no-extraneous-dependencies": "off",
     "no-param-reassign": [
       "error",
       {

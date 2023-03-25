@@ -1,3 +1,5 @@
+@import './scrollbar.scss';
+
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -10,12 +12,10 @@ body {
 
 html {
   font-size: $mainFontSize;
-
   margin: 0;
   padding: 0; 
   height: 100%;
-  // background-color: $colorGreyMainBackground;
-  scroll-behavior: smooth;
+  background-color: $mainBackgroundColor;
   overflow-x: hidden;
 }
 

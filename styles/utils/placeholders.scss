@@ -24,3 +24,14 @@
 %buttonRed:active {
   background-color: $colorRed2;
 }
+
+%introPageTitle {
+  color: $colorWhite;
+  font-weight: $fontWeightBold;
+  font-size: 3.2rem;
+  @extend %smooth-transition;
+
+  @include onDesktop {
+    font-size: 4.8rem;
+  }
+}

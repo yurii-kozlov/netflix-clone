@@ -1,10 +1,10 @@
 import { ReactElement, useState } from 'react';
 import cn from 'classnames';
-import styles from 'components/SubscriptionForm/SubscriptionForm.module.scss';
-import { introPageForminputs } from 'types/introPageFormInputs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { emailValidationSchema } from 'constants/validationSchemas/introPageEmailValidation';
 import { useForm } from 'react-hook-form';
+import { emailValidationSchema } from 'constants/validationSchemas/introPageEmailValidation';
+import { introPageForminputs } from 'types/introPageFormInputs';
+import styles from 'components/SubscriptionForm/SubscriptionForm.module.scss';
 
 export const SubscriptionForm = (): ReactElement => {
   const [isLabelActive, setIsLabelActive] = useState<boolean>(false);
@@ -57,7 +57,11 @@ export const SubscriptionForm = (): ReactElement => {
               Email address
             </label>
             <input
-              className={styles.emailInput}
+              className={cn(
+                styles.emailInput,
+                {[styles.emailInputError]: errors.email},
+                {[styles.emailInputSuccess]: emailName && !errors.email}
+              )}
               id='email'
               maxLength={50}
               minLength={5}

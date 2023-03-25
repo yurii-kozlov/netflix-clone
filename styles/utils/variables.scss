@@ -2,18 +2,23 @@
   $mainFontSize: 10px;
 /*#endregion */
 
+/*region backgroundColor */
+  $mainBackgroundColor: rgba(0, 0, 0, 0.8);
+/*#endregion*/
+
 /*region fonts */
   $mainFontFamily: 'Roboto', sans-serif;
 /*#endregion*/
 
-
 /*region colorWhite */
   $colorWhite: #fff;
+  $colorWhite1: #f1f1f1;
 /*#endregion*/
 
 /*region colorBlack */
   $colorBlack: #000;
   $colorBlack1: rgba(0, 0, 0, 0.7);
+  $colorBlack2: rgba(0, 0, 0, 1);
 /*#endregion*/
 
 /*region colorRed */
@@ -21,12 +26,24 @@
   $colorRed: #e50914;
   $colorRed1: #ba1018;
   $colorRed2: #9d0e16;
+  $colorRed3: #dc2626;
+  $colorRed4: #ad1414;
 /*#endregion*/
 
 /*region colorGrey */
   $colorGrey1: rgba(255, 255, 255, 0.7);
   $colorGrey2: rgba(255, 255, 255, 0.3);
   $colorGrey3: rgba(39, 34, 34, 0.577);
+  $colorGrey4: rgba(255, 255, 255, 0.2);
+  $colorGrey5: rgba(255, 255, 255, 0.315);
+/*#endregion*/
+
+/*region colorGreen */
+  $colorGreen: rgb(11, 193, 11);
+/*#endregion*/
+
+/*region colorBlue */
+  $colorBlue: #0071eb;
 /*#endregion*/
 
 /*#region fontWeight */
