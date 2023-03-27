@@ -6,4 +6,10 @@
 
 .link {
   text-decoration: underline;
+  @extend %smooth-transition;
+  display: inline-block;
+}
+
+.link:hover {
+  transform: scale(1.06);
 }
