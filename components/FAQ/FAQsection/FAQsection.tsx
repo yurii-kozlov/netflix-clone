@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
-import { faqSection } from 'types/faqSection';
+import { FAQsection as FAQblock } from 'types/intro/FAQsection';
 import cross from 'images/cross.svg';
 import styles from 'components/FAQ/FAQsection/FAQsection.module.scss';
 
 type FAQsectionProps = {
-  section: faqSection
+  section: FAQblock
 }
 
 export const FAQsection: React.FC<FAQsectionProps> = ({ section }): ReactElement => {

@@ -2,12 +2,15 @@ import React, { ReactElement } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import cn from 'classnames';
-import { media } from 'api/media';
 import { Container } from 'components/Container';
 import { SubscriptionForm } from 'components/SubscriptionForm';
 import styles from 'components/Header/Header.module.scss';
 
-export const Header = (): ReactElement => (
+type HeaderProps = {
+  netflixLogo: string
+}
+
+export const Header: React.FC<HeaderProps> = ({ netflixLogo }): ReactElement => (
   <div className={cn(styles.sectionWrapper, styles.marginBottom)}>
     <Container>
       <header className={styles.section}>
@@ -17,7 +20,7 @@ export const Header = (): ReactElement => (
               alt='Netflix'
               className={styles.logo}
               height={40}
-              src={media.images.netflixLogo}
+              src={netflixLogo}
               width={184}
             />
           </Link>

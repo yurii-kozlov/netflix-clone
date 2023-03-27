@@ -1,4 +1,4 @@
-export interface footerListItem {
+export interface FooterListItem {
   title: string,
   link: string
 }
