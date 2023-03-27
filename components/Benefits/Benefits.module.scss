@@ -1,0 +1,160 @@
+.title {
+  @extend %introPageTitle;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  @include onDesktop {
+    text-align: left;
+  }
+}
+
+.detailedDescription {
+  @extend %smooth-transition;
+  color: $colorWhite;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+  text-align: center;
+
+  @include onDesktop {
+    font-size: 2.5rem;
+    max-width: 48rem;
+    text-align: left;
+  }
+}
+
+.section {
+  padding: 5rem 7rem;
+  background-color: $colorBlack;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @extend %smooth-transition;
+
+  @include onDesktop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.blockReverse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @extend %smooth-transition;
+  gap: 4rem;
+
+  @include onDesktop {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.imageAndVideoWrapper {
+  position: relative;
+}
+
+.card {
+  background-color: $colorBlack2;
+  border-radius: 1rem;
+  border: 0.2rem solid $colorGrey4;
+  box-shadow: 0 0 2em 0 $colorBlack2;
+  width: 60%;
+  max-height: 9.6rem;
+  position: absolute;
+  left: 20%;
+  bottom: 8%;
+  z-index: 3;
+  display: flex;
+  padding: 0.7rem 1rem;
+  justify-content: space-between;
+}
+
+.moviePoster {
+  width: 3.4rem;
+  height: 4.5rem;
+}
+
+.posterAndInfoWrapper {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.movieTitle {
+  @extend %smooth-transition;
+  color: $colorWhite;
+  font-size: 1.4rem;
+
+  @include onTablet {
+    font-size: 1.6rem;
+  }
+}
+
+.downloadingIcon {
+  @extend %smooth-transition;
+  width: 4.8rem;
+  height: 4.8rem;
+
+  @include onDesktop {
+    height: 5rem;
+  }
+}
+
+.movieStatus {
+  @extend %smooth-transition;
+  font-size: 1.2rem;
+  color: $colorBlue;
+
+  @include onDesktop {
+    font-size: 1.4rem;
+  }
+}
+
+.imagesWrapper {
+  position: relative;
+}
+
+.marginBottom {
+  margin-bottom: 0.7rem;
+}
+
+.image {
+  z-index: 2;
+  position: relative;
+  width: 100%;
+
+  @include onMobile {
+    min-width: 35rem;
+  }
+}
+
+.videoWrapper {
+  z-index: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  max-width: 73%;
+  max-height: 54%;
+  position: absolute;
+  top: 48%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+}
+
+.monitorVideoWrapper {
+  z-index: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  max-width: 63%;
+  max-height: 47%;
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

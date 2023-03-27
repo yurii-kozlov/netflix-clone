@@ -1,0 +1,141 @@
+.subtitle {
+  color: $colorWhite;
+  font-size: 1.8rem;
+  @extend %smooth-transition;
+  font-weight: $fontWeightRegular;
+  text-align: center;
+
+  @include onDesktop {
+    font-size: 2.4rem;
+  }
+
+  margin-bottom: 1.8rem;
+}
+
+.inputAndButtonWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  @include onMobile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.inputAndLabelWrapper {
+  height: 100%;
+  width: 37rem;
+  min-width: 3rem;
+  border: 0.1rem solid $colorGrey2;
+  border-radius: 0.7rem;
+
+  @include onMobile {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+.buttonSubmit {
+  @extend %buttonRed;
+  width: 20rem;
+  outline: transparent;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: fontWeightBold;
+  height: 5.6rem;
+
+  @include onMobile {
+    display: block;
+    width: 15rem;
+    height: 4.8rem;
+  }
+
+  @include onTablet {
+    font-size: 2.4rem;
+  }
+}
+
+.emailInput {
+  @extend %smooth-transition;
+  height: 5.5rem;
+  border: 0.1rem solid transparent;
+  outline: transparent;
+  background-color: $colorGrey3;
+  width: 100%;
+  padding: 1.7rem 1.8rem 0.5rem;
+  color: $colorWhite;
+  font-size: 1.7rem;
+  border-radius: 0.7rem;
+
+  @include onMobile {
+    height: 4.9rem;
+  }
+}
+
+.emailInput:focus {
+  border-color: $colorWhite;
+}
+
+.emailInputError {
+  border-color: $colorDanger;
+}
+
+.emailInputError:focus {
+  border-color: $colorDanger;
+}
+
+.emailInputSuccess {
+  border-color: $colorGreen;
+}
+
+.emailInputSuccess:focus {
+  border-color: $colorGreen;
+}
+
+.emailLabel {
+  @extend %smooth-transition;
+  position: absolute;
+  color: $colorGrey1;
+  font-weight: $fontWeightRegular;
+  font-size: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 1.8rem;
+  font-weight: $fontWeightRegular;
+
+  @include onMobile {
+    top: 20%;
+    transform: translateY(-50%);
+  }
+}
+
+.activeEmailLabel {
+  @extend %smooth-transition;
+  position: absolute;
+  color: $colorGrey1;
+  font-size: 1.2rem;
+  top: 25%;
+  transform: translateY(-50%);
+  padding-left: 1.8rem;
+  font-weight: $fontWeightLight;
+
+  @include onMobile {
+    top: 15%;
+    transform: translateY(-90%);
+  }
+}
+
+.error {
+  @extend %smooth-transition;
+  color: $colorDanger;
+  font-size: 1.7rem;
+  position: absolute;
+  transform: translateY(20%);
+  font-weight: $fontWeightRegular;
+
+  @include onMobile {
+    font-size: 1.4rem;
+  }
+}

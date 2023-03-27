@@ -1,0 +1,15 @@
+.listItem {
+  font-size: 1.4rem;
+  color: $colorGrey1;
+  max-width: 20rem;
+}
+
+.link {
+  text-decoration: underline;
+  @extend %smooth-transition;
+  display: inline-block;
+}
+
+.link:hover {
+  transform: scale(1.06);
+}

@@ -1,0 +1,78 @@
+.title {
+  @extend %smooth-transition;
+  color: $colorWhite;
+  font-size: 1.8rem;
+  font-weight: $fontWeightRegular;
+
+  @include onTablet {
+    font-size: 2.4rem;
+  }
+}
+
+.listItem {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  @include onDesktop {
+    max-width: 100rem;
+  }
+}
+
+.answerBlock {
+  background-color: $colorGrey4;
+  max-height: 0;
+  overflow: hidden;
+  @extend %smooth-transition;
+  transform: scaleY(0);
+}
+
+.answerBlockvisible {
+  padding: 2.4rem;
+  max-height: max-content;
+  transform: scaleY(1);
+}
+
+.answerText {
+  @extend %smooth-transition;
+  color: $colorWhite;
+  font-size: 1.8rem;
+  white-space: pre-line;
+
+  @include onTablet {
+    font-size: 2.4rem;
+  }
+}
+
+.buttonOpenClose {
+  @extend %smooth-transition;
+  width: 100%;
+  padding: 2.4rem;
+  text-align: left;
+  background-color: $colorGrey4;
+  border: none;
+  border-bottom: 0.1rem solid $colorBlack;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonOpenClose:hover {
+  background-color: $colorGrey5;
+}
+
+.crossIcon {
+  @extend %smooth-transition;
+  max-width: 1.8rem;
+  max-height: 1.8rem;
+
+  @include onTablet {
+    max-width: 2.4rem;
+    max-height: 2.4rem;
+  }
+
+  transform: rotate(45deg);
+  filter: invert(0.8) sepia(3) saturate(1) hue-rotate(175deg)
+}
+
+.crossIconClicked {
+  transform: rotate(0deg);
+}

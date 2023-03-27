@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { ReactElement } from 'react'
 import { Header } from 'components/Header';
-
+import { Benefits } from 'components/Benefits/Benefits';
+import { FAQ } from 'components/FAQ';
+import { Footer } from 'components/Footer';
 
 export default function Home(): ReactElement {
   return (
@@ -22,6 +24,11 @@ export default function Home(): ReactElement {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <Header />
+      <main>
+        <Benefits />
+        <FAQ />
+        <Footer />
+      </main>
     </>
   )
 }
