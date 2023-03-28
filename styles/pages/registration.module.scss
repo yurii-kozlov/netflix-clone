@@ -1,6 +1,13 @@
 .regContainer {
   max-width: 34rem;
-  min-height: 26rem;
+  @include onTablet {
+    min-height: 80vh;
+  }
+
+  @include onDesktop {
+    min-height: 70vh;
+  }
+
   margin: 0 auto;
   padding: 13rem 0;
   background-color: $colorWhite;
