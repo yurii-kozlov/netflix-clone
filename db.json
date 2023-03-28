@@ -132,5 +132,40 @@
         "link": "#onlyOnNetflix"
       }
     ]
+  },
+  "signUp": {
+    "images": {
+      "netflixLogo": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/netflix-logo_dqyblo.png"
+    },
+    "footerLinksList": [
+      {
+        "title": "FAQ",
+        "link": "#faq"
+      },
+      {
+        "title": "Privacy",
+        "link": "#privacy"
+      },
+      {
+        "title": "Help Center",
+        "link": "#helpCenter"
+      },
+      {
+        "title": "Cookie Preferences",
+        "link": "#cookiePreferences"
+      },
+      {
+        "title": "Netflix Shop",
+        "link": "#netflixShop"
+      },
+      {
+        "title": "Corporate Information",
+        "link": "#corporateInformation"
+      },
+      {
+        "title": "Terms of Use",
+        "link": "#terms"
+      }
+    ]
   }
 }

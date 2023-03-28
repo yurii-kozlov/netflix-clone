@@ -13,7 +13,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
   const { tv, mobile, moviePoster,downloading, mac, kids } = media.images;
   const { sectionTV, sectionDownloading, sectionMac, sectionKids } = media.texts
 
-  return  (
+  return (
     <section className={styles.marginBottom}>
       <div className={cn(styles.section, styles.marginBottom)}>
         <Container>

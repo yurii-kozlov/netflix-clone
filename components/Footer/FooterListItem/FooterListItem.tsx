@@ -8,7 +8,7 @@ type FooterListItemProps = {
 };
 
 export const FooterListItem: React.FC<FooterListItemProps> = ({ listItem }) => {
-  const {title,link } = listItem;
+  const {title, link } = listItem;
 
   return (
     <li className={styles.listItem}>

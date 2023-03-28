@@ -1,0 +1,84 @@
+.logo {
+  @include onMobile {
+    width: 9rem;
+    height: 2.4rem;
+  }
+
+  @extend %smooth-transition;
+}
+
+.wrapper {
+  background-color: $colorWhite;
+}
+
+.header {
+  padding: 1.2rem 0;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    padding: 3rem 0;
+  }
+
+  @include onDesktop {
+    padding: 3rem 1rem;
+  }
+  border-bottom: 0.1rem solid $colorWhite3;
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.signOutLink {
+  @extend %smooth-transition;
+  color: $colorBlack3;
+  font-weight: $fontWeightBold;
+  font-size: 1.4rem;
+
+  @include onTablet {
+    font-size: 1.8rem;
+  }
+}
+
+.signOutLink:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: $colorWhite4;
+  padding: 5rem 0;
+}
+
+.linksList {
+  list-style: none;
+  @extend %smooth-transition;
+  list-style: none;
+  display: grid;
+  gap: 1.6rem;
+  @include onMobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include onTablet {
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  }
+
+  @include onDesktop {
+    max-width: 70vw;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  }
+}
+
+.contact {
+  color: $colorGrey6;
+  font-size: 1.6rem;
+  font-weight: $fontWeightMedium;
+  margin-bottom: 3rem;
+}
+
+.contactPhone:hover {
+  text-decoration: underline;
+}
