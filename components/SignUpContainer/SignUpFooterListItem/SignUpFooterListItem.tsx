@@ -6,6 +6,7 @@ import styles from 'components/SignUpContainer/SignUpFooterListItem/SignUpFooter
 type SignUpFooterListItemProps = {
   footerListItem: FooterListItem
 };
+
 export const SignUpFooterListItem: React.FC<SignUpFooterListItemProps> = ({ footerListItem}): ReactElement => {
   const {link, title } = footerListItem;
 
