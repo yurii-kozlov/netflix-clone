@@ -1,4 +1,5 @@
 import { ReactElement, useState } from 'react';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import styles from 'components/SubscriptionForm/SubscriptionForm.module.scss';
 
 export const SubscriptionForm = (): ReactElement => {
   const [isLabelActive, setIsLabelActive] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -33,6 +35,7 @@ export const SubscriptionForm = (): ReactElement => {
   const onSubmit = (): void => {
     reset();
     setIsLabelActive(!isLabelActive);
+    router.push('/signUp/registration');
   };
 
 

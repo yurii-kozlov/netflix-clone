@@ -1,0 +1,10 @@
+.link {
+  color: $colorGrey6;
+  font-size: 1.3rem;
+  font-weight: $fontWeightMedium;
+  letter-spacing: 0.03rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

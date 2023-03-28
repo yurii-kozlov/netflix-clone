@@ -1,0 +1,65 @@
+.regContainer {
+  max-width: 34rem;
+  min-height: 26rem;
+  margin: 0 auto;
+  padding: 13rem 0;
+  background-color: $colorWhite;
+}
+
+.stepLogoContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.stepLogo {
+  background-image: url('https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Devices.png');
+  display: inline-block;
+  width: 26rem;
+  height: 9rem;
+  @extend %iconSizes;
+}
+
+.stepHeaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.4rem;
+}
+
+.stepIndicator {
+  font-size: 1.3rem;
+  line-height: 1.9rem;
+  text-align: center;
+  display: flex;
+}
+
+.stepTitle {
+  font-size: 3.2rem;
+  text-align: center;
+  font-weight: $fontWeightSemiBold;
+  color: $colorBlack3;
+  margin-bottom: 1.2rem;
+}
+
+.contentBox {
+  text-align: center;
+  font-size: 1.8rem;
+  min-width: 30rem;
+  color: $colorBlack3;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  max-width: 34rem;
+}
+
+.buttonNext {
+  width: 100%;
+  min-height: 6.4rem;
+  @extend %buttonRed;
+  outline: transparent;
+  border: none;
+  font-size: 2.4rem;
+}
