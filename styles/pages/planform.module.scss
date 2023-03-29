@@ -1,0 +1,52 @@
+.planformWrapper {
+  margin: 0 auto;
+  max-width: 102.4rem;
+  padding-top: 2rem;
+  padding-bottom: 10rem;
+  @extend %animationAppearance;
+
+  @include onTablet {
+    min-height: 80vh
+  }
+}
+
+.stepIndicator {
+  @extend %stepIndicator;
+  line-height: 1.9rem;
+  text-align: center;
+}
+
+.stepTitle {
+  @extend %stepTitle;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.checkMarkList {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.checkMarkListItem {
+  display: flex;
+}
+
+.checkMarkListItem:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.listItemText {
+  color: $colorBlack3;
+  font-size: 1.8rem;
+  margin-left: 1rem;
+}
+
+.logo {
+  width: 5rem;
+  height: 5rem;
+}
+
+.checkMark {
+  width: 2.6rem;
+  height: 2.6rem;
+}

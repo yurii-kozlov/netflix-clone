@@ -47,3 +47,17 @@
   font-weight: $fontWeightSemiBold;
   color: $colorBlack3;
 }
+
+%animationAppearance {
+  animation: appearance 1s 1;
+}
+
+@keyframes appearance {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  } to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
