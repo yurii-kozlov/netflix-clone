@@ -16,17 +16,14 @@
 }
 
 .stepIndicator {
-  font-size: 1.3rem;
+  @extend %stepIndicator;
   line-height: 1.9rem;
   text-align: center;
-  display: flex;
 }
 
 .stepTitle {
-  font-size: 3.2rem;
+  @extend %stepTitle;
   text-align: left;
-  font-weight: $fontWeightSemiBold;
-  color: $colorBlack3;
   margin-bottom: 1.2rem;
 }
 

@@ -1,18 +1,16 @@
 import React, { ReactElement, useState } from 'react';
-import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import cn from 'classnames'
-import { instance } from 'api/api';
-import { SignUp } from 'types/SignUp';
+import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
 import { RegistrationFormInputs } from 'types/RegistrationFormInputs';
 import { registrationSchema } from 'constants/validationSchemas/registrationSchema';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
 import styles from 'styles/pages/regform.module.scss';
 
-const Regform: React.FC<RegformStaticProps> = ({ error, regformData }): ReactElement => {
+const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactElement => {
   const [isEmailLabelActive, setIsEmailLabelActive] = useState<boolean>(false);
   const [isPasswordLabelActive, setIsPasswordLabelActive] = useState<boolean>(false);
   const [isReceivingOffers, setIsReceivingOffers] = useState<boolean>(false);
@@ -59,7 +57,7 @@ const Regform: React.FC<RegformStaticProps> = ({ error, regformData }): ReactEle
   }
 
   return (
-    <SignUpContainer error={error || null} signUpData={regformData || null}>
+    <SignUpContainer error={error || null} signUpData={signUpData || null}>
       <Container>
         <div className={styles.formWrapper}>
           <form
@@ -69,7 +67,7 @@ const Regform: React.FC<RegformStaticProps> = ({ error, regformData }): ReactEle
           >
             <div className={styles.formHeader}>
               <span className={styles.stepIndicator}>
-                STEP&nbsp;<b>1</b>&nbsp;OF <b>&nbsp;3</b>
+                STEP&nbsp;<b>1</b>&nbsp;OF<b>&nbsp;3</b>
               </span>
               <h1 className={styles.stepTitle}>Create a password to start your membership</h1>
               <p className={styles.contentBox}>
@@ -162,37 +160,5 @@ const Regform: React.FC<RegformStaticProps> = ({ error, regformData }): ReactEle
     );
 }
 
-type RegformSuccess = {
-  regformData: SignUp;
-  error?: never
-}
-
-type RegformError = {
-  regformData?: never;
-  error: string;
-}
-
-
-type RegformStaticProps = RegformSuccess | RegformError;
-
-export const getStaticProps: GetStaticProps<RegformStaticProps> = async () => {
-  try {
-    const { data } = await instance.get('/signUp');
-
-    return {
-      props: {
-        regformData: data
-      }
-    }
-
-  } catch (error) {
-
-    return {
-      props: {
-        error: 'Failed to fetch Data'
-      }
-    }
-  }
-}
-
+export { getStaticProps };
 export default Regform;
