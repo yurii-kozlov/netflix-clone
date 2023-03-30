@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
 import { Plan } from 'enums/Plan';
+import { TableData } from 'components/TableData';
 import greyCheckMark from 'images/checkMarkGrey.svg';
 import redCheckMark from 'images/checkMark.svg';
 import styles from 'components/PlanTable/PlanTable.module.scss';
@@ -10,6 +11,10 @@ export const PlanTable = (): ReactElement => {
   const [chosenPlan, setPlan] = useState<Plan>(Plan.Premium);
 
   const handlePlanChage = (event: React.ChangeEvent<HTMLInputElement>):void => setPlan(event.target.value as Plan);
+
+  const prices = ['EUR4.99', 'EUR7.49', 'EUR9.99'];
+  const quality = ['Good', 'Better', 'Best'];
+  const resolutions = ['720p', '1080p', '4K+HDR'];
 
   return (
     <div className={styles.tableWrapper}>
@@ -74,43 +79,19 @@ export const PlanTable = (): ReactElement => {
             <td className={styles.feature}>
               Monthly price
             </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Basic})}>
-              EUR4.99
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Standard})}>
-              EUR7.49
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Premium})}>
-              EUR9.99
-            </td>
+            <TableData chosenPlan={chosenPlan} content={prices}/>
           </tr>
           <tr className={styles.tableRow}>
             <td className={styles.feature}>
               Video quality
             </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Basic})}>
-              Good
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Standard})}>
-              Better
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Premium})}>
-              Best
-            </td>
+            <TableData chosenPlan={chosenPlan} content={quality} />
           </tr>
           <tr className={styles.tableRow}>
             <td className={styles.feature}>
               Resolution
             </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Basic})}>
-              720p
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Standard})}>
-              1080p
-            </td>
-            <td className={cn(styles.data, {[styles.dataActive]: chosenPlan === Plan.Premium})}>
-              4K+HDR
-            </td>
+            <TableData chosenPlan={chosenPlan} content={resolutions} />
           </tr>
           <tr className={styles.tableRow}>
             <td className={styles.feature}>
@@ -169,10 +150,10 @@ export const PlanTable = (): ReactElement => {
         <button
           className={styles.buttonNext}
           type="submit"
-            >
+        >
           Next
         </button>
       </div>
     </div>
-    );
+  );
 }
