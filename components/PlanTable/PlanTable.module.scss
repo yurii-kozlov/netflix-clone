@@ -1,0 +1,217 @@
+.tableHeader {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.table {
+  margin-bottom: 1rem;
+}
+
+.planSelectorWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @include onTablet {
+    width: 60%;
+  }
+}
+
+.selectorlabel {
+  width: 33.3%;
+  padding: 0.8rem 0.4rem;
+  position: relative;
+
+  @include onTablet {
+    padding: 1.2rem 0;
+  }
+}
+
+.selectorInput {
+  @extend %smooth-transition;
+  height: 7.5rem;
+  width: 100%;
+
+  @include onTablet {
+    height: 9rem;
+    width: 9rem;
+  }
+
+  @include onDesktop {
+    height: 12rem;
+    width: 12rem;
+  }
+  opacity: 0;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.selectorDescription {
+  @extend %smooth-transition;
+  background-color: $colorRed;
+  border-radius: 0.2rem;
+  height: 7.5rem;
+  width: 100%;
+
+  @include onTablet {
+    height: 9rem;
+    width: 9rem;
+  }
+
+  @include onDesktop {
+    height: 12rem;
+    width: 12rem;
+  }
+  
+  display: inline-block;
+  color: $colorWhite;
+  font-size: 1.7rem;
+  font-weight: $fontWeightBold;
+  margin: 0 auto;
+  opacity: 0.6;
+  padding: 1.8rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.selectorDescriptionActive {
+  opacity: 1;
+}
+
+.selectorDescriptionActive::after {
+  @extend %smooth-transition;
+  border: 0 solid transparent;
+  border-top-color: $colorRed;
+  content: "";
+  display: block;
+  left: 50%;
+  position: absolute;
+  top: 89%;
+  
+  @include onMobile {
+    border-width: 1.5rem 1.5rem 0;
+  }
+
+  @include onDesktop {
+    top: 91%;
+  }
+  transform: translateX(-50%);
+  border-width: 1rem 1rem 0;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableRow {
+  @extend %smooth-transition;
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+
+  @include onMobile {
+    flex-wrap: wrap;
+  }
+}
+
+.tableRow:not(:last-child) {
+  border-bottom: 0.1rem solid $colorGrey8;
+}
+
+.feature {
+  @extend %smooth-transition;
+  width: 40%;
+  color: $colorBlack3;
+  font-weight: $fontWeightMedium;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+
+  @include onMobile {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 1.6rem 0.8rem 0.4rem;
+    text-align: center;
+  }
+}
+
+.data {
+  @extend %smooth-transition;
+  width: 20%;
+  color: $colorGrey6;
+  font-weight: $fontWeightBold;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  text-align: center;
+  
+  @include onMobile {
+    width: 33.3%;
+  }
+}
+
+.dataActive {
+  color: $colorRed;
+}
+
+.checkmark {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.featureDevices {
+  display: inline-block;
+  max-width: 35rem;
+}
+
+.additionalnfoBlock {
+  margin-bottom: 2.4rem;
+}
+
+.additionalnfoWrapper {
+  color: $colorGrey6;
+  display: block;
+  font-size: 1.3em;
+  padding: 0 1.6rem;
+}
+
+.additionalnfoWrapper:first-child {
+  margin-bottom: 1rem;
+}
+
+.additionalInfo {
+  font-size: 1.3rem;
+  color: $colorGrey6;
+}
+
+.outerLink {
+  color: $colorBlue;
+  text-decoration: none;
+}
+
+.outerLink:hover {
+  text-decoration: underline;
+}
+
+.buttonNextContainer {
+  margin: 0 auto;
+  max-width: 44rem;
+  text-align: center;
+}
+
+.buttonNext {
+  @extend %buttonRed;
+  outline: transparent;
+  border: none;
+  font-size: 2.4rem;
+  min-height: 6.4rem;
+  width: 100%;
+}

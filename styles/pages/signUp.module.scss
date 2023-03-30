@@ -1,0 +1,73 @@
+.planWrapper {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding-top: 10rem;
+  padding-bottom: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @extend %animationAppearance;
+
+  @include onTablet {
+    min-height: 80vh;
+  }
+}
+
+.contextBody {
+  margin-bottom: 4.5rem;
+}
+
+.checkMark {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.logo {
+  background-image: url('https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Checkmark.png');
+  @extend %iconSizes;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+}
+
+.stepIndicator {
+  @extend %stepIndicator;
+  line-height: 1.9rem;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.stepTitle {
+  @extend %stepTitle;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.checkMarkList {
+  list-style: none;
+}
+
+.checkMarkListItem {
+  display: flex;
+}
+
+.checkMarkListItem:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.listItemText {
+  color: $colorBlack3;
+  font-size: 1.8rem;
+  max-width: 25rem;
+  margin-left: 1rem;
+}
+
+.buttonNext {
+  width: 100%;
+  min-height: 6.4rem;
+  @extend %buttonRed;
+  outline: transparent;
+  border: none;
+  font-size: 2.4rem;
+}

@@ -35,3 +35,29 @@
     font-size: 4.8rem;
   }
 }
+
+%stepIndicator {
+  font-size: 1.3rem;
+  color: $colorBlack3;
+  font-weight: $fontWeightMedium;
+}
+
+%stepTitle {
+  font-size: 3.2rem;
+  font-weight: $fontWeightSemiBold;
+  color: $colorBlack3;
+}
+
+%animationAppearance {
+  animation: appearance 1s 1;
+}
+
+@keyframes appearance {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  } to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

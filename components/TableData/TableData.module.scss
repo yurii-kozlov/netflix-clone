@@ -1,0 +1,17 @@
+.data {
+  @extend %smooth-transition;
+  width: 20%;
+  color: $colorGrey6;
+  font-weight: $fontWeightBold;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  text-align: center;
+  
+  @include onMobile {
+    width: 33.3%;
+  }
+}
+
+.dataActive {
+  color: $colorRed;
+}

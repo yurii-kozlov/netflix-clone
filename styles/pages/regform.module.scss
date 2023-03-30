@@ -1,0 +1,201 @@
+.formWrapper {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 4rem;
+  padding-bottom: 8rem;
+  min-height: 70vh;
+  @extend %animationAppearance;
+
+  @include onTablet {
+    min-height: 80vh;
+  }
+
+  @include onDesktop {
+    min-height: 70vh;
+  }
+}
+
+.stepIndicator {
+  @extend %stepIndicator;
+  line-height: 1.9rem;
+  text-align: center;
+}
+
+.stepTitle {
+  @extend %stepTitle;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.contentBox {
+  font-size: 1.8rem;
+  color: $colorBlack3;
+}
+
+.contentBox {
+  margin-bottom: 1rem;
+}
+
+.inputsList {
+  list-style: none;
+  margin-bottom: 2.4rem;
+}
+
+.inputAndLabelWrapper {
+  height: 100%;
+  min-width: 3rem;
+  border: 0.1rem solid $colorGrey2;
+  border-radius: 0.7rem;
+  position: relative;
+
+  @include onMobile {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+.input {
+  @extend %smooth-transition;
+  height: 5.5rem;
+  border: 0.1rem solid $colorGrey7;
+  outline: transparent;
+  background-color: $colorWhite;
+  width: 100%;
+  padding: 1.7rem 1.8rem 0.5rem;
+  color: $colorBlack;
+  font-size: 1.7rem;
+  border-radius: 0.7rem;
+
+  @include onMobile {
+    height: 4.9rem;
+  }
+}
+
+.input:focus {
+  border-color: $colorBlue;
+}
+
+.inputError:focus {
+  border-color: $colorDanger;
+}
+
+.inputError:not(:focus) {
+  border-color: $colorDanger;
+}
+
+.inputSuccess {
+  border-color: $colorGreen;
+}
+
+.inputSuccess:focus {
+  border-color: $colorGreen;
+}
+
+.inputSuccess:not(:focus) {
+  border-color: $colorGreen;
+}
+
+.label {
+  @extend %smooth-transition;
+  position: absolute;
+  color: $colorGrey7;
+  font-weight: $fontWeightRegular;
+  font-size: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 1.8rem;
+  font-weight: $fontWeightRegular;
+
+  @include onMobile {
+    font-size: 1.4rem;
+    transform: translateY(-50%);
+  }
+}
+
+.inputListItem:not(:last-child) {
+  margin-bottom: 2.2rem;
+}
+
+.activeLabel {
+  @extend %smooth-transition;
+  position: absolute;
+  font-size: 1.2rem;
+  top: 25%;
+  transform: translateY(-50%);
+  padding-left: 1.8rem;
+  font-weight: $fontWeightBold;
+
+  @include onMobile {
+    transform: translateY(-50%);
+  }
+}
+
+.error {
+  @extend %smooth-transition;
+  color: $colorDanger;
+  font-size: 1.3rem;
+  position: absolute;
+  transform: translateY(20%);
+  font-weight: $fontWeightRegular;
+}
+
+.buttonNext {
+  width: 100%;
+  min-height: 6.4rem;
+  @extend %buttonRed;
+  outline: transparent;
+  border: none;
+  font-size: 2.4rem;
+}
+
+.checkBoxWrapper {
+  position: relative;
+}
+
+.emailCheckbox {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+
+.emailCheckboxLabel {
+  display: block;
+  line-height: 1.2;
+  padding: 0.6rem 0;
+  font-size: 1.6rem;
+  padding-left: 4rem;
+}
+
+.emailCheckboxLabel::before {
+  content: '';
+  height: 2.5rem;
+  width: 2.5rem;
+  color: $colorBlack;
+  background-color: $colorWhite;
+  border: 0.1rem solid;
+  display: block;
+  padding: 0;
+  position: absolute;
+  top: 0.2rem;
+  left: 0;
+}
+
+.emailCheckboxLabelActive::after {
+  border-bottom: 0.4rem solid;
+  border-left: 0.4rem solid;
+  color: $colorBlue;
+  content: "";
+  display: block;
+  height: 0.6rem;
+  left: 0.4rem;
+  position: absolute;
+  top: 0.8rem;
+  transform: rotate(-45deg);
+  width: 1.4rem;
+}
+
+.emailCheckboxLabelActive::before {
+  color: $colorBlue;
+}
