@@ -16,6 +16,10 @@
   }
 }
 
+.formWrapperDisappear {
+  @extend %animationFadingOut;
+}
+
 .stepIndicator {
   @extend %stepIndicator;
   line-height: 1.9rem;

@@ -1,21 +1,32 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import cn from 'classnames';
 import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
 import checkMark from 'images/checkMark.svg';
 import styles from 'styles/pages/signUp.module.scss';
-import { useRouter } from 'next/router';
 
 const SignUp: React.FC<SignUpStaticProps> = ({ signUpData, error }): ReactElement => {
-  const router = useRouter();
+  const [isNextButtonClicked, setIsNextButtonClicked] = useState<boolean>(false);
 
-  const handleNextButtonClick = (): Promise<boolean> => router.push('/signUp/planform');
+  const router = useRouter();
+  const handleNextButtonClick = (): Promise<boolean> => {
+    setIsNextButtonClicked(true);
+
+    return router.push('/signUp/planform')
+  };
 
   return (
     <SignUpContainer error={error || null} signUpData={signUpData || null}>
       <Container>
-        <div className={styles.planWrapper}>
+        <div
+          className={cn(
+            styles.planWrapper,
+            {[styles.planWrapperDisappear]: isNextButtonClicked}
+          )}
+        >
           <span className={styles.logo} />
           <div className={styles.stepWrapper} >
             <span className={styles.stepIndicator}>
