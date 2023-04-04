@@ -1,0 +1,199 @@
+.section {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 4rem;
+  padding-bottom: 12rem;
+  @extend %animationAppearance;
+
+  @include onTablet {
+    min-height: 80vh;
+  }
+}
+
+.stepIndicator {
+  @extend %stepIndicator;
+  line-height: 1.9rem;
+}
+
+.stepTitle {
+  @extend %stepTitle;
+  margin-bottom: 1.2rem;
+}
+
+.heading {
+  margin-bottom: 1rem;
+}
+
+.inputsList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.inputsListItem {
+  width: 100%;
+  flex-grow: 2;
+  margin-bottom: 1rem;
+}
+
+.inputsListItemCardInfo {
+  flex-grow: 0;
+  width: 49%;
+  margin-bottom: 1rem;
+}
+
+.inputAndLabelWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  @extend %smooth-transition;
+  height: 4.6rem;
+  border: 0.1rem solid $colorGrey7;
+  outline: transparent;
+  background-color: $colorWhite;
+  color: $colorBlack;
+  font-size: 1.6rem;
+  border-radius: 0.7rem;
+  padding: 1rem 5.5rem 0 1rem;
+}
+
+.label {
+  @extend %smooth-transition;
+  position: absolute;
+  color: $colorGrey7;
+  font-weight: $fontWeightRegular;
+  font-size: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: $fontWeightRegular;
+  padding-left: 1.1rem;
+
+  @include onMobile {
+    font-size: 1.4rem;
+  }
+}
+
+.input:focus {
+  border-color: $colorBlue;
+}
+
+.inputError:focus {
+  border-color: $colorDanger;
+}
+
+.inputError:not(:focus) {
+  border-color: $colorDanger;
+}
+
+.inputSuccess {
+  border-color: $colorGreen;
+}
+
+.inputSuccess:focus {
+  border-color: $colorGreen;
+}
+
+.inputSuccess:not(:focus) {
+  border-color: $colorGreen;
+}
+
+.error {
+  @extend %smooth-transition;
+  color: $colorDanger;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+}
+
+.activeLabel {
+  @extend %smooth-transition;
+  position: absolute;
+  font-size: 1.1rem;
+  top: 25%;
+  transform: translateY(-55%);
+  font-weight: $fontWeightRegular;
+}
+
+.termsOfUseDisclosure {
+  color: $colorGrey7;
+  font-size: 1.3rem;
+  font-weight: $fontWeightMedium;
+}
+
+.userConsent {
+  margin-bottom: 0.8rem;
+}
+
+.outerLink {
+  color: $colorBlue;
+}
+
+.outerLink:hover {
+  text-decoration: underline;
+}
+
+.agreementInputWrapper {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.agreementInput {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+
+.agreementInputLabel {
+  display: block;
+  line-height: 1.2;
+  padding: 0.8rem 0;
+  font-size: 1.3rem;
+  padding-left: 3.5rem;
+  color: $colorGrey7;
+}
+
+.agreementInputLabel::before {
+  content: '';
+  height: 2.5rem;
+  width: 2.5rem;
+  color: $colorGrey7;
+  background-color: $colorWhite;
+  border: 0.1rem solid;
+  display: block;
+  padding: 0;
+  position: absolute;
+  top: 0.2rem;
+  left: 0;
+}
+
+.agreementInputLabelActive::after {
+  border-bottom: 0.4rem solid;
+  border-left: 0.4rem solid;
+  color: $colorBlue;
+  content: "";
+  display: block;
+  height: 0.6rem;
+  left: 0.4rem;
+  position: absolute;
+  top: 0.8rem;
+  transform: rotate(-45deg);
+  width: 1.4rem;
+}
+
+.agreementInputLabelActive::before {
+  color: $colorBlue;
+}
+
+.buttonSubmit {
+  width: 100%;
+  min-height: 6.4rem;
+  @extend %buttonRed;
+  outline: transparent;
+  border: none;
+  font-size: 2.4rem;
+}

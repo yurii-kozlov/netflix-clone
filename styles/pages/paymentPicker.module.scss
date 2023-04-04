@@ -1,0 +1,145 @@
+.section {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 12rem;
+  @extend %animationAppearance;
+}
+
+.logo {
+  background-image: url(https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Lock.png);
+  @extend %iconSizes;
+  width: 5rem;
+  height: 5rem;
+  display: inline-block;
+}
+
+.logoContainer {
+  margin-bottom: 2rem;
+}
+
+.stepIndicator {
+  @extend %stepIndicator;
+  line-height: 1.9rem;
+}
+
+.stepTitle {
+  @extend %stepTitle;
+  margin-bottom: 1.2rem;
+}
+
+.additionalInfo {
+  font-size: 1.8rem;
+  font-weight: $fontWeightLight;
+  margin-bottom: 1rem;
+  color: $colorBlack3;
+}
+
+.encryptionIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.encryptionInfo {
+  font-size: 1.3rem;
+  height: 1.4rem;
+}
+
+.encryptionInfoWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 2rem;
+  justify-content: flex-start;
+}
+
+.benefit {
+  font-size: 1.8rem;
+  font-weight: $fontWeightBold;
+  color: $colorBlack3;
+}
+
+.additionalInfoWrapper {
+  margin-bottom: 2rem;
+}
+
+.buttonWrapper {
+  position: relative;
+}
+
+.spinner {
+  width: 5rem;
+  height: 5rem;
+  left: 45%;
+  position: absolute;
+  top: 10%;
+  z-index: 1;
+  display: none;
+
+  animation: full-rotation 1s linear infinite;
+  animation-direction: normal;
+  background-image: url(https://assets.nflxext.com/ffe/siteui/common/site-spinner-240.png);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.spinnerActive {
+  display: block;
+}
+
+@keyframes full-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.buttonCard {
+  @extend %smooth-transition;
+  overflow: hidden;
+  width: 100%;
+  min-height: 6rem;
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  background-color: $colorWhite;
+  border-radius: 0.5rem;
+  border: 0.2rem solid $colorGrey8;
+  color: $colorBlack3;
+}
+
+.buttonCardInactive {
+  opacity: 0.3;
+}
+
+.buttonCard:hover {
+  background-color: $colorGrey9;
+}
+
+.cardAndLogosWrapper {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 1.5rem 0;
+  gap: 1rem;
+  margin-left: 1.2rem;
+}
+
+.cardType {
+  font-size: 1.6rem;
+  color: $colorBlack3;
+}
+
+.paymentSystemsWrapper {
+  display: flex;
+  gap: 0.3rem;
+}
