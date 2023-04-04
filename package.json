@@ -25,12 +25,16 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.7",
+    "react-input-mask": "^2.0.4",
     "sass": "^1.59.3",
     "typescript": "5.0.2",
     "uuidv4": "^6.2.13",
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@types/react-input-mask": "^3.0.2",
+    "@types/react-numeric-input": "^2.2.4",
+    "@types/react-text-mask": "^5.4.11",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "eslint": "^8.36.0",

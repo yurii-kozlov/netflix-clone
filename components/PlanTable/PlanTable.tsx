@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { Plan } from 'enums/Plan';
 import { TableData } from 'components/TableData';
@@ -9,8 +10,10 @@ import styles from 'components/PlanTable/PlanTable.module.scss';
 
 export const PlanTable = (): ReactElement => {
   const [chosenPlan, setPlan] = useState<Plan>(Plan.Premium);
+  const router = useRouter();
 
   const handlePlanChage = (event: React.ChangeEvent<HTMLInputElement>):void => setPlan(event.target.value as Plan);
+  const handleNextButtonClick = (): Promise<boolean> => router.push('/signUp/paymentPicker');
 
   const prices = ['EUR4.99', 'EUR7.49', 'EUR9.99'];
   const quality = ['Good', 'Better', 'Best'];
@@ -149,7 +152,8 @@ export const PlanTable = (): ReactElement => {
       <div className={styles.buttonNextContainer}>
         <button
           className={styles.buttonNext}
-          type="submit"
+          onClick={handleNextButtonClick}
+          type="button"
         >
           Next
         </button>

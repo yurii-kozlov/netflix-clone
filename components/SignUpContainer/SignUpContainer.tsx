@@ -30,6 +30,7 @@ export const SignUpContainer: React.FC<SignUpContainerProps> = ({ children, sign
                   height={40}
                   src={images?.netflixLogo}
                   width={184}
+                  priority
                 />
               </Link>
             }
