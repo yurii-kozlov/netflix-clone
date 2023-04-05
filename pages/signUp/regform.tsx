@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import cn from 'classnames'
 import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
 import { RegistrationFormInputs } from 'types/RegistrationFormInputs';
+import { useAppSelector, useAppDispatch } from 'store/hooks';
+import { actions as accountActions } from 'features/personalAccount';
 import { registrationSchema } from 'constants/validationSchemas/registrationSchema';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
@@ -16,20 +18,30 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   const [isReceivingOffers, setIsReceivingOffers] = useState<boolean>(false);
 
   const router = useRouter();
+  const email = useAppSelector((state) => state.accountInfo.email);
+  const dispatch = useAppDispatch();
 
   const {
     register,
     reset,
     formState: {errors, isSubmitSuccessful},
     watch,
-    handleSubmit
+    handleSubmit,
   } = useForm<RegistrationFormInputs>({
+    defaultValues: {
+      email
+    },
     mode: 'all',
     resolver: yupResolver(registrationSchema),
   });
 
   const emailInput = watch('email');
-  const password = watch('password');
+  const passwordInput = watch('password');
+
+  const updateEmail = (updatedEmail: string): void => {
+    dispatch(accountActions.setEmail(updatedEmail));
+  }
+
 
   const handleReceiveingOffers = (): void => setIsReceivingOffers(!isReceivingOffers);
 
@@ -42,15 +54,19 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   }
 
   const handlePasswordInputFocus = (): void => {
-    if (password) {
+    if (passwordInput) {
       setIsPasswordLabelActive(true);
     } else {
       setIsPasswordLabelActive(!isPasswordLabelActive);
     }
   }
 
-  const onSubmit = (): void => {
-    reset();
+  const onSubmit = (formData: RegistrationFormInputs): void => {
+    updateEmail(formData.email);
+    reset({
+      email: '',
+      password: ''
+    });
     setIsEmailLabelActive(!isEmailLabelActive);
     setIsPasswordLabelActive(!isPasswordLabelActive);
     router.push('/signUp');
@@ -85,9 +101,9 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
               <li className={styles.inputListItem}>
                 <div className={styles.inputAndLabelWrapper}>
                   <label
-                    className={cn(styles.label, {[styles.activeLabel]: isEmailLabelActive})}
+                    className={cn(styles.label, {[styles.activeLabel]: isEmailLabelActive || emailInput})}
                     htmlFor='email'
-                  >
+                    >
                     Email
                   </label>
                   <input
@@ -119,7 +135,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
                     className={cn(
                       styles.input,
                       {[styles.inputError]: errors.password},
-                      {[styles.inputSuccess]: password && !errors.password}
+                      {[styles.inputSuccess]: passwordInput && !errors.password}
                     )}
                     id='password'
                     {...register('password')}
