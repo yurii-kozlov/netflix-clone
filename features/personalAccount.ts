@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface InitialState {
   email: string,
-  password: string
 }
 
 const initialState: InitialState = {
-  email: '',
-  password: ''
+  email: ''
 }
 
 const personalAccoutSlice = createSlice({
@@ -16,9 +14,6 @@ const personalAccoutSlice = createSlice({
   reducers: {
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
-    },
-    setPassword: (state, action: PayloadAction<string>) => {
-      state.password = action.payload;
     }
   },
 });
