@@ -11,6 +11,10 @@
   background-color: $colorWhite;
 }
 
+.childrenWrapper {
+  overflow: hidden;
+}
+
 .header {
   padding: 1.2rem 0;
   @extend %smooth-transition;

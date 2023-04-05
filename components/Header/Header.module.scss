@@ -72,6 +72,14 @@
   }
 }
 
+.linkToSignInPage:hover {
+ background-color: $colorRed2;
+}
+
+.linkToSignInPage:active{
+  background-color: $colorRed5;
+ }
+
 .content {
   text-align: center;
 }

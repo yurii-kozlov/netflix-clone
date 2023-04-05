@@ -20,7 +20,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   const {
     register,
     reset,
-    formState: {errors},
+    formState: {errors, isSubmitSuccessful},
     watch,
     handleSubmit
   } = useForm<RegistrationFormInputs>({
@@ -59,7 +59,11 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   return (
     <SignUpContainer error={error || null} signUpData={signUpData || null}>
       <Container>
-        <div className={styles.formWrapper}>
+        <div className={cn(
+          styles.formWrapper,
+          {[styles.formWrapperDisappear]: isSubmitSuccessful}
+        )}
+        >
           <form
             action="#"
             method='post'
@@ -119,6 +123,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
                     )}
                     id='password'
                     {...register('password')}
+                    autoComplete="current password"
                     maxLength={50}
                     minLength={5}
                     onBlur={handlePasswordInputFocus}

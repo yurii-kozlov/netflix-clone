@@ -19,7 +19,7 @@ const CreditOption: React.FC<SignUpStaticProps> = ({ error, signUpData }): React
   const [isLastNameLabelActive, setIsLastNameLabelActive] = useState<boolean>(false);
 
   const {
-    handleSubmit, reset, register, formState: {errors}, watch, setValue
+    handleSubmit, reset, register, formState: {errors, isSubmitSuccessful}, watch, setValue
   } = useForm<CreditCardFormInputs>({
     mode: 'all',
     resolver: yupResolver(creditCardValidation)
@@ -88,7 +88,12 @@ const CreditOption: React.FC<SignUpStaticProps> = ({ error, signUpData }): React
   return (
     <SignUpContainer error={error || null} signUpData={signUpData || null}>
       <Container>
-        <section className={styles.section}>
+        <section
+          className={cn(
+            styles.section,
+            {[styles.sectionDisappear]: isSubmitSuccessful}
+          )}
+        >
           <div className={styles.heading} >
             <span className={styles.stepIndicator}>
               STEP&nbsp;<b>3</b>&nbsp;OF<b>&nbsp;3</b>

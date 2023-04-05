@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { emailValidationSchema } from 'constants/validationSchemas/introPageEmailValidation';
 import { introPageForminputs } from 'types/introPageFormInputs';
+import { LoadingIndicator } from 'components/LoadingIndicator';
 import styles from 'components/SubscriptionForm/SubscriptionForm.module.scss';
 
 export const SubscriptionForm = (): ReactElement => {
@@ -15,7 +16,7 @@ export const SubscriptionForm = (): ReactElement => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     watch
   } = useForm<introPageForminputs>({
     mode: 'all',
@@ -75,9 +76,18 @@ export const SubscriptionForm = (): ReactElement => {
             />
             {errors.email && <p className={styles.error} >{errors.email.message}</p>}
           </div>
-          <button className={styles.buttonSubmit} type="submit">Get Started</button>
+          <button
+            className={cn(
+              styles.buttonSubmit,
+              {[styles.buttonSubmitDisabled]: isSubmitSuccessful}
+            )}
+            disabled={isSubmitSuccessful}
+            type="submit"
+          >
+            {isSubmitSuccessful ? <LoadingIndicator /> : 'Get Started'}
+          </button>
         </div>
       </form>
     </div>
-    )
+  )
 } ;

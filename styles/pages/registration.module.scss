@@ -1,18 +1,10 @@
 .regContainer {
   max-width: 34rem;
+  overflow: hidden;
   @extend %animationAppearance;
-
   @include onTablet {
     min-height: 80vh;
   }
-
-.regContainerDisappear {
-  animation: fade-out 0.5s 1;
-  max-width: 34rem;
-  @include onTablet {
-    min-height: 80vh;
-  }
-}
 
   @include onDesktop {
     min-height: 70vh;
@@ -21,6 +13,10 @@
   margin: 0 auto;
   padding: 13rem 0;
   background-color: $colorWhite;
+}
+
+.regContainerDisappear {
+  @extend %animationFadingOut;
 }
 
 .stepLogoContainer {

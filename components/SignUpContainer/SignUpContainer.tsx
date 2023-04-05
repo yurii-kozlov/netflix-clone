@@ -38,7 +38,9 @@ export const SignUpContainer: React.FC<SignUpContainerProps> = ({ children, sign
           </div>
         </Container>
       </header>
-      {children}
+      <div className={styles.childrenWrapper}>
+        {children}
+      </div>
       <footer className={styles.footer}>
         <Container>
           <p className={styles.contact}>

@@ -15,14 +15,19 @@ const PaymentPicker: React.FC<SignUpStaticProps> = ({ signUpData, error }): Reac
   const router = useRouter();
 
   const handleButtonPaymentClick = (): void => {
-    router.push('/signUp/creditOption');
     setIsButtonPaymentClicked(true);
+    router.push('/signUp/creditOption');
   }
 
   return (
     <SignUpContainer error={error || null} signUpData={signUpData || null}>
       <Container>
-        <section className={styles.section}>
+        <section
+          className={cn(
+            styles.section,
+            {[styles.sectionDisappear]: isButtonPaymentClicked}
+          )}
+        >
           <div className={styles.heading} >
             <div className={styles.logoContainer}>
               <span className={styles.logo} />
@@ -43,10 +48,12 @@ const PaymentPicker: React.FC<SignUpStaticProps> = ({ signUpData, error }): Reac
           </div>
           <div className={styles.buttonWrapper}>
             <div className={cn(styles.spinner, {[styles.spinnerActive]: isButtonPaymentClicked})}/>
-            <button className={cn(
+            <button
+              className={cn(
               styles.buttonCard,
               {[styles.buttonCardInactive]: isButtonPaymentClicked}
-            )}
+              )}
+              disabled={isButtonPaymentClicked}
               onClick={handleButtonPaymentClick}
               type="button"
             >
