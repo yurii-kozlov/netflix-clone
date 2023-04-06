@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { Media } from 'types/intro/Media';
 import { Container } from 'components/Container';
 import styles from 'components/Benefits/Benefits.module.scss';
+import Image from 'next/image';
 
 type BenefitsProps = {
   media: Media
@@ -25,7 +26,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imageAndVideoWrapper} >
-              <img alt="tv" className={styles.image} src={tv} />
+              <Image alt="tv" className={styles.image} height={480} src={tv} width={640}/>
               <div className={styles.videoWrapper}>
                 <video
                   className={styles.video}
@@ -54,7 +55,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imagesWrapper} >
-              <img alt="mobile" className={styles.image} src={mobile} />
+              <Image alt="mobile" className={styles.image} height={480} src={mobile} width={640}/>
               <div className={styles.card} >
                 <div className={styles.posterAndInfoWrapper}>
                   <img alt="moviePoster" className={styles.moviePoster} src={moviePoster}/>
@@ -79,7 +80,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imageAndVideoWrapper} >
-              <img alt="mac" className={styles.image} src={mac} />
+              <Image alt="mac" className={styles.image} height={480} src={mac} width={640}/>
               <div className={cn(styles.monitorVideoWrapper )}>
                 <video
                   className={styles.video}
@@ -108,11 +109,11 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imagesWrapper} >
-              <img alt="kids" className={styles.image} src={kids} />
+              <Image alt="kids" className={styles.image} height={480} src={kids} width={640}/>
             </div>
           </div>
         </Container>
       </div>
     </section>
-    );
+  );
 }
