@@ -61,9 +61,9 @@ export const SubscriptionForm = (): ReactElement => {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
         >
-        <h3 className={styles.subtitle}>
+        <h1 className={styles.subtitle}>
           Ready to watch? Enter your email to create or restart your membership.
-        </h3>
+        </h1>
         <div className={styles.inputAndButtonWrapper}>
           <div className={styles.inputAndLabelWrapper}>
             <label

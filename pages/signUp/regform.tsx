@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import cn from 'classnames'
@@ -73,111 +74,116 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   }
 
   return (
-    <SignUpContainer error={error || null} signUpData={signUpData || null}>
-      <Container>
-        <div className={cn(
+    <>
+      <Head>
+        <title>Netflix</title>
+      </Head>
+      <SignUpContainer error={error || null} signUpData={signUpData || null}>
+        <Container>
+          <div className={cn(
           styles.formWrapper,
           {[styles.formWrapperDisappear]: isSubmitSuccessful}
-        )}
-        >
-          <form
-            action="#"
-            method='post'
-            onSubmit={handleSubmit(onSubmit)}
+          )}
           >
-            <div className={styles.formHeader}>
-              <span className={styles.stepIndicator}>
-                STEP&nbsp;<b>1</b>&nbsp;OF<b>&nbsp;3</b>
-              </span>
-              <h1 className={styles.stepTitle}>Create a password to start your membership</h1>
-              <p className={styles.contentBox}>
-                Just a few more steps and you&apos;re done!
-              </p>
-              <p className={styles.contentBox}>
-                We hate paperwork, too.
-              </p>
-            </div>
-            <ul className={styles.inputsList}>
-              <li className={styles.inputListItem}>
-                <div className={styles.inputAndLabelWrapper}>
-                  <label
-                    className={cn(styles.label, {[styles.activeLabel]: isEmailLabelActive || emailInput})}
-                    htmlFor='email'
+            <form
+              action="#"
+              method='post'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <div className={styles.formHeader}>
+                <span className={styles.stepIndicator}>
+                  STEP&nbsp;<b>1</b>&nbsp;OF<b>&nbsp;3</b>
+                </span>
+                <h1 className={styles.stepTitle}>Create a password to start your membership</h1>
+                <p className={styles.contentBox}>
+                  Just a few more steps and you&apos;re done!
+                </p>
+                <p className={styles.contentBox}>
+                  We hate paperwork, too.
+                </p>
+              </div>
+              <ul className={styles.inputsList}>
+                <li className={styles.inputListItem}>
+                  <div className={styles.inputAndLabelWrapper}>
+                    <label
+                      className={cn(styles.label, {[styles.activeLabel]: isEmailLabelActive || emailInput})}
+                      htmlFor='email'
                     >
-                    Email
-                  </label>
-                  <input
-                    className={cn(
+                      Email
+                    </label>
+                    <input
+                      className={cn(
                       styles.input,
                       {[styles.inputError]: errors.email},
                       {[styles.inputSuccess]: emailInput && !errors.email}
-                    )}
-                    {...register('email')}
-                    id='email'
-                    maxLength={50}
-                    minLength={5}
-                    onBlur ={handleEmailInputFocus}
-                    onFocus={handleEmailInputFocus}
-                    type="email"
-                  />
-                  {errors.email && <p className={styles.error} >{errors.email.message}</p>}
-                </div>
-              </li>
-              <li className={styles.inputListItem}>
-                <div className={styles.inputAndLabelWrapper}>
-                  <label
-                    className={cn(styles.label, {[styles.activeLabel]: isPasswordLabelActive})}
-                    htmlFor='password'
-                  >
-                    Add a password
-                  </label>
-                  <input
-                    className={cn(
+                      )}
+                      {...register('email')}
+                      id='email'
+                      maxLength={50}
+                      minLength={5}
+                      onBlur ={handleEmailInputFocus}
+                      onFocus={handleEmailInputFocus}
+                      type="email"
+                    />
+                    {errors.email && <p className={styles.error} >{errors.email.message}</p>}
+                  </div>
+                </li>
+                <li className={styles.inputListItem}>
+                  <div className={styles.inputAndLabelWrapper}>
+                    <label
+                      className={cn(styles.label, {[styles.activeLabel]: isPasswordLabelActive})}
+                      htmlFor='password'
+                    >
+                      Add a password
+                    </label>
+                    <input
+                      className={cn(
                       styles.input,
                       {[styles.inputError]: errors.password},
                       {[styles.inputSuccess]: passwordInput && !errors.password}
-                    )}
-                    id='password'
-                    {...register('password')}
-                    autoComplete="current password"
-                    maxLength={50}
-                    minLength={5}
-                    onBlur={handlePasswordInputFocus}
-                    onFocus={handlePasswordInputFocus}
-                    type="password"
-                  />
-                  {errors.password && <p className={styles.error} >{errors.password.message}</p>}
-                </div>
-              </li>
-              <li className={styles.inputListItem}>
-                <div className={styles.checkBoxWrapper}>
-                  <label
-                    className={cn(styles.emailCheckboxLabel, {[styles.emailCheckboxLabelActive]: isReceivingOffers})}
-                    htmlFor='emailPreference'
-                  >
-                    Please do not email me Netflix special offers.
-                    <input
-                      checked={isReceivingOffers}
-                      className={styles.emailCheckbox}
-                      id='emailPreference'
-                      name='emailPreference'
-                      onChange={handleReceiveingOffers}
-                      type="checkbox"
+                      )}
+                      id='password'
+                      {...register('password')}
+                      autoComplete="current password"
+                      maxLength={50}
+                      minLength={5}
+                      onBlur={handlePasswordInputFocus}
+                      onFocus={handlePasswordInputFocus}
+                      type="password"
                     />
-                  </label>
-                </div>
-              </li>
-            </ul>
-            <button
-              className={styles.buttonNext}
-              type="submit"
-            >
-              Next
-            </button>
-          </form>
-        </div>
-      </Container>
-    </SignUpContainer>
+                    {errors.password && <p className={styles.error} >{errors.password.message}</p>}
+                  </div>
+                </li>
+                <li className={styles.inputListItem}>
+                  <div className={styles.checkBoxWrapper}>
+                    <label
+                      className={cn(styles.emailCheckboxLabel, {[styles.emailCheckboxLabelActive]: isReceivingOffers})}
+                      htmlFor='emailPreference'
+                    >
+                      Please do not email me Netflix special offers.
+                      <input
+                        checked={isReceivingOffers}
+                        className={styles.emailCheckbox}
+                        id='emailPreference'
+                        name='emailPreference'
+                        onChange={handleReceiveingOffers}
+                        type="checkbox"
+                     />
+                    </label>
+                  </div>
+                </li>
+              </ul>
+              <button
+                className={styles.buttonNext}
+                type="submit"
+              >
+                Next
+              </button>
+            </form>
+          </div>
+        </Container>
+      </SignUpContainer>
+    </>
     );
 }
 
