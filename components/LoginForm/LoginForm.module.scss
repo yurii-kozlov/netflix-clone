@@ -1,0 +1,231 @@
+.block {
+  margin: 0 auto;
+  background-color: $colorBlack;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    background-color: $colorBlack4;
+    max-width: 45rem;
+  }
+}
+
+.content {
+  min-height: 52rem;
+
+  @include onTablet {
+    min-height: 66rem;
+    padding: 6rem 6.8rem 4rem;
+  }
+}
+
+.title {
+  color: $colorWhite;
+  font-size: 3.2rem;
+  font-weight: $fontWeightBold;
+  margin-bottom: 2.8rem;
+}
+
+.inputAndLabelWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.input {
+  @extend %smooth-transition;
+  width: 100%;
+  padding: 1.6rem 2rem 0;
+  height: 5rem;
+  outline: transparent;
+  border-radius: 0.7rem;
+  border: none;
+  background-color: $colorBlack3;
+  color: $colorWhite;
+  font-size: 1.6rem;
+  position: relative;
+}
+
+.inputAndLabelWrapperError::after {
+  border-bottom: 0.2rem solid $colorYellow;
+  border-bottom-left-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
+  display: block;
+  content: '';
+  height: 0.6rem;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.input:focus {
+  background-color: $colorGrey10;
+}
+
+.label {
+  @extend %smooth-transition;
+  transition-timing-function: ease-in-out;
+  position: absolute;
+  color: $colorGrey7;
+  font-size: 1.6rem;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.labelActive {
+  @extend %smooth-transition;
+  top: 25%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+.inputsList {
+  @extend %smooth-transition;
+  list-style: none;
+  margin-bottom: 3rem;
+
+  @include onTablet {
+    margin-bottom: 2rem;
+  }
+}
+
+.inputsListItem:not(:last-child) {
+  margin-bottom: 1.5rem;
+
+  @include onTablet {
+    margin-bottom: 3rem;
+  }
+}
+
+.error {
+  color: $colorYellow;
+  padding: 0.6rem 0.3rem;
+  font-size: 1.3rem;
+}
+
+.buttonSubmit {
+  @extend %buttonRed;
+  width: 100%;
+  padding: 1.6rem;
+  font-size: 1.6rem;
+  border: none;
+  font-weight: $fontWeightBold;
+  margin-bottom: 1.2rem;
+}
+
+.buttonSubmit:hover {
+  background-color: $colorRed2;
+}
+
+.buttonSubmit:active {
+  background-color: $colorRed5;
+}
+
+.rememberMeLabelText {
+  color: $colorGrey11;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+  margin-left: 2rem;
+}
+
+.checkboxAndNeedHelpWrapper {
+  color: $colorGrey11;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+  display: flex;
+  align-items: center;
+}
+
+.needHelpLink:hover {
+ text-decoration: underline;
+}
+
+
+.checkBoxWrapper {
+  position: relative;
+  flex-grow: 1;
+}
+
+.checkBoxlabel {
+  position: relative;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.checkBoxlabel::before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: $colorGrey6;
+  border: 0;
+  border-radius: 0.2rem;
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.checkbox:focus + .checkBoxlabel::before {
+  background-color: $colorWhite;
+}
+
+.checkboxLabelActive::after {
+  border-bottom: 0.3rem solid;
+  border-left: 0.3rem solid;
+  color: $colorBlack;
+  content: "";
+  display: block;
+  height: 0.4rem;
+  position: absolute;
+  top: 0.35rem;
+  left: 0.2rem;
+  transform: rotate(-45deg);
+  width: 0.9rem;
+}
+
+.checkbox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.form {
+  margin-bottom: 3rem;
+}
+
+.regInfoOffer {
+  color: $colorGrey6;
+  font-size: 1.6rem;
+  font-weight: $fontWeightRegular;
+  margin-bottom: 1rem;
+}
+
+.signUpLink {
+  color: $colorWhite;
+}
+
+.signUpLink:hover {
+  text-decoration: underline;
+}
+
+.additionalInfo {
+  font-size: 1.3rem;
+}
+
+.securityInfo {
+  color: $colorGrey7;
+  text-align: left;
+}
+
+.termsOfUseLink {
+  color: $colorBlue;
+  cursor: pointer;
+  display: inline;
+  padding: 0;
+}
+
+.termsOfUseLink:hover {
+  text-decoration: underline;
+}
+

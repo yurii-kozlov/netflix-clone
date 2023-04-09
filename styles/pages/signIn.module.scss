@@ -1,0 +1,77 @@
+.wrapper {
+  background-color: $colorBlack;
+  @extend %smooth-transition;
+  min-height: 100vh;
+
+  @include onTablet {
+    background-image: linear-gradient($colorBlack5, $colorBlack5), url('https://assets.nflxext.com/ffe/siteui/vlv3/f1c3c4eb-2fea-42c7-9ebd-1c093bd8a69d/85fb1332-e60f-4944-8835-fed9a7afd4bf/UA-en-20230403-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+.loginAndHeaderWrapper{
+  padding: 3rem 0;
+  @include onTablet {
+    min-height: 90vh;
+  }
+}
+
+.formContainer {
+  @include onTablet {
+    margin-bottom: 9rem;
+  }
+}
+
+.footer {
+  @extend %smooth-transition;
+  background-color: $colorBlack;
+  padding: 3rem 0;
+  color: $colorGrey6;
+  border-top: 0.1rem solid $colorGrey6;
+
+  @include onTablet {
+    background-color: $colorBlack4;
+    border: none;
+  }
+}
+
+.header {
+  margin-bottom: 3rem;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    margin-bottom: 2rem;
+  }
+}
+
+.heading {
+  @extend %smooth-transition;
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+  @include onDesktop {
+    padding-left: 10%;
+  }
+}
+
+.phoneNumber:hover {
+  text-decoration: underline;
+}
+
+.linksList {
+  display: grid;
+  list-style: none;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+
+  @include onTablet {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+
+  @include onDesktop {
+    grid-template-columns: repeat(4, minmax(20rem, 30rem));
+    place-items: center;
+  }
+}

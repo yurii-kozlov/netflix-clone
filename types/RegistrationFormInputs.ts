@@ -1,4 +1,5 @@
 export interface RegistrationFormInputs {
   email: string,
-  password: string
+  password: string,
 }
+

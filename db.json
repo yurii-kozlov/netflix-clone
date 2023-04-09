@@ -167,5 +167,36 @@
         "link": "#terms"
       }
     ]
+  },
+  "signIn": {
+    "images": {
+      "netflixLogo": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/netflix-logo_dqyblo.png"
+    },
+    "footerLinksList": [
+      {
+        "title": "FAQ",
+        "link": "#faq"
+      },
+      {
+        "title": "Help Center",
+        "link": "#helpCenter"
+      },
+      {
+        "title": "Terms of Use",
+        "link": "#terms"
+      },
+      {
+        "title": "Cookie Preferences",
+        "link": "#cookiePreferences"
+      },
+      {
+        "title": "Privacy",
+        "link": "#privacy"
+      },
+      {
+        "title": "Corporate Information",
+        "link": "#corporateInformation"
+      }
+    ]
   }
 }
