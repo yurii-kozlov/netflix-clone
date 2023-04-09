@@ -1,11 +1,11 @@
 import { ReactElement, useState } from 'react';
-import cn from 'classnames';
-import styles from 'components/LoginForm/LoginForm.module.scss';
 import Link from 'next/link';
-import { signInValidation } from 'constants/validationSchemas/signInValidation';
-import { SignInFormInputs } from 'types/SignInFormInputs';
+import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signInValidation } from 'constants/validationSchemas/signInValidation';
+import { SignInFormInputs } from 'types/SignInFormInputs';
+import styles from 'components/LoginForm/LoginForm.module.scss';
 
 export const LoginForm = (): ReactElement => {
   const [isEmailLabelActive, setIsEmailLabelActive] = useState<boolean>(false);

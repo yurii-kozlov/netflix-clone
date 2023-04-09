@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import { instance } from 'api/api';
-import { SignIn as SignInData } from 'types/intro/SignIn';
-import { Container } from 'components/Container';
 import Image from 'next/image';
 import Link from 'next/link';
 import { v4 as uuid_v4 } from 'uuid';
+import { instance } from 'api/api';
+import { SignIn as SignInData } from 'types/intro/SignIn';
+import { Container } from 'components/Container';
 import { Error } from 'components/Error';
 import { SignInFooterListItem } from 'components/SignInFooterListItem';
 import { LoginForm } from 'components/LoginForm';
