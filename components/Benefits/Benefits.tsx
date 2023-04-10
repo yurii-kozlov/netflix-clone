@@ -81,7 +81,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
           <div className={cn(styles.block, styles.marginBottom)}>
             <div className={styles.description}>
               <h2 className={styles.title}>{sectionMac.title}</h2>
-              <p className={styles.detailedDescription}>
+              <p className={cn(styles.detailedDescription, styles.detailedDescriptionMac)}>
                 {sectionMac.description}
               </p>
             </div>

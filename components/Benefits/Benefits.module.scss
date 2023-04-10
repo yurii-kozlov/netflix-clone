@@ -22,6 +22,14 @@
   }
 }
 
+.detailedDescriptionMac {
+  margin-bottom: 2rem;
+
+  @include onDesktop {
+    margin-bottom: 0;
+  }
+}
+
 .section {
   padding: 5rem 3rem;
   background-color: $colorBlack;
@@ -49,7 +57,7 @@
   flex-direction: column;
   align-items: center;
   @extend %smooth-transition;
-  gap: 4rem;
+  gap: 3rem;
 
   @include onDesktop {
     flex-direction: row-reverse;
