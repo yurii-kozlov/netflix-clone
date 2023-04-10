@@ -26,7 +26,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imageAndVideoWrapper} >
-              <Image alt="tv" className={styles.image} height={480} src={tv} width={640}/>
+              <Image alt="tv" className={styles.image} height={480} src={tv} width={640} />
               <div className={styles.videoWrapper}>
                 <video
                   className={styles.video}
@@ -55,7 +55,13 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
               </p>
             </div>
             <div className={styles.imagesWrapper} >
-              <Image alt="mobile" className={styles.image} height={480} src={mobile} width={640}/>
+              <Image
+                alt="mobile"
+                className={styles.mobileDeviceImage}
+                height={480}
+                src={mobile}
+                width={640}
+              />
               <div className={styles.card} >
                 <div className={styles.posterAndInfoWrapper}>
                   <img alt="moviePoster" className={styles.moviePoster} src={moviePoster}/>
@@ -75,7 +81,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
           <div className={cn(styles.block, styles.marginBottom)}>
             <div className={styles.description}>
               <h2 className={styles.title}>{sectionMac.title}</h2>
-              <p className={styles.detailedDescription}>
+              <p className={cn(styles.detailedDescription, styles.detailedDescriptionMac)}>
                 {sectionMac.description}
               </p>
             </div>

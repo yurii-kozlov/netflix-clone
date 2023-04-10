@@ -11,7 +11,7 @@
 .detailedDescription {
   @extend %smooth-transition;
   color: $colorWhite;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: $fontWeightRegular;
   text-align: center;
 
@@ -22,9 +22,21 @@
   }
 }
 
+.detailedDescriptionMac {
+  margin-bottom: 2rem;
+
+  @include onDesktop {
+    margin-bottom: 0;
+  }
+}
+
 .section {
-  padding: 5rem 7rem;
+  padding: 5rem 3rem;
   background-color: $colorBlack;
+
+  @include onTablet {
+    padding: 5rem 7rem;
+  }
 }
 
 .block {
@@ -45,7 +57,7 @@
   flex-direction: column;
   align-items: center;
   @extend %smooth-transition;
-  gap: 4rem;
+  gap: 3rem;
 
   @include onDesktop {
     flex-direction: row-reverse;
@@ -126,14 +138,37 @@
 .image {
   z-index: 2;
   position: relative;
-  width: 100%;
   height: 100%;
+
+  @include onTablet {
+    max-width: 100%;
+  }
 
   @include onMobile {
     min-width: 35rem;
     height: 100%;
+    width: 100%;
   }
 
+  @include onDesktop {
+    width: 100%;
+  }
+}
+
+.mobileDeviceImage {
+  z-index: 2;
+  position: relative;
+  height: 100%;
+
+  @include onTablet {
+    max-width: 100%;
+  }
+
+  @include onMobile {
+    min-width: 35rem;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .videoWrapper {
