@@ -57,7 +57,7 @@ export const Benefits: React.FC<BenefitsProps> = ({ media }): ReactElement => {
             <div className={styles.imagesWrapper} >
               <Image
                 alt="mobile"
-                className={styles.mobileDeviceImage}
+                className={styles.image}
                 height={480}
                 src={mobile}
                 width={640}
