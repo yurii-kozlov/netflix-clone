@@ -151,23 +151,7 @@
   }
 
   @include onDesktop {
-    width: 100%;
-  }
-}
-
-.mobileDeviceImage {
-  z-index: 2;
-  position: relative;
-  height: 100%;
-
-  @include onTablet {
     max-width: 100%;
-  }
-
-  @include onMobile {
-    min-width: 35rem;
-    height: 100%;
-    width: 100%;
   }
 }
 
