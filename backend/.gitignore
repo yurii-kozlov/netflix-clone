@@ -3,9 +3,5 @@ node_modules/
 
 # Ignore log files
 *.log
-
-# Ignore environment variables file
-.env
-
 # Ignore compiled TypeScript files
 dist/
