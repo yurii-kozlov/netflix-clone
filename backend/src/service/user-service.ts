@@ -65,6 +65,7 @@ class UserService {
     }
 
     const arePasswordsEqual = await bcrypt.compare(password, user.password);
+
     if (!arePasswordsEqual) {
       throw ApiError.BadRequest('The password is wrong');
     }
