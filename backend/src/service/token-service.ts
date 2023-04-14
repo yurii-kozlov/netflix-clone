@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
 import tokenModel from 'models/token-model';
 import UserDto from 'dtos/user-dto';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 class TokenService {
   generateTokens(payload: UserDto) {

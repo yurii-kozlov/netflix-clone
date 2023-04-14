@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import { register } from 'tsconfig-paths';
 import router from 'router/router';
+import handleErrors from 'middlewares/error-middleware';
 
 dotenv.config();
 register();
@@ -12,10 +13,12 @@ register();
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use('/api', router);
+app.use(handleErrors);
 
 const start = async () => {
   try {
