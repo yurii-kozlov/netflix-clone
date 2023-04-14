@@ -3,6 +3,7 @@ import userService, { UserData } from "service/user-service";
 import dotenv from 'dotenv';
 import { validationResult } from 'express-validator';
 import ApiError from "exceptions/api-error";
+import { UserDoc } from "models/user-model";
 
 dotenv.config();
 
@@ -36,9 +37,18 @@ class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<Response<UserData> | void> {
     try {
-      
+        const { email, password } = req.body;
+        const userData = await userService.login(email, password);
+
+        res.cookie(
+          'refreshToken',
+          userData.refreshToken,
+          {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}
+        );
+
+        return res.json(userData);
     } catch (error) {
         next(error);
     }
@@ -48,9 +58,13 @@ class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<Response<string>> {
     try {
-      
+        const { refreshToken } = req.cookies;
+        const token = await userService.logout(refreshToken);
+        res.clearCookie('refreshToken');
+
+        return res.json(token);
     } catch (error) {
         next(error);
     }
@@ -75,9 +89,18 @@ class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<Response<UserData> | void> {
     try {
-      
+      const { refreshToken } = req.cookies;
+      const userData = await userService.refresh(refreshToken);
+
+      res.cookie(
+        'refreshToken',
+        userData.refreshToken,
+        {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}
+      );
+
+      return res.json(userData);
     } catch (error) {
         next(error);
     }
@@ -87,9 +110,11 @@ class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<Response<UserDoc[]>> {
     try {
-      res.json(['123', 'sdf13312'])
+        const users = await userService.getAllUsers();
+
+        return res.json(users);
     } catch (error) {
         next(error);
     }
