@@ -6,6 +6,8 @@ import tokenService from 'service/token-service';
 import UserDto from 'dtos/user-dto';
 import ApiError from 'exceptions/api-error';
 import dotenv from 'dotenv';
+import userModel from 'models/user-model';
+import { UserDoc } from 'models/user-model';
 
 dotenv.config();
 
@@ -53,6 +55,60 @@ class UserService {
 
     user.isActivated = true;
     await user.save();
+  }
+
+  async login(email: string, password: string) {
+    const user = await userModel.findOne({email});
+
+    if (!user) {
+      throw ApiError.BadRequest('The user with the indicated email hasn\'t been found');
+    }
+
+    const arePasswordsEqual = await bcrypt.compare(password, user.password);
+
+    if (!arePasswordsEqual) {
+      throw ApiError.BadRequest('The password is wrong');
+    }
+
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({...userDto});
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {...tokens, user: userDto};
+  }
+
+  async logout(refreshToken:string) {
+    const token = await tokenService.removeToken(refreshToken);
+
+    return token;
+  }
+
+  async refresh(refreshToken: string) {
+    if (!refreshToken) {
+      throw ApiError.UnathorizedError();
+    }
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnathorizedError();
+    }
+
+    const user = await userModel.findById(userData.id)
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({...userDto});
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {...tokens, user: userDto};
+  }
+
+  async getAllUsers(): Promise<UserDoc[]> {
+    const users = await userModel.find();
+
+    return users;
   }
 }
 
