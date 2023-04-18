@@ -1,8 +1,11 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import * as authActions from 'features/authorization';
 import { signInValidation } from 'constants/validationSchemas/signInValidation';
 import { SignInFormInputs } from 'types/SignInFormInputs';
 import styles from 'components/LoginForm/LoginForm.module.scss';
@@ -17,6 +20,16 @@ export const LoginForm = (): ReactElement => {
     mode: 'all',
     resolver: yupResolver(signInValidation)
   })
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(authActions.checkAuth());
+    }
+  }, [])
 
   const passwordInput = watch('password');
   const emailInput = watch('email');
@@ -38,10 +51,19 @@ export const LoginForm = (): ReactElement => {
     }
   }
 
-  const onSubmit = (): void => {
-    reset();
-    setIsEmailLabelActive(!isEmailLabelActive);
-    setIsPasswordLabelActive(!isPasswordLabelActive);
+  const onSubmit = (formData: SignInFormInputs): void => {
+    dispatch(authActions.login(formData));
+
+    if (isAuthorized) {
+      router.push('/main');
+      reset();
+      setIsEmailLabelActive(!isEmailLabelActive);
+      setIsPasswordLabelActive(!isPasswordLabelActive);
+    }
+  }
+
+  if (isAuthorized) {
+    router.replace('/main');
   }
 
   return (
@@ -155,5 +177,5 @@ export const LoginForm = (): ReactElement => {
         </div>
       </div>
     </div>
-    );
+  );
 }

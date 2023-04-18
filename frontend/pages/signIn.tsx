@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { v4 as uuid_v4 } from 'uuid';
@@ -8,8 +10,12 @@ import { SignIn as SignInData } from 'types/intro/SignIn';
 import { Container } from 'components/Container';
 import { Error } from 'components/Error';
 import { SignInFooterListItem } from 'components/SignInFooterListItem';
-import { LoginForm } from 'components/LoginForm';
 import styles from 'styles/pages/signIn.module.scss';
+
+const DynamicLoginForm = dynamic(() =>
+  import('components/LoginForm/LoginForm').then((res) => res.LoginForm),
+  {ssr: false}
+)
 
 export const SignIn: React.FC<SignInStaticProps> = ({ signInData, error }): ReactElement => {
 
@@ -17,37 +23,41 @@ export const SignIn: React.FC<SignInStaticProps> = ({ signInData, error }): Reac
   const { footerLinksList } = signInData || {};
 
   return (
-    <div className={styles.wrapper}>
-      <Container>
-        <div className={styles.loginAndHeaderWrapper}>
-          <header className={styles.header}>
-            {netflixLogo ? (
-              <Link href="/">
-                <Image
-                  alt='Netflix'
-                  className={styles.logo}
-                  height={40}
-                  src={netflixLogo}
-                  width={184}
-                />
-              </Link>
+    <>
+      <Head>
+        <title>Netflix</title>
+      </Head>
+      <div className={styles.wrapper}>
+        <Container>
+          <div className={styles.loginAndHeaderWrapper}>
+            <header className={styles.header}>
+              {netflixLogo ? (
+                <Link href="/">
+                  <Image
+                    alt='Netflix'
+                    className={styles.logo}
+                    height={40}
+                    src={netflixLogo}
+                    width={184}
+                  />
+                </Link>
               ) : (
                 <Link href="/">Home</Link>
               )}
-          </header>
-          <div className={styles.formContainer}>
-            <LoginForm />
+            </header>
+            <div className={styles.formContainer}>
+              <DynamicLoginForm />
+            </div>
           </div>
-        </div>
-      </Container>
-      <footer className={styles.footer}>
-        <Container>
-          <div className={styles.heading}>
-            Questions? Call:&nbsp;
-            <a className={styles.phoneNumber} href="tel:0800-509-417">0800-509-417</a>
-          </div>
-          {error ? (
-            <Error error={error}/>
+        </Container>
+        <footer className={styles.footer}>
+          <Container>
+            <div className={styles.heading}>
+              Questions? Call:&nbsp;
+              <a className={styles.phoneNumber} href="tel:0800-509-417">0800-509-417</a>
+            </div>
+            {error ? (
+              <Error error={error}/>
           ): (
             <ul className={styles.linksList}>
               {footerLinksList?.map((listItem) => (
@@ -55,9 +65,10 @@ export const SignIn: React.FC<SignInStaticProps> = ({ signInData, error }): Reac
               ))}
             </ul>
           )}
-        </Container>
-      </footer>
-    </div>
+          </Container>
+        </footer>
+      </div>
+    </>
   );
 }
 
