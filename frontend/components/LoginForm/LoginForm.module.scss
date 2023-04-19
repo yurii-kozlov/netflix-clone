@@ -229,3 +229,18 @@
   text-decoration: underline;
 }
 
+.loginErrorContainer {
+  background-color: $colorYellow;
+  font-size: 1.4rem;
+  border-radius: 0.4rem;
+  padding: 1rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.loginError {
+  color: $colorWhite;
+}
+
+.registrationOffer {
+  text-decoration: underline;
+}

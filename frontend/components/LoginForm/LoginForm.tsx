@@ -24,6 +24,7 @@ export const LoginForm = (): ReactElement => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
+  const erorrLogin = useAppSelector((state) => state.authorization.error);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -70,6 +71,14 @@ export const LoginForm = (): ReactElement => {
     <div className={styles.block}>
       <div className={styles.content}>
         <h1 className={styles.title}>Sign In</h1>
+        {erorrLogin && (
+          <div className={styles.loginErrorContainer}>
+            <p className={styles.loginError}>
+              {erorrLogin}. Please try again or&nbsp;
+              <Link className={styles.registrationOffer} href="/">create a new account</Link>
+            </p>
+          </div>
+        )}
         <form
           action="#"
           className={styles.form}

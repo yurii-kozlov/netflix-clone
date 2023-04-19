@@ -39,12 +39,10 @@ $api.interceptors.response.use((config: AxiosResponse) => config,
         if (e instanceof Error) {
           throw new Error(e.message);
         }
-
-        throw new Error('Unknown error occurred');
       }
     }
 
-    throw new Error('Unknown error occurred');
+    throw error;
   }
 )
 
