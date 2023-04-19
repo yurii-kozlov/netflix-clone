@@ -34,7 +34,7 @@ export const SignUpContainer: React.FC<SignUpContainerProps> = ({ children, sign
                 />
               </Link>
             }
-            <Link className={styles.signOutLink} href="#">Sign In</Link>
+            <Link className={styles.signOutLink} href="/signIn">Sign In</Link>
           </div>
         </Container>
       </header>

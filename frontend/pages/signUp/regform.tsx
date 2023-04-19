@@ -8,6 +8,7 @@ import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
 import { RegistrationFormInputs } from 'types/RegistrationFormInputs';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { actions as accountActions } from 'features/personalAccount';
+import * as authActions from 'features/authorization';
 import { registrationSchema } from 'constants/validationSchemas/registrationSchema';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
@@ -64,6 +65,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
 
   const onSubmit = (formData: RegistrationFormInputs): void => {
     updateEmail(formData.email);
+    dispatch(authActions.registration(formData));
     reset({
       email: '',
       password: ''
@@ -184,7 +186,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
         </Container>
       </SignUpContainer>
     </>
-    );
+  );
 }
 
 export { getStaticProps };
