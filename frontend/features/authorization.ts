@@ -16,24 +16,24 @@ const initialState: InitialState = {
   error: null
 }
 
-export interface LoginError {
-  message: string;
-}
-
 export const checkAuth = createAsyncThunk(
   'auth/check',
-  async () => {
+  async (_args, thunkAPI) => {
     try {
         const response = await axios.get<AuthResponse>(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, {
           withCredentials: true
         });
 
         localStorage.setItem('token', response.data.accessToken);
-        console.log(response);
 
         return response.data.user;
-    } catch (error: any) {
-      return console.log(error.response.data.message);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+
+        return thunkAPI.rejectWithValue(error.response?.data.message)
+      }
+
+      throw new Error('Something went wrong');
     }
   }
 )
@@ -44,11 +44,9 @@ export const login = createAsyncThunk(
     try {
       const response = await AuthService.login(email, password);
       localStorage.setItem('token', response.data.accessToken);
-      console.log(response);
 
       return response.data.user;
     } catch (error: unknown) {
-      console.log(error.response.data.message);
 
       if (error instanceof AxiosError) {
 
@@ -66,11 +64,9 @@ export const registration = createAsyncThunk(
     try {
       const response = await AuthService.registration(email, password);
       localStorage.setItem('token', response.data.accessToken);
-      console.log(response);
 
       return response.data.user
     } catch (error: unknown) {
-      console.log(error.response.data.message);
 
       if (error instanceof AxiosError) {
         return thunkAPI.rejectWithValue(error.response?.data.message)
@@ -83,14 +79,19 @@ export const registration = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'auth/logout',
-  async () => {
+  async (_args, thunkAPI) => {
     try {
       await AuthService.logout();
       localStorage.removeItem('token');
 
       return { payload: {} as User};
-    } catch (error: any) {
-      return console.log(error.response.data.message);
+    } catch (error: unknown) {
+
+      if (error instanceof AxiosError) {
+        return thunkAPI.rejectWithValue(error.response?.data.message)
+      }
+
+      throw new Error('Something went wrong');
     }
   }
 );
