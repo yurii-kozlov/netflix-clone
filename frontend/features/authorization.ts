@@ -1,8 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AuthService from 'services/AuthService';
 import { User } from 'types/models/User'
-import { AuthResponse } from 'types/models/apiResponse/AuthResponse';
 
 export interface InitialState {
   user: User | null;
@@ -20,9 +19,7 @@ export const checkAuth = createAsyncThunk(
   'auth/check',
   async (_args, thunkAPI) => {
     try {
-        const response = await axios.get<AuthResponse>(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, {
-          withCredentials: true
-        });
+        const response = await AuthService.refresh();
 
         localStorage.setItem('token', response.data.accessToken);
 

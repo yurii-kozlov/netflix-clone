@@ -9,7 +9,12 @@ export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL
 });
 
-export const $api = axios.create({
+export const $apiRefresh = axios.create({
+  withCredentials: true,
+  baseURL: process.env.NEXT_PUBLIC_API_URL
+})
+
+const $api = axios.create({
   withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_API_URL
 });
