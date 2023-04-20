@@ -26,11 +26,19 @@ export const LoginForm = (): ReactElement => {
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const erorrLogin = useAppSelector((state) => state.authorization.error);
 
+  if (isAuthorized) {
+    router.replace('/main');
+  }
+
   useEffect(() => {
     if (localStorage.getItem('token')) {
       dispatch(authActions.checkAuth());
     }
   }, [])
+
+  useEffect(() => () => {
+    dispatch(authActions.actions.setError(''));
+  }, [dispatch])
 
   const passwordInput = watch('password');
   const emailInput = watch('email');
@@ -61,10 +69,6 @@ export const LoginForm = (): ReactElement => {
       setIsEmailLabelActive(!isEmailLabelActive);
       setIsPasswordLabelActive(!isPasswordLabelActive);
     }
-  }
-
-  if (isAuthorized) {
-    router.replace('/main');
   }
 
   return (

@@ -38,7 +38,6 @@ export const checkAuth = createAsyncThunk(
   }
 )
 
-
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }: { email: string, password: string}, thunkAPI) => {
@@ -70,10 +69,14 @@ export const registration = createAsyncThunk(
       console.log(response);
 
       return response.data.user
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error.response.data.message);
 
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      if (error instanceof AxiosError) {
+        return thunkAPI.rejectWithValue(error.response?.data.message)
+      }
+
+      throw new Error('Something went wrong');
     }
   }
 );
@@ -101,6 +104,9 @@ const authSlice = createSlice({
     },
     setIsAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -115,6 +121,9 @@ const authSlice = createSlice({
       .addCase(registration.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuth = true;
+      })
+      .addCase(registration.rejected, (state, action) => {
+        state.error = action.payload as string;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = {} as User;

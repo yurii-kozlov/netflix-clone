@@ -203,3 +203,15 @@
 .emailCheckboxLabelActive::before {
   color: $colorBlue;
 }
+
+.registrationErrorWrapper {
+  padding: 1.6rem 1.7rem;
+  font-weight: $fontWeightRegular;
+  background-color: $colorYellow1;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
