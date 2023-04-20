@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,9 @@ import * as authActions from 'features/authorization';
 import { registrationSchema } from 'constants/validationSchemas/registrationSchema';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
+import warningIcon from 'images/warning.svg';
 import styles from 'styles/pages/regform.module.scss';
+import Image from 'next/image';
 
 const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactElement => {
   const [isEmailLabelActive, setIsEmailLabelActive] = useState<boolean>(false);
@@ -22,6 +24,7 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   const router = useRouter();
   const email = useAppSelector((state) => state.accountInfo.email);
   const dispatch = useAppDispatch();
+  const registrationError = useAppSelector((state) => state.authorization.error);
 
   const {
     register,
@@ -39,11 +42,11 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
 
   const emailInput = watch('email');
   const passwordInput = watch('password');
+  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
 
   const updateEmail = (updatedEmail: string): void => {
     dispatch(accountActions.setEmail(updatedEmail));
   }
-
 
   const handleReceiveingOffers = (): void => setIsReceivingOffers(!isReceivingOffers);
 
@@ -63,17 +66,25 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
     }
   }
 
+
   const onSubmit = (formData: RegistrationFormInputs): void => {
-    updateEmail(formData.email);
     dispatch(authActions.registration(formData));
-    reset({
-      email: '',
-      password: ''
-    });
-    setIsEmailLabelActive(!isEmailLabelActive);
-    setIsPasswordLabelActive(!isPasswordLabelActive);
-    router.push('/signUp');
+
+    if (isAuthorized) {
+      updateEmail(formData.email);
+      reset({
+        email: '',
+        password: ''
+      });
+      setIsEmailLabelActive(!isEmailLabelActive);
+      setIsPasswordLabelActive(!isPasswordLabelActive);
+      router.push('/signUp');
+    }
   }
+
+  useEffect(() => () => {
+    dispatch(authActions.actions.setError(''));
+  }, [dispatch]);
 
   return (
     <>
@@ -83,10 +94,18 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
       <SignUpContainer error={error || null} signUpData={signUpData || null}>
         <Container>
           <div className={cn(
-          styles.formWrapper,
-          {[styles.formWrapperDisappear]: isSubmitSuccessful}
+              styles.formWrapper,
+              {[styles.formWrapperDisappear]: isSubmitSuccessful && isAuthorized}
           )}
           >
+            {registrationError && (
+              <div className={styles.registrationErrorWrapper}>
+                <Image alt='warning-icon' className={styles.warningIcon} src={warningIcon}/>
+                <p className={styles.registrationError}>
+                  <b>{registrationError}</b>
+                </p>
+              </div>
+            )}
             <form
               action="#"
               method='post'

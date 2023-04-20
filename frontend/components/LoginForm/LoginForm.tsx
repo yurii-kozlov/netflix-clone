@@ -24,12 +24,21 @@ export const LoginForm = (): ReactElement => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
+  const erorrLogin = useAppSelector((state) => state.authorization.error);
+
+  if (isAuthorized) {
+    router.replace('/main');
+  }
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
       dispatch(authActions.checkAuth());
     }
   }, [])
+
+  useEffect(() => () => {
+    dispatch(authActions.actions.setError(''));
+  }, [dispatch])
 
   const passwordInput = watch('password');
   const emailInput = watch('email');
@@ -62,14 +71,18 @@ export const LoginForm = (): ReactElement => {
     }
   }
 
-  if (isAuthorized) {
-    router.replace('/main');
-  }
-
   return (
     <div className={styles.block}>
       <div className={styles.content}>
         <h1 className={styles.title}>Sign In</h1>
+        {erorrLogin && (
+          <div className={styles.loginErrorContainer}>
+            <p className={styles.loginError}>
+              {erorrLogin}. Please try again or&nbsp;
+              <Link className={styles.registrationOffer} href="/">create a new account</Link>
+            </p>
+          </div>
+        )}
         <form
           action="#"
           className={styles.form}

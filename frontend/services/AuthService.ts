@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import $api from 'api/api';
+import $api, { $apiRefresh }from 'api/api';
 import { AuthResponse } from 'types/models/apiResponse/AuthResponse';
 
 export default class AuthService {
@@ -13,5 +13,9 @@ export default class AuthService {
 
   static async logout(): Promise<void> {
     return $api.post('/logout');
+  }
+
+  static async refresh(): Promise<AxiosResponse<AuthResponse>> {
+    return $apiRefresh.get<AuthResponse>('/refresh');
   }
 }
