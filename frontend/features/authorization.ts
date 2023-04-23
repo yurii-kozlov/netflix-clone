@@ -7,12 +7,14 @@ export interface InitialState {
   user: User | null;
   isAuth: boolean;
   error: string | null;
+  isLoading: boolean;
 }
 
 const initialState: InitialState = {
   user: {} as User,
   isAuth: false,
-  error: null
+  error: null,
+  isLoading: false
 }
 
 export const checkAuth = createAsyncThunk(
@@ -64,7 +66,6 @@ export const registration = createAsyncThunk(
 
       return response.data.user
     } catch (error: unknown) {
-
       if (error instanceof AxiosError) {
         return thunkAPI.rejectWithValue(error.response?.data.message)
       }
@@ -105,23 +106,36 @@ const authSlice = createSlice({
     },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload
+    },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload
         state.isAuth = true;
+        state.isLoading = false;
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.isLoading = false;
+      })
+      .addCase(registration.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(registration.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.user = action.payload;
         state.isAuth = true;
       })
       .addCase(registration.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.isLoading = false;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = {} as User;

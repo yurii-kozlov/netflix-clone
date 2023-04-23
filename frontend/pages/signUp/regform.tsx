@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import cn from 'classnames'
@@ -14,7 +15,6 @@ import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
 import warningIcon from 'images/warning.svg';
 import styles from 'styles/pages/regform.module.scss';
-import Image from 'next/image';
 
 const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactElement => {
   const [isEmailLabelActive, setIsEmailLabelActive] = useState<boolean>(false);
@@ -22,9 +22,11 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
   const [isReceivingOffers, setIsReceivingOffers] = useState<boolean>(false);
 
   const router = useRouter();
-  const email = useAppSelector((state) => state.accountInfo.email);
   const dispatch = useAppDispatch();
+  const email = useAppSelector((state) => state.accountInfo.email);
   const registrationError = useAppSelector((state) => state.authorization.error);
+  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
+  const isRegRequestLoading = useAppSelector((state) => state.authorization.isLoading);
 
   const {
     register,
@@ -42,7 +44,6 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
 
   const emailInput = watch('email');
   const passwordInput = watch('password');
-  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
 
   const updateEmail = (updatedEmail: string): void => {
     dispatch(accountActions.setEmail(updatedEmail));
@@ -66,25 +67,30 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
     }
   }
 
-
   const onSubmit = (formData: RegistrationFormInputs): void => {
-    dispatch(authActions.registration(formData));
+    dispatch(authActions.registration(formData))
 
-    if (isAuthorized) {
-      updateEmail(formData.email);
-      reset({
-        email: '',
-        password: ''
-      });
-      setIsEmailLabelActive(!isEmailLabelActive);
-      setIsPasswordLabelActive(!isPasswordLabelActive);
-      router.push('/signUp');
-    }
+    updateEmail(formData.email);
   }
 
-  useEffect(() => () => {
+  if (isAuthorized && !registrationError && isSubmitSuccessful && !isRegRequestLoading) {
+    router.push('/signUp');
+    reset({
+      email: '',
+      password: ''
+    });
+    setIsEmailLabelActive(!isEmailLabelActive);
+    setIsPasswordLabelActive(!isPasswordLabelActive);
     dispatch(authActions.actions.setError(''));
-  }, [dispatch]);
+  }
+
+  useEffect(() => {
+    dispatch(authActions.actions.setError(''));
+
+    return () => {
+      dispatch(authActions.actions.setError(''));
+    }
+  } , [email]);
 
   return (
     <>
@@ -95,7 +101,8 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
         <Container>
           <div className={cn(
               styles.formWrapper,
-              {[styles.formWrapperDisappear]: isSubmitSuccessful && isAuthorized}
+              {[styles.formWrapperDisappear]
+                : isSubmitSuccessful && !registrationError && !isRegRequestLoading}
           )}
           >
             {registrationError && (
@@ -194,12 +201,22 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
                   </div>
                 </li>
               </ul>
-              <button
-                className={styles.buttonNext}
-                type="submit"
-              >
-                Next
-              </button>
+              <div className={styles.submitButtonWrapper}>
+                <div className={cn(
+                  styles.spinner,
+                  {[styles.spinnerActive]: !registrationError && isSubmitSuccessful}
+                )}
+                />
+                <button
+                  className={cn(
+                    styles.buttonNext,
+                    {[styles.buttonNextInactive]: !registrationError && isSubmitSuccessful && isRegRequestLoading}
+                  )}
+                  type="submit"
+                >
+                  Next
+                </button>
+              </div>
             </form>
           </div>
         </Container>

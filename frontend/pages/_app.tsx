@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
-import store from '@/store/store';
+import store from 'store/store';
 import 'styles/base/globals.scss'
 
 import { Roboto } from 'next/font/google';
@@ -25,5 +25,5 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
         </main>
       </Provider>
     </>
-  )
+  );
 }
