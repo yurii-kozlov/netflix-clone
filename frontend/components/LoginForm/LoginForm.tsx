@@ -25,6 +25,7 @@ export const LoginForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const erorrLogin = useAppSelector((state) => state.authorization.error);
+  const isLoginRequestLoading = useAppSelector((state) => state.authorization.isLoading);
 
   if (isAuthorized) {
     router.replace('/main');
@@ -149,9 +150,22 @@ export const LoginForm = (): ReactElement => {
               {errors.password && <p className={styles.error}>{errors.password.message}</p>}
             </li>
           </ul>
-          <button className={styles.buttonSubmit} type="submit">
-            Sign In
-          </button>
+          <div className={styles.buttonSubmitWrapper}>
+            <div className={cn(
+              styles.spinner,
+              {[styles.spinnerActive]: isLoginRequestLoading}
+            )}
+            />
+            <button
+              className={cn(
+              styles.buttonSubmit,
+              {[styles.buttonSubmitDisabled]: isLoginRequestLoading}
+              )}
+              disabled={isLoginRequestLoading}
+              type="submit">
+              Sign In
+            </button>
+          </div>
           <div className={styles.checkboxAndNeedHelpWrapper}>
             <div className={styles.checkBoxWrapper}>
               <input

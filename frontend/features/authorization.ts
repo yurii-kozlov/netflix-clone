@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AuthService from 'services/AuthService';
 import { User } from 'types/models/User'
-import { stat } from 'fs';
 
 export interface InitialState {
   user: User | null;
@@ -64,12 +63,9 @@ export const registration = createAsyncThunk(
     try {
       const response = await AuthService.registration(email, password);
       localStorage.setItem('token', response.data.accessToken);
-      console.log(response.data.user)
 
       return response.data.user
     } catch (error: unknown) {
-      console.log(error)
-
       if (error instanceof AxiosError) {
         return thunkAPI.rejectWithValue(error.response?.data.message)
       }
@@ -117,12 +113,17 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload
         state.isAuth = true;
+        state.isLoading = false;
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.isLoading = false;
       })
       .addCase(registration.pending, (state) => {
         state.isLoading = true;
