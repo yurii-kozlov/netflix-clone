@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import { v4 as uuid_v4 } from 'uuid';
-import { FooterListItem as FooterListItemLink } from 'types/intro/FooterListItem';
+import { LinksListItem} from 'types/LinksListItem';
 import { Container } from 'components/Container';
 import { FooterListItem } from 'components/Footer/FooterListItem';
 import styles from 'components/Footer/Footer.module.scss';
 
 type FooterProps = {
-  footerLinksList: [FooterListItemLink]
+  footerLinksList: LinksListItem[]
 }
 
 export const Footer: React.FC<FooterProps> = ({ footerLinksList }): ReactElement => (

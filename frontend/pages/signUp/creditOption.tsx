@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputMask from 'react-input-mask';
 import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
 import { creditCardValidation } from 'constants/validationSchemas/creditCardValidation';
-import { CreditCardFormInputs } from 'types/CreditCardFormInputs';
+import { CreditCardFormInputs } from 'types/formInputs/CreditCardFormInputs';
 import { SignUpContainer } from 'components/SignUpContainer';
 import { Container } from 'components/Container';
 import { PaymentSystems } from 'components/PaymentSystems';

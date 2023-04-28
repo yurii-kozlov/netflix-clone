@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import cn from 'classnames'
 import { getStaticProps, SignUpStaticProps } from 'api/getStaticPropsSignUp';
-import { RegistrationFormInputs } from 'types/RegistrationFormInputs';
+import { RegistrationFormInputs } from 'types/formInputs/RegistrationFormInputs';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { actions as accountActions } from 'features/personalAccount';
 import * as authActions from 'features/authorization';

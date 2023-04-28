@@ -1,8 +1,8 @@
-import { FooterListItem } from 'types/intro/FooterListItem';
+import { LinksListItem } from 'types/LinksListItem';
 
 export type SignIn = {
   images: {
     netflixLogo: string
   },
-  footerLinksList: FooterListItem []
+  footerLinksList: LinksListItem []
 };

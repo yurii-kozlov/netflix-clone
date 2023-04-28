@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from 'store/hooks';
 import { actions as accountActions } from 'features/personalAccount';
 import { emailValidationSchema } from 'constants/validationSchemas/introPageEmailValidation';
-import { introPageForminputs } from 'types/introPageFormInputs';
+import { introPageForminputs } from 'types/formInputs/introPageFormInputs';
 import { LoadingIndicator } from 'components/LoadingIndicator';
 import styles from 'components/SubscriptionForm/SubscriptionForm.module.scss';
 

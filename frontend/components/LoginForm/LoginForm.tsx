@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import * as authActions from 'features/authorization';
 import { signInValidation } from 'constants/validationSchemas/signInValidation';
-import { SignInFormInputs } from 'types/SignInFormInputs';
+import { SignInFormInputs } from 'types/formInputs/SignInFormInputs';
 import styles from 'components/LoginForm/LoginForm.module.scss';
 
 export const LoginForm = (): ReactElement => {
