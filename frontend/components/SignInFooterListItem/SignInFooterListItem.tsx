@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { FooterListItem } from 'types/intro/FooterListItem';
+import { LinksListItem } from 'types/LinksListItem';
 import styles from 'components/SignInFooterListItem/SignInFooterListItem.module.scss';
 
 type SignInFooterListItemProps = {
-  listItem: FooterListItem
+  listItem: LinksListItem
 }
 
 export const SignInFooterListItem: React.FC<SignInFooterListItemProps> = ({ listItem }) => {

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React, { ReactElement } from 'react';
-import { FooterListItem } from 'types/intro/FooterListItem';
+import { LinksListItem } from 'types/LinksListItem';
 import styles from 'components/SignUpContainer/SignUpFooterListItem/SignUpFooterListItem.module.scss';
 
 type SignUpFooterListItemProps = {
-  footerListItem: FooterListItem
+  footerListItem: LinksListItem
 };
 
 export const SignUpFooterListItem: React.FC<SignUpFooterListItemProps> = ({ footerListItem}): ReactElement => {

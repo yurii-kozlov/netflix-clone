@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from 'components/Footer/FooterListItem/FooterListItem.module.scss';
-import { FooterListItem as FooterListItemLink } from 'types/intro/FooterListItem';
+import { LinksListItem} from 'types/LinksListItem';
 
 type FooterListItemProps = {
-  listItem: FooterListItemLink
+  listItem: LinksListItem
 };
 
 export const FooterListItem: React.FC<FooterListItemProps> = ({ listItem }) => {

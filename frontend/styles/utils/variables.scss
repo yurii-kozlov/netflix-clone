@@ -25,6 +25,13 @@
   $colorBlack4: rgba(0, 0, 0, .75);
   $colorBlack5: rgba(0, 0, 0, 0.5);
   $colorBlack6: rgba(0, 0, 0, 0.9);
+  $colorBlack7: #141414;
+/*#endregion*/
+
+/*region shadowBlack */
+  $shadowBlack: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px,
+    rgba(0, 0, 0, 0.14) 0px 8px 10px 1px,
+    rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
 /*#endregion*/
 
 /*region colorRed */
@@ -49,6 +56,8 @@
   $colorGrey9: rgba(216, 212, 212, 0.739);
   $colorGrey10: #414040;
   $colorGrey11: #b3b3b3;
+  $colorGrey12: #333131;
+  $colorGrey13: rgba(255, 255, 255, 0.08);
 /*#endregion*/
 
 /*region colorGreen */
