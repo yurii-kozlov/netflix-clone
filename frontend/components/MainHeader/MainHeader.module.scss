@@ -2,12 +2,188 @@
   background-color: $colorBlack7;
 }
 
-.title {
-  color: #fff;
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 6.4rem;
+  padding: 1.5rem 0;
+  gap: 2rem 3rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    justify-content: start;
+  }
 }
 
-.list {
+.contentWrapperWithActiveSearch {
+  gap: 1.5rem 2rem;
+
+  @include onTablet {
+    gap: 0;
+  }
+}
+
+.logo {
+  height: 2.5rem;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    margin-right: 3.2rem;
+  }
+}
+
+.title {
+  color: $colorWhite;
+  font-weight: $fontWeightBold;
+  font-size: 2.4rem;
+}
+
+.avatar {
+  border-radius: 0.4rem;
+}
+
+.navMenOnMobileAndTablet {
+  pointer-events: none;
+  position: absolute;
   list-style: none;
+  top: 150%;
+  right: 0;
+  min-width: 14rem;
+  max-width: 16rem;
+  opacity: 0;
+  transform: translateY(30%);
+
+  background-color: $colorGrey12;
+  box-shadow: $shadowBlack;
+  border-radius: 0.4rem;
+  transition: opacity 367ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 278ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  @include onTablet {
+    left: 0;
+  }
+
+  @include onDesktop {
+    background-color: transparent;
+  }
+}
+
+.navMenOnMobileAndTabletActive {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.navList{
+  list-style: none;
+  display: none;
+  @extend %smooth-transition;
+
+  @include onDesktop {
+    flex-grow: 1;
+    display: flex;
+    gap: 1.6rem;
+    list-style: none;
+  }
+}
+
+.button {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.buttonNotification {
+  display: none;
+
+  @include onTablet {
+    display: block;
+  }
+}
+
+.buttonsList {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  gap: 1.5rem;
+
+  @include onTablet {
+    gap: 2rem;
+    justify-content: flex-start;
+  }
+}
+
+.navMenuOnMobileAndTabletWrapper {
+  @extend %smooth-transition;
+  position: relative;
+
+  @include onTablet {
+    flex-grow: 1;
+    display: flex;
+  }
+  @include onDesktop {
+    display: none;
+  }
+}
+
+.title {
+  flex-grow: 1;
+  display: none;
+  font-size: 2.4rem;
+  font-weight: $fontWeightBold;
+
+  @include onTablet {
+    display: block;
+  }
+
+  @include onDesktop {
+    display: none;
+  }
+}
+
+.navMenuButton {
+  position: relative;
+  @extend %smooth-transition;
+}
+
+.navMenuButton:focus {
+  transform: rotate(360deg);
+}
+
+.searchInput {
+  border: none;
+  outline: transparent;
+  @extend %smooth-transition;
+  background-color: transparent;
+  border: none;
+  color: $colorWhite;
+  padding: 0;
+  font-size: 1.5rem;
+  width: 0;
+}
+
+.searchInput::placeholder {
+  font-size: 1.5rem;
+  font-weight: $fontWeightMedium;
+}
+
+.searchInputActive {
+  width: 20rem;
+  padding-left: 0.5rem;
+}
+
+.buttonsListItemSearchInput {
+  display: flex;
+  align-items: center;
+  @extend %smooth-transition;
+}
+
+.activeButtonsListItemSearchInput {
+  border: 0.1rem solid $colorWhite;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }

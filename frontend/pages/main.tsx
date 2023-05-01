@@ -1,13 +1,13 @@
 import { FC, ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { GetStaticProps } from 'next';
+import { instance } from 'api/api';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import * as authActions from 'features/authorization';
+import { MainPageData } from 'types/mainPage/MainPage';
 import { MainHeader } from 'components/MainHeader';
 import { Loader } from 'components/Loader';
 import styles from 'styles/pages/main.module.scss';
-import { MainPageData } from 'types/mainPage/MainPage';
-import { GetStaticProps } from 'next';
-import { instance } from 'api/api';
 
 const Main: FC<MainPageStaticProps> = ({ mainPageData, error }): ReactElement => {
   const { header } = mainPageData || {};
