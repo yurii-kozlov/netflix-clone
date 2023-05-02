@@ -61,7 +61,7 @@ class UserService {
     const user = await UserModel.findOne({email});
 
     if (!user) {
-      throw ApiError.BadRequest(`The user with the email ${email} doesn't exist`);
+      throw ApiError.BadRequest(`The user with the email ${email} doesn't exist. Please register first`);
     }
 
     user.plan = plan;

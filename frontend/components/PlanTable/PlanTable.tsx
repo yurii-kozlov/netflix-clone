@@ -27,8 +27,7 @@ export const PlanTable = (): ReactElement => {
   const handlePlanChage = (event: React.ChangeEvent<HTMLInputElement>):void =>
     setPlan(event.target.value as SetStateAction<SubscriptionPlans>);
 
-    const handleNextButtonClick = async (): Promise<void> => {
-
+  const handleNextButtonClick = async (): Promise<void> => {
     dispatch(authActions.subscriptionPlan({
       email: userEmail!,
       plan: plans[chosenPlan]
