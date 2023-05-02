@@ -14,6 +14,10 @@ export const $apiRefresh = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL
 })
 
+export const movieFetcher = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_MOVIE_BASE_URL
+})
+
 const $api = axios.create({
   withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_API_URL

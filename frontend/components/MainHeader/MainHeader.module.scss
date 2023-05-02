@@ -187,3 +187,14 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
 }
+
+.error {
+  @extend %smooth-transition;
+  color: $colorDanger;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+
+  @include onTablet {
+    font-size: 1.5rem;
+  }
+}
