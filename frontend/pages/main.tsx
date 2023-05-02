@@ -2,14 +2,16 @@ import { FC, ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 import { instance } from 'api/api';
+import { fetchMovies } from 'api/moviesFetching';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import * as authActions from 'features/authorization';
 import { MainPageData } from 'types/mainPage/MainPage';
+import { Movies } from 'types/MovieAPI';
 import { MainHeader } from 'components/MainHeader';
 import { Loader } from 'components/Loader';
 import styles from 'styles/pages/main.module.scss';
 
-const Main: FC<MainPageStaticProps> = ({ mainPageData, error }): ReactElement => {
+const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
   const { header } = mainPageData || {};
 
   const dispatch = useAppDispatch();
@@ -47,26 +49,59 @@ const Main: FC<MainPageStaticProps> = ({ mainPageData, error }): ReactElement =>
 
 export default Main;
 
-
 type MainPageSuccess = {
   mainPageData: MainPageData;
+  movies: Movies;
   error?: never;
 }
 
 type MainPageError = {
   mainPageData?: never;
+  movies?: never;
   error: string;
 }
 
-type MainPageStaticProps = MainPageSuccess | MainPageError;
+type MainPageServerSideProps = MainPageSuccess | MainPageError;
 
-export const getStaticProps: GetStaticProps<MainPageStaticProps> = async () => {
+export const getServerSideProps: GetStaticProps<MainPageServerSideProps> = async () => {
   try {
-      const { data } = await instance.get('/main');
+      const [
+        { data: mainPageData },
+        netflixOriginals,
+        trendingNow,
+        topRated,
+        actionMovies,
+        comedyMovies,
+        horrorMovies,
+        romanceMovies,
+        documentaries,
+      ] = await Promise.all([
+        instance.get('/main'),
+        fetchMovies('fetchNetflixOriginals'),
+        fetchMovies('fetchTrending'),
+        fetchMovies('fetchActionMovies'),
+        fetchMovies('fetchComedyMovies'),
+        fetchMovies('fetchDocumentaries'),
+        fetchMovies('fetchHorrorMovies'),
+        fetchMovies('fetchRomanceMovies'),
+        fetchMovies('fetchTopRated'),
+      ]);
+
+      const movies: Movies = {
+        netflixOriginals,
+        trendingNow,
+        topRated,
+        actionMovies,
+        comedyMovies,
+        horrorMovies,
+        romanceMovies,
+        documentaries
+      }
 
       return {
         props: {
-          mainPageData: data
+          mainPageData,
+          movies
         }
       }
    } catch (error) {
