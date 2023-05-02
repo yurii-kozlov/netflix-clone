@@ -59,7 +59,7 @@ export const login = createAsyncThunk(
 );
 
 export const registration = createAsyncThunk(
-  'auth/registr',
+  'auth/registration',
   async ({ email, password }: { email: string, password: string }, thunkAPI) => {
     try {
       const response = await AuthService.registration(email, password);
