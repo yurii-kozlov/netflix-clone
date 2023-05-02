@@ -66,7 +66,7 @@ type MainPageServerSideProps = MainPageSuccess | MainPageError;
 export const getServerSideProps: GetStaticProps<MainPageServerSideProps> = async () => {
   try {
       const [
-        { data },
+        { data: mainPageData },
         netflixOriginals,
         trendingNow,
         topRated,
@@ -100,7 +100,7 @@ export const getServerSideProps: GetStaticProps<MainPageServerSideProps> = async
 
       return {
         props: {
-          mainPageData: data,
+          mainPageData,
           movies
         }
       }
