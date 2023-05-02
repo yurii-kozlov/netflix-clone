@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
-import { Plan } from 'enums/Plan';
+import { Plan, plans } from 'enums/Plan';
 import { TableData } from 'components/TableData';
 import { LoadingIndicator } from 'components/LoadingIndicator';
 import greyCheckMark from 'images/checkMarkGrey.svg';
@@ -11,11 +11,12 @@ import styles from 'components/PlanTable/PlanTable.module.scss';
 
 export const PlanTable = (): ReactElement => {
   const [isNextButtonClicked, setIsNextButtonClicked] = useState<boolean>(false);
-  const [chosenPlan, setPlan] = useState<Plan>(Plan.Premium);
+  const [chosenPlan, setPlan] = useState<Plan>(Plan.Basic);
   const router = useRouter();
 
   const handlePlanChage = (event: React.ChangeEvent<HTMLInputElement>):void => setPlan(event.target.value as Plan);
   const handleNextButtonClick = (): Promise<boolean> => {
+    console.log(plans[chosenPlan])
     setIsNextButtonClicked(true);
 
     return router.push('/signUp/paymentPicker')
@@ -24,6 +25,7 @@ export const PlanTable = (): ReactElement => {
   const prices = ['EUR4.99', 'EUR7.49', 'EUR9.99'];
   const quality = ['Good', 'Better', 'Best'];
   const resolutions = ['720p', '1080p', '4K+HDR'];
+
 
   return (
     <div

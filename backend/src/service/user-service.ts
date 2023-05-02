@@ -1,4 +1,4 @@
-import UserModel from 'models/user-model';
+import UserModel, { Plan } from 'models/user-model';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import mailService from 'service/mail-service';
@@ -55,6 +55,20 @@ class UserService {
 
     user.isActivated = true;
     await user.save();
+  }
+
+  async setPlan(plan: Plan, email: string) {
+    const user = await UserModel.findOne({email});
+
+    if (!user) {
+      throw ApiError.BadRequest(`The user with the email ${email} doesn't exist`);
+    }
+
+    user.plan = plan;
+    await user.save();
+    const userDto = new UserDto(user);
+
+    return userDto;
   }
 
   async login(email: string, password: string) {
