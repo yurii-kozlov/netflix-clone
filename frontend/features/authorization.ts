@@ -2,6 +2,7 @@ import { AxiosError } from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AuthService from 'services/AuthService';
 import { User } from 'types/models/User'
+import { Plan } from 'types/Plan';
 
 export interface InitialState {
   user: User | null;
@@ -58,7 +59,7 @@ export const login = createAsyncThunk(
 );
 
 export const registration = createAsyncThunk(
-  'auth/registration',
+  'auth/registr',
   async ({ email, password }: { email: string, password: string }, thunkAPI) => {
     try {
       const response = await AuthService.registration(email, password);
@@ -74,6 +75,23 @@ export const registration = createAsyncThunk(
     }
   }
 );
+
+export const subscriptionPlan = createAsyncThunk(
+  'auth/plan',
+  async ({ email, plan }: {email: string, plan: Plan}, thunkAPI) => {
+    try {
+        const response = await AuthService.setPlan(email, plan);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+)
 
 export const logout = createAsyncThunk(
   'auth/logout',
@@ -135,6 +153,17 @@ const authSlice = createSlice({
       })
       .addCase(registration.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.isLoading = false;
+      })
+      .addCase(subscriptionPlan.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isLoading = false;
+      })
+      .addCase(subscriptionPlan.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(subscriptionPlan.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(logout.fulfilled, (state) => {

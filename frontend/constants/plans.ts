@@ -1,22 +1,4 @@
-export enum Plan {
-  Basic = 'basic',
-  Standard = 'standard',
-  Premium = 'premium'
-}
-
-export interface Plan1 {
-  name: string;
-  monthlyPrice: number;
-  videoQuality: string;
-  resolution: string;
-  multideviceViewing: boolean;
-}
-
-export type Plans = {
-  basic: Plan1;
-  standard: Plan1;
-  premium: Plan1;
-}
+import { Plans } from 'types/Plan';
 
 export const plans: Plans = {
   basic: {
