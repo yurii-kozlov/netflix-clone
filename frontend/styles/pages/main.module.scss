@@ -7,11 +7,15 @@
 }
 
 .section {
-  background-color: $colorWhite;
-  height: 100vh;
+  background-color: $mainBackgroundColor;
+  color: $colorWhite;
+}
+
+.content {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  color: $colorWhite;
+  height: 100vh;
 }
-

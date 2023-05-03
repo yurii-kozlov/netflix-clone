@@ -19,11 +19,21 @@ type MainHeaderProps = {
 export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactElement => {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState<boolean>(false);
   const [isSearchInputVisible, setIsSearchInputVisible] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  const handleScroll = (): void => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  }
 
   const handleSearchButtonClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setIsSearchInputVisible(!isSearchInputVisible);
     event.stopPropagation();
   };
+
   const handleSearchInputVisibility = (): void => setIsSearchInputVisible(false);
 
   const { headerLinksList } = headerData || {};
@@ -39,6 +49,14 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
   };
 
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [])
+
+  useEffect(() => {
     document.addEventListener('click', handleNavMenuVisibility);
     document.addEventListener('click', handleSearchInputVisibility);
 
@@ -49,7 +67,7 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
   }, [isNavMenuOpen, isSearchInputVisible])
 
   return (
-    <header className={styles.header}>
+    <header className={cn(styles.header, {[styles.scrolledHeader]: isScrolled})}>
       <Container>
         <nav className={styles.navigation}>
           <div className={cn(
