@@ -273,8 +273,36 @@
   min-height: 6.4rem;
   width: 100%;
   position: relative;
+  margin-bottom: 1rem;
 }
 
 .buttonNextDisabled {
   opacity: 0.5;
+}
+
+.registrationErrorWrapper {
+  @extend %smooth-transition;
+  display: flex;
+  justify-content: center;
+  padding: 1.6rem 1.7rem;
+  font-weight: $fontWeightRegular;
+  background-color: $colorYellow1;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @include onTablet {
+    gap: 3rem;
+  }
+}
+
+.warningIcon {
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+
+.registrationLink:hover {
+  text-decoration: underline;
 }

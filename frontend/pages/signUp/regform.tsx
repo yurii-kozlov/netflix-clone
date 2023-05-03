@@ -141,9 +141,9 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
                     </label>
                     <input
                       className={cn(
-                      styles.input,
-                      {[styles.inputError]: errors.email},
-                      {[styles.inputSuccess]: emailInput && !errors.email}
+                        styles.input,
+                        {[styles.inputError]: errors.email},
+                        {[styles.inputSuccess]: emailInput && !errors.email}
                       )}
                       {...register('email')}
                       id='email'
@@ -167,8 +167,8 @@ const Regform: React.FC<SignUpStaticProps> = ({ error, signUpData }): ReactEleme
                     <input
                       className={cn(
                       styles.input,
-                      {[styles.inputError]: errors.password},
-                      {[styles.inputSuccess]: passwordInput && !errors.password}
+                        {[styles.inputError]: errors.password},
+                        {[styles.inputSuccess]: passwordInput && !errors.password}
                       )}
                       id='password'
                       {...register('password')}

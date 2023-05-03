@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { validationResult } from 'express-validator';
 import ApiError from "exceptions/api-error";
 import { UserDoc } from "models/user-model";
+import UserDto from "dtos/user-dto";
 
 dotenv.config();
 
@@ -82,6 +83,21 @@ class UserController {
       return res.redirect(`${process.env.CLIENT_URL}/signIn`);
     } catch (error) {
         next(error);
+    }
+  }
+
+  async setPlan(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response<UserDto | void>>{
+    try {
+      const { email, plan } = req.body;
+      const user = await userService.setPlan(plan, email);
+
+      return res.json(user);
+    } catch (error) {
+      next(error);
     }
   }
 
