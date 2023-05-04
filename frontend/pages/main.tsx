@@ -9,10 +9,13 @@ import { MainPageData } from 'types/mainPage/MainPage';
 import { Movies } from 'types/MovieAPI';
 import { MainHeader } from 'components/MainHeader';
 import { Loader } from 'components/Loader';
+import { Banner } from 'components/Banner';
+import { Error } from 'components/Error';
 import styles from 'styles/pages/main.module.scss';
 
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
   const { header } = mainPageData || {};
+  const { netflixOriginals } = movies || {};
 
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
@@ -31,19 +34,24 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
   }
 
   return (
-    <>
+    <div className={styles.section}>
       <MainHeader error={error || null} headerData={header || null}/>
-      <section className={styles.section}>
-        <h1>Hi, you are authorized</h1>
-        <h1>
-          {isActivated ? `The account has been verified via email ${userEmail}`: 'VERIFY YOUR ACCOUNT'}
-        </h1>
-        <button onClick={(): void => {
+      <main>
+        {netflixOriginals ? (
+          <Banner netflixOriginals={netflixOriginals}/>
+        ): <Error error={error!}/>}
+        <section className={styles.content}>
+          <h1>Hi, you are authorized</h1>
+          <h1>
+            {isActivated ? `The account has been verified via email ${userEmail}`: 'VERIFY YOUR ACCOUNT'}
+          </h1>
+          <button onClick={(): void => {
         dispatch(authActions.logout());
         router.push('/');
-        }} type="button">Log out</button>
-      </section>
-    </>
+          }} type="button">Log out</button>
+        </section>
+      </main>
+    </div>
   );
 }
 

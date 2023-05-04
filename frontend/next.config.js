@@ -1,7 +1,8 @@
 module.exports = {
   images: {
     domains: [
-      'res.cloudinary.com', 'assets.nflxext.com', 'occ-0-6308-3467.1.nflxso.net'
+      'res.cloudinary.com', 'assets.nflxext.com', 'occ-0-6308-3467.1.nflxso.net',
+      'image.tmdb.org'
     ],
   },
   i18n: {

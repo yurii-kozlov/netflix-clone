@@ -1,5 +1,10 @@
 .header {
-  background-color: $colorBlack7;
+  @extend %smooth-transition;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 20;
 }
 
 .contentWrapper {
@@ -186,6 +191,7 @@
   border: 0.1rem solid $colorWhite;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  background-color: $mainBackgroundColor;
 }
 
 .error {
@@ -197,4 +203,8 @@
   @include onTablet {
     font-size: 1.5rem;
   }
+}
+
+.scrolledHeader {
+  background-color: $mainBackgroundColor;
 }
