@@ -28,12 +28,12 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
   const userEmail = useAppSelector((state) => state.authorization.user?.email);
   const router = useRouter();
 
-  const { ref: ref1, inView: inView1 } = useInView({
+  const { ref: firstPartTunnelsRef, inView: firstPartTunnelsView } = useInView({
     triggerOnce: true,
     rootMargin: '100px'
   });
 
-    const { ref: ref2, inView: inView2 } = useInView({
+    const { ref: secondPartTunnelsRef, inView: secondPartTunnelsView } = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
@@ -76,8 +76,8 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
           <section className={styles.content}>
             <Container>
               <div className={styles.moviesRows}>
-                <div ref={ref1}>
-                  {inView1 && (
+                <div ref={firstPartTunnelsRef}>
+                  {firstPartTunnelsView && (
                     <>
                       <div className={styles.movieRowWrapper}>
                         <DynamicMovieRow movies={trendingNow} rowTitle="Trending Now"/>
@@ -88,8 +88,8 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
                     </>
                   )}
                 </div>
-                <div ref={ref2}>
-                  {inView2 && (
+                <div ref={secondPartTunnelsRef}>
+                  {secondPartTunnelsView && (
                     <>
                       <div className={styles.movieRowWrapper}>
                         <DynamicMovieRow movies={actionMovies} rowTitle="Action Thrillers"/>
