@@ -1,0 +1,37 @@
+import React, { ReactElement } from 'react';
+import Image from 'next/image';
+import { Movie } from 'types/MovieAPI';
+import styles from 'components/MovieCard/MovieCard.module.scss';
+
+type MovieCardProps = {
+  movie: Movie
+};
+
+export const MovieCard: React.FC<MovieCardProps> = ({ movie }): ReactElement => {
+  const {backdrop_path, poster_path} = movie;
+  const movieImageBaseUrl = process.env.NEXT_PUBLIC_MOVIE_IMAGE_BASE_URL;
+
+  const sizes = `
+    (max-width: 640px) 100vw,
+    (max-width: 768px) 50vw,
+    30vw`;
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.imageWrapper}>
+        <button
+          className={styles.button}
+          type="button"
+        >
+          <Image
+            alt="image"
+            className={styles.image}
+            sizes={sizes}
+            src={`${movieImageBaseUrl}${backdrop_path || poster_path}`}
+            fill
+          />
+        </button>
+      </div>
+    </div>
+  );
+};

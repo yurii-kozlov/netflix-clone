@@ -30,7 +30,6 @@ export const Banner: React.FC<BannerProps> = ({ netflixOriginals }): ReactElemen
 
   return (
     <div className={styles.wrapper}>
-
       <div className={styles.imageWrapper}>
         <Image
           alt="image"
