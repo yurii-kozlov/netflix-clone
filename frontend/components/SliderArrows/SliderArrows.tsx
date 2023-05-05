@@ -7,17 +7,13 @@ export const SliderArrowNext = (props: CustomArrowProps): ReactElement => {
   const {onClick } = props;
 
   return (
-    <div
+    <button
       className={cn(styles.arrowWrapper, styles.nextArrowWrapper)}
       onClick={onClick}
-      role="presentation"
+      type="button"
     >
-      <div
-        className={cn(styles.arrows, styles.nextArrow)}
-        onClick={onClick}
-        role="presentation"
-    />
-    </div>
+      <div className={cn(styles.arrows, styles.nextArrow)}/>
+    </button>
   );
 };
 
@@ -29,11 +25,8 @@ export const SliderArrowPrev = (props: CustomArrowProps): ReactElement => {
       className={cn(styles.arrowWrapper, styles.prevArrowWrapper)}
       onClick={onClick}
       type="button"
-      >
-      <div
-        className={cn(styles.arrows, styles.prevArrow)}
-
-    />
+    >
+      <div className={cn(styles.arrows, styles.prevArrow)}/>
     </button>
   );
 };
