@@ -1,0 +1,65 @@
+.arrowWrapper{
+  @extend %smooth-transition;
+  z-index: 1;
+  width: 5rem;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.prevArrowWrapper {
+  left: 0;
+}
+
+.nextArrowWrapper {
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.arrowWrapper:hover {
+  background-color: $colorBlack8;
+  opacity: 0.7;
+
+  .arrows {
+    border-color: $colorWhite;
+  }
+}
+
+.arrows {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  @extend %smooth-transition;
+
+  @include onDesktop {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.prevArrow {
+  border-bottom: 0.3rem solid;
+  border-left: 0.3rem solid;
+  transform: rotate(45deg);
+  border-color: $colorGrey1;
+}
+
+.nextArrow {
+  border-bottom: 0.3rem solid;
+  border-left: 0.3rem solid;
+  transform: rotate(-135deg);
+
+  border-color: $colorGrey1;
+}
+
+.arrows:hover {
+  border-color: $colorWhite;
+}

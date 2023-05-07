@@ -1,0 +1,15 @@
+.title {
+  @extend %smooth-transition;
+  font-weight: $fontWeightBold;
+  font-size: 2.2rem;
+  color: $colorWhite;
+  margin-bottom: 1.4rem;
+
+  @include onTablet {
+    margin-bottom: 1.6rem;
+    font-size: 2.4rem;
+  }
+}
+
+
+

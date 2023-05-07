@@ -1,11 +1,14 @@
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import store from 'store/store';
 import 'styles/base/globals.scss'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'animate.css/animate.min.css';
 
 import { Roboto } from 'next/font/google';
-import Head from 'next/head';
 
 const roboto = Roboto({
   subsets: ['latin'],
