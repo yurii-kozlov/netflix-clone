@@ -3,6 +3,11 @@ export interface Genre {
   name: string;
 };
 
+export interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
 export interface Movie {
   title: string;
   backdrop_path: string;
@@ -22,13 +27,17 @@ export interface Movie {
   vote_count: number;
 };
 
-export enum Element {
+export enum ElementType {
   Bloopers = 'Bloopers',
   Featurette = 'Featurette',
   BehindTheScenes = 'Behind the Scenes',
   Clip = 'Clip',
   Trailer = 'Trailer',
-  Teaser = 'Teaser'
+  Teaser = 'Teaser',
+}
+
+export interface Element {
+  type: ElementType;
 }
 
 export type Movies = {

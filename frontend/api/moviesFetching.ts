@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { movieFetcher } from 'api/api';
-import { Movie, MovieAPIResponse } from 'types/MovieAPI';
+import { Element, Movie, MovieAPIResponse, Genre } from 'types/MovieAPI';
 
 const MOVIE_API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
@@ -23,3 +23,44 @@ export const fetchMovies = async (requestKey: MoviesFetchRequestKey): Promise<Mo
 
   return response.data.results;
 }
+
+export type FetchMovieData = {
+  genres: Genre[];
+  trailer: string
+}
+
+// export const fetchMovie = async (movie: Movie): Promise<FetchMovieData> =>{
+//   try {
+//     const { data } = await movieFetcher.get(
+//       `https://api.themoviedb.org/3/${
+//         movie?.media_type === 'tv' ? 'tv' : 'movie'
+//       }/${movie?.id}?api_key=${
+//         process.env.NEXT_PUBLIC_MOVIE_API_KEY
+//       }&language=en-US&append_to_response=videos`
+//     )
+
+//     console.log('new movie', data);
+//     let movieTrailer;
+//     let genres;
+
+//     if (data?.videos) {
+//       const index = data.videos.results.findIndex(
+//         (element: Element) => element.type === 'Trailer'
+//       )
+//       movieTrailer = data.videos?.results[index]?.key;
+//     }
+
+//     if (data?.genres) {
+//       genres = data.genres;
+//     }
+
+//     return ({
+//       genres,
+//       trailer: movieTrailer
+//     });
+
+//   } catch (error) {
+//     throw new Error('Failed to fetch movie preview')
+//   }
+
+// }

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import personalAccountReducer from 'features/personalAccount';
 import authorizationReducer from 'features/authorization';
+import moviePreviewReducer from 'features/moviePreview';
 
 const store = configureStore({
   reducer: {
     accountInfo: personalAccountReducer,
-    authorization: authorizationReducer
+    authorization: authorizationReducer,
+    moviePreview: moviePreviewReducer,
   }
 });
 

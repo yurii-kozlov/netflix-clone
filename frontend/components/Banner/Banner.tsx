@@ -1,6 +1,9 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
+import { useAppDispatch } from 'store/hooks';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { actions as moviePreviewActions } from 'features/moviePreview';
 import { Movie } from 'types/MovieAPI';
 import { Loader } from 'components/Loader';
 import { Container } from 'components/Container';
@@ -15,6 +18,8 @@ type BannerProps = {
 export const Banner: React.FC<BannerProps> = ({ netflixOriginals }): ReactElement => {
   const [movie, setMovie] = useState<Movie | null>(null);
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     setMovie(
       netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
@@ -24,6 +29,10 @@ export const Banner: React.FC<BannerProps> = ({ netflixOriginals }): ReactElemen
   if (!movie) {
     return <div className={styles.loaderWrapper}><Loader/></div>;
   }
+
+  const openMoviePopup = (): PayloadAction<Movie> => dispatch(
+    moviePreviewActions.openMoviePopup(movie)
+  );
 
   const {title, backdrop_path, poster_path, overview} = movie;
   const movieImageBaseUrl = process.env.NEXT_PUBLIC_MOVIE_IMAGE_BASE_URL;
@@ -50,7 +59,11 @@ export const Banner: React.FC<BannerProps> = ({ netflixOriginals }): ReactElemen
               <Image alt="play" className={styles.icon} src={playIcon}/>
               <span>Play</span>
             </button>
-            <button className={cn(styles.button, styles.buttonMoreInfo)} type="button">
+            <button
+              className={cn(styles.button, styles.buttonMoreInfo)}
+              onClick={openMoviePopup}
+              type="button"
+            >
               <Image alt="more info" className={styles.icon} src={moreInfoIcon}/>
               <span>More info</span>
             </button>
