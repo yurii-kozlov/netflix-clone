@@ -138,11 +138,9 @@ const MoviePopup: React.FC = (): ReactElement => {
             className={styles.reactPlayer}
             height='100%'
             muted={isVolumeMuted}
-            // style={{ position: 'absolute', top: '0', left: '0' }}
-            playing
             url={`https://www.youtube.com/watch?v=${trailer}`}
-            // width="100%"
             width='100%'
+            playing
           />
         </div>
         <div className={styles.detailedInfo}>
