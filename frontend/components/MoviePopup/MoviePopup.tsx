@@ -26,7 +26,7 @@ const MoviePopup: React.FC = (): ReactElement => {
   const previewMovie = useAppSelector((state) => state.moviePreview.movieForPreview);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
-    if (event.key === 'Esc') {
+    if (event.key === 'Escape') {
       dispatch(moviePreviewActions.closeMoviePopup());
     }
   }
