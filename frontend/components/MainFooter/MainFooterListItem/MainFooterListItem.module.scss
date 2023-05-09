@@ -1,0 +1,15 @@
+.listItem {
+  @extend %smooth-transition;
+  color: $colorGrey8;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+
+  @include onTablet {
+    font-size: 1.6rem;
+  }
+}
+
+.listItem:is(:hover, :focus) {
+  scale: 1.06;
+  text-decoration: underline;
+}
