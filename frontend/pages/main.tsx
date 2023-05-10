@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { AnimationOnScroll} from 'react-animation-on-scroll';
 import { useInView } from 'react-intersection-observer';
 import { CSSTransition } from 'react-transition-group';
 import { instance } from 'api/api';
@@ -20,9 +21,10 @@ import styles from 'styles/pages/main.module.scss';
 
 const DynamicMovieRow = dynamic(() => import('components/MoviesRow').then((res) => res.MoviesRow));
 const DynamicMoviePopup = dynamic(() => import('components/MoviePopup').then((res) => res.MoviePopup));
+const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res) => res.MainFooter));
 
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
-  const { header } = mainPageData || {};
+  const { header, footerLinksList } = mainPageData || {};
 
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
@@ -33,14 +35,18 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
 
   const { ref: firstPartTunnelsRef, inView: firstPartTunnelsView } = useInView({
     triggerOnce: true,
-    rootMargin: '100px'
+    rootMargin: '15px'
   });
 
-    const { ref: secondPartTunnelsRef, inView: secondPartTunnelsView } = useInView({
+  const { ref: secondPartTunnelsRef, inView: secondPartTunnelsView } = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
 
+  const { ref: footerRef, inView: footerInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -134,6 +140,17 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
             </CSSTransition>
           </section>
         </main>
+        {footerLinksList ? (
+          <div className={styles.footerWrapper} ref={footerRef}>
+            {footerInView && (
+              <AnimationOnScroll animateIn="animate__fadeInUp" >
+                <DynamicMainFooter footerLinksList={footerLinksList}/>
+              </AnimationOnScroll>
+            )}
+          </div>
+        ): (
+          <Error error='Failed to fetch footer data'/>
+        )}
       </div>
     </>
   );
