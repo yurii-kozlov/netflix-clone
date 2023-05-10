@@ -2,7 +2,6 @@ import { model, Schema, Document } from "mongoose";
 import { UserDoc } from "interfaces/UserDoc";
 import { Movie } from "interfaces/Movie";
 
-
 const movieSchema = new Schema<Movie>({
   title: { type: String, required: true },
   backdrop_path: { type: String, required: true },

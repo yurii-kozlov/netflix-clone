@@ -93,8 +93,6 @@ class UserService {
 
     user.likedMovies = [...user.likedMovies, movie];
     await user.save();
-
-    return movie;
   }
 
   async login(email: string, password: string) {
