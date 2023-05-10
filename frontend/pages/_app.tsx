@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactElement } from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
+import NextNProgress from 'nextjs-progressbar';
 import store from 'store/store';
 import 'styles/base/globals.scss'
 import 'slick-carousel/slick/slick.css';
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
       </Head>
       <Provider store={store}>
         <main className={roboto.className}>
+          <NextNProgress color='#d30b15' height={4} showOnShallow/>
           <Component {...pageProps} />
         </main>
       </Provider>
