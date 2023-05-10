@@ -103,9 +103,9 @@ const MoviePopup: React.FC = (): ReactElement => {
                 >
               {isVolumeMuted ? (
                 <BiVolumeMute color='fff' size={23}/>
-                ): (
-                  <BiVolumeFull color='fff' size={23}/>
-                )}
+              ): (
+                <BiVolumeFull color='fff' size={23}/>
+              )}
             </button>
             <div className={styles.userButtonsGroup}>
               <button className={cn(styles.button, styles.buttonPlay)} type="button">
