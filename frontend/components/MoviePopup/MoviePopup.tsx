@@ -7,7 +7,6 @@ import { actions as moviePreviewActions } from 'features/moviePreview';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Element, ElementType, Genre, ProductionCountry } from 'types/MovieAPI';
 import { movieFetcher } from 'api/api';
-import { Error } from 'components/Error';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { HiOutlineX } from 'react-icons/hi';
 import { BiVolumeFull, BiVolumeMute } from 'react-icons/bi';
@@ -22,7 +21,6 @@ const MoviePopup: React.FC = (): ReactElement => {
   const [productionCountries, setProductionCountries] = useState<ProductionCountry[]>([]);
 
   const dispatch = useAppDispatch();
-  const isMoviePopupVisible = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
   const previewMovie = useAppSelector((state) => state.moviePreview.movieForPreview);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
@@ -65,10 +63,6 @@ const MoviePopup: React.FC = (): ReactElement => {
   const closeMoviePopup = (): PayloadAction<void> => dispatch(moviePreviewActions.closeMoviePopup());
   const toggleVolume = (): void => setIsMuted(!isVolumeMuted);
 
-  if (!previewMovie) {
-    return <Error error='Failed to fetch the movie, Please try again later or contact us'/>
-  }
-
   const {
     vote_average,
     release_date,
@@ -76,114 +70,112 @@ const MoviePopup: React.FC = (): ReactElement => {
     overview,
     original_language,
     vote_count,
-  } = previewMovie;
+  } = previewMovie || {};
 
   return (
     <div
-      className={cn(
-        styles.block,
-        {[styles.blockActive]: isMoviePopupVisible},
-        {[styles.blockDisappearance]: !isMoviePopupVisible}
-      )}
+      className={styles.block}
       onClick={closeMoviePopup}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
     >
-      <div
-        className={styles.content}
-        onClick={(event): void => event.stopPropagation()}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-      >
-        <div className={styles.playerWrapper}>
-          <button
-            className={styles.buttonClose}
-            onClick={closeMoviePopup}
-            type="button"
-          >
-            <HiOutlineX color='fff' size={23}/>
-          </button>
-          <button
-            className={cn(styles.userButton, styles.buttonVolume)}
-            onClick={toggleVolume}
-            type="button"
-          >
-            {isVolumeMuted ? (
-              <BiVolumeMute color='fff' size={23}/>
-            ): (
-              <BiVolumeFull color='fff' size={23}/>
-            )}
-          </button>
-          <div className={styles.userButtonsGroup}>
-            <button className={cn(styles.button, styles.buttonPlay)} type="button">
-              <Image alt="play" className={styles.icon} src={playIcon}/>
-              <span>Play</span>
-            </button>
+      {previewMovie && (
+        <div
+          className={styles.content}
+          onClick={(event): void => event.stopPropagation()}
+          onKeyDown={handleKeyDown}
+          role="button"
+          tabIndex={0}
+            >
+          <div className={styles.playerWrapper}>
             <button
-              className={styles.userButton}
+              className={styles.buttonClose}
+              onClick={closeMoviePopup}
               type="button"
             >
-              <AiOutlinePlus color='fff' size={23}/>
+              <HiOutlineX color='fff' size={23}/>
             </button>
             <button
-              className={styles.userButton}
+              className={cn(styles.userButton, styles.buttonVolume)}
+              onClick={toggleVolume}
               type="button"
-            >
-              <GoThumbsup color='fff' size={23}/>
-            </button>
-          </div>
-          <ReactPlayer
-            className={styles.reactPlayer}
-            height='100%'
-            muted={isVolumeMuted}
-            url={`https://www.youtube.com/watch?v=${trailer}`}
-            width='100%'
-            playing
-          />
-        </div>
-        <div className={styles.detailedInfo}>
-          <div className={styles.releaseInfoAndMatchWrapper}>
-            <p className={styles.matchRank}>{vote_average * 10}% Match</p>
-            <p className={styles.releaseData}>{release_date || first_air_date}</p>
-            <div className={styles.qualityWrapper}>
-              <span className={styles.quality}>HD</span>
-            </div>
-          </div>
-          <div className={styles.descriptionAndAdditionalInfoBlocksWrapper}>
-            <div className={styles.descriptionBlock}>
-              <p className={styles.overview}>
-                {overview}
-              </p>
-            </div>
-            <div className={styles.additionalInfo}>
-              <div className={styles.additionalInfoSubblock}>
-                <span className={styles.additionalInfoSubblockTitle}>Genres:&nbsp;</span>
-                <p className={styles.additionalInfoSubblockContent}>{genres.map((genre) => genre.name).join(', ')}</p>
-              </div>
-              {productionCountries && (
-                <div className={styles.additionalInfoSubblock}>
-                  <span className={styles.additionalInfoSubblockTitle}>
-                    Production {productionCountries.length > 1 ? 'countries': 'country'}:&nbsp;
-                  </span>
-                  <p className={styles.additionalInfoSubblockContent}>
-                    {productionCountries.map((productionCountry) => productionCountry.name).join(', ')}
-                  </p>
-                </div>
+                >
+              {isVolumeMuted ? (
+                <BiVolumeMute color='fff' size={23}/>
+              ): (
+                <BiVolumeFull color='fff' size={23}/>
               )}
-              <div className={styles.additionalInfoSubblock}>
-                <span className={styles.additionalInfoSubblockTitle}>Original language:&nbsp;</span>
-                <p className={styles.additionalInfoSubblockContent}>{original_language}</p>
+            </button>
+            <div className={styles.userButtonsGroup}>
+              <button className={cn(styles.button, styles.buttonPlay)} type="button">
+                <Image alt="play" className={styles.icon} src={playIcon}/>
+                <span>Play</span>
+              </button>
+              <button
+                className={styles.userButton}
+                type="button"
+                  >
+                <AiOutlinePlus color='fff' size={23}/>
+              </button>
+              <button
+                className={styles.userButton}
+                type="button"
+              >
+                <GoThumbsup color='fff' size={23}/>
+              </button>
+            </div>
+            <ReactPlayer
+              className={styles.reactPlayer}
+              height='100%'
+              muted={isVolumeMuted}
+              url={`https://www.youtube.com/watch?v=${trailer}`}
+              width='100%'
+              playing
+            />
+          </div>
+          <div className={styles.detailedInfo}>
+            <div className={styles.releaseInfoAndMatchWrapper}>
+              {vote_average && (<p className={styles.matchRank}>{vote_average * 10}% Match</p>)}
+              <p className={styles.releaseData}>{release_date || first_air_date}</p>
+              <div className={styles.qualityWrapper}>
+                <span className={styles.quality}>HD</span>
               </div>
-              <div className={styles.additionalInfoSubblock}>
-                <span className={styles.additionalInfoSubblockTitle}>Total votes:&nbsp;</span>
-                <p className={styles.additionalInfoSubblockContent}>{vote_count}</p>
+            </div>
+            <div className={styles.descriptionAndAdditionalInfoBlocksWrapper}>
+              <div className={styles.descriptionBlock}>
+                <p className={styles.overview}>
+                  {overview}
+                </p>
+              </div>
+              <div className={styles.additionalInfo}>
+                <div className={styles.additionalInfoSubblock}>
+                  <span className={styles.additionalInfoSubblockTitle}>Genres:&nbsp;</span>
+                  <p className={styles.additionalInfoSubblockContent}>{genres.map((genre) => genre.name).join(', ')}</p>
+                </div>
+                {productionCountries && (
+                  <div className={styles.additionalInfoSubblock}>
+                    <span className={styles.additionalInfoSubblockTitle}>
+                      Production {productionCountries.length > 1 ? 'countries': 'country'}:&nbsp;
+                    </span>
+                    <p className={styles.additionalInfoSubblockContent}>
+                      {productionCountries.map((productionCountry) => productionCountry.name).join(', ')}
+                    </p>
+                  </div>
+                    )}
+                <div className={styles.additionalInfoSubblock}>
+                  <span className={styles.additionalInfoSubblockTitle}>Original language:&nbsp;</span>
+                  <p className={styles.additionalInfoSubblockContent}>{original_language}</p>
+                </div>
+                <div className={styles.additionalInfoSubblock}>
+                  <span className={styles.additionalInfoSubblockTitle}>Total votes:&nbsp;</span>
+                  <p className={styles.additionalInfoSubblockContent}>{vote_count}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 };

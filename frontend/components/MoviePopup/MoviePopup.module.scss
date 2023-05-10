@@ -11,14 +11,6 @@
   justify-content: center;
   align-items: center;
   pointer-events: all;
-
-  transform-origin: top center;
-
-  animation: modalAppearance 0.2s ease-out forwards;
-}
-
-.blockDisappearance {
-  animation: modalDisappearance 0.2s ease-out forwards;
 }
 
 .content {
@@ -135,28 +127,6 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-@keyframes modalAppearance {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes modalDisappearance {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
 }
 
 .title {

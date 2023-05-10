@@ -17,10 +17,10 @@ import { Loader } from 'components/Loader';
 import { Banner } from 'components/Banner';
 import { Error } from 'components/Error';
 import { Container } from 'components/Container';
+import { MoviePopup } from 'components/MoviePopup';
 import styles from 'styles/pages/main.module.scss';
 
 const DynamicMovieRow = dynamic(() => import('components/MoviesRow').then((res) => res.MoviesRow));
-const DynamicMoviePopup = dynamic(() => import('components/MoviePopup').then((res) => res.MoviePopup));
 const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res) => res.MainFooter));
 
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
@@ -85,7 +85,7 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
           <section className={styles.content}>
             <Container>
               <div className={styles.moviesRows}>
-                <div ref={firstPartTunnelsRef}>
+                <div className={styles.moviesRowsWrapper} ref={firstPartTunnelsRef}>
                   {firstPartTunnelsView && (
                     <>
                       <div className={styles.movieRowWrapper}>
@@ -97,7 +97,7 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
                     </>
                   )}
                 </div>
-                <div ref={secondPartTunnelsRef}>
+                <div className={styles.moviesRowsWrapper} ref={secondPartTunnelsRef}>
                   {secondPartTunnelsView && (
                     <>
                       <div className={styles.movieRowWrapper}>
@@ -131,12 +131,18 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
               </div>
             </Container>
             <CSSTransition
-              classNames="popup"
+              classNames={{
+                enter: styles.enter,
+                enterActive: styles.enterActive,
+                enterDone: styles.enterDone,
+                exit: styles.exit,
+              }}
               in={isMoviePopupActive}
               timeout={300}
+              appear
               unmountOnExit
             >
-              <DynamicMoviePopup />
+              <MoviePopup/>
             </CSSTransition>
           </section>
         </main>
