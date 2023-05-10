@@ -16,7 +16,7 @@ type MoviesRowProps = {
 
 export const MoviesRow: React.FC<MoviesRowProps> = ({ rowTitle, movies }): ReactElement => (
   <div >
-    <AnimationOnScroll animateIn="animate__fadeInUp" >
+    <AnimationOnScroll animateIn="animate__fadeInUp">
       <div className={styles.wrapper} >
         <h2 className={styles.title}>{rowTitle}</h2>
         <div className={styles.block}>

@@ -1,0 +1,20 @@
+.MyClass {
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+  z-index: 10000;
+}
+.MyClassEnterActive {
+  left: 15px;
+  transition: left 500ms;
+}
+.MyClassEnterDone {
+  left: 15px;
+}
+.MyClassExit {
+  left: 15px;
+}
+.MyClassExitActive {
+  left: 5px;
+  transition: left 500ms;
+}

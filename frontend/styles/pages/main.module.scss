@@ -23,3 +23,37 @@
 .movieRowWrapper:not(:last-child) {
   margin-bottom: 2rem;
 }
+
+.moviesRowsWrapper {
+  margin-bottom: 2rem;
+}
+
+.enterActive, .enterDone{
+  animation: modalAppearance 0.2s ease-out forwards;
+}
+
+.exit {
+  animation: modalDisappearance 0.2s ease-out forwards;
+}
+
+@keyframes modalAppearance {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modalDisappearance {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
