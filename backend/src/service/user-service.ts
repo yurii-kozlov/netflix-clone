@@ -1,4 +1,5 @@
-import UserModel, { Plan } from 'models/user-model';
+import UserModel from 'models/user-model';
+import { Plan } from 'interfaces/Plan';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import mailService from 'service/mail-service';
@@ -7,7 +8,8 @@ import UserDto from 'dtos/user-dto';
 import ApiError from 'exceptions/api-error';
 import dotenv from 'dotenv';
 import userModel from 'models/user-model';
-import { UserDoc } from 'models/user-model';
+import { UserDoc } from "interfaces/UserDoc";
+import { Movie } from 'interfaces/Movie';
 
 dotenv.config();
 
@@ -69,6 +71,30 @@ class UserService {
     const userDto = new UserDto(user);
 
     return userDto;
+  }
+
+  async addMovieToWatchLaterList(movie: Movie, email: string) {
+    const user = await UserModel.findOne({email});
+
+    if (!user) {
+      throw ApiError.BadRequest(`The user with the email ${email} doesn't exist. Please register first`);
+    }
+
+    user.watchLaterMovies = [...user.watchLaterMovies, movie];
+    await user.save();
+  }
+
+  async addMovieToLikedList(movie: Movie, email: string) {
+    const user = await UserModel.findOne({email});
+
+    if (!user) {
+      throw ApiError.BadRequest(`The user with the email ${email} doesn't exist. Please register first`);
+    }
+
+    user.likedMovies = [...user.likedMovies, movie];
+    await user.save();
+
+    return movie;
   }
 
   async login(email: string, password: string) {

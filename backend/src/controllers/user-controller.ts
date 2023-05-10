@@ -3,8 +3,9 @@ import userService, { UserData } from "service/user-service";
 import dotenv from 'dotenv';
 import { validationResult } from 'express-validator';
 import ApiError from "exceptions/api-error";
-import { UserDoc } from "models/user-model";
+import { UserDoc } from "interfaces/UserDoc";
 import UserDto from "dtos/user-dto";
+import { Movie } from "interfaces/Movie";
 
 dotenv.config();
 
@@ -96,6 +97,36 @@ class UserController {
       const user = await userService.setPlan(plan, email);
 
       return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addMovieToWatchLaterList(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response<Movie| void>> {
+    try {
+      const { watchLaterMovie, email } = req.body;
+      await userService.addMovieToWatchLaterList(watchLaterMovie, email);
+
+      return res.json(watchLaterMovie);
+    } catch (error) {
+        next(error);
+    }
+  }
+
+  async addMovieToLikedList(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response<Movie | void>> {
+    try {
+      const { likedMovie, email } = req.body;
+       await userService.addMovieToLikedList(likedMovie, email);
+
+      return res.json(likedMovie);
     } catch (error) {
       next(error);
     }

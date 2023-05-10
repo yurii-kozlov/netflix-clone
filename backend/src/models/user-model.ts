@@ -1,20 +1,26 @@
 import { model, Schema, Document } from "mongoose";
+import { UserDoc } from "interfaces/UserDoc";
+import { Movie } from "interfaces/Movie";
 
-export interface Plan {
-  name: string;
-  monthlyPrice: number;
-  videoQuality: string;
-  resolution: string;
-  multideviceViewing: boolean;
-}
 
-export interface UserDoc extends Document {
-  email: string,
-  password: string,
-  activationLink: string,
-  isActivated: boolean,
-  plan: Plan
-}
+const movieSchema = new Schema<Movie>({
+  title: { type: String, required: true },
+  backdrop_path: { type: String, required: true },
+  media_type: { type: String },
+  release_date: { type: String },
+  first_air_date: { type: String, required: true },
+  genre_ids: [{ type: Number, required: true }],
+  id: { type: Number, required: true },
+  name: { type: String, required: true },
+  original_country: { type: String },
+  original_language: { type: String, required: true },
+  original_name: { type: String },
+  overview: { type: String, required: true },
+  popularity: { type: Number, required: true },
+  poster_path: { type: String, required: true },
+  vote_average: { type: Number, required: true },
+  vote_count: { type: Number, required: true },
+});
 
 const UserSchema = new Schema<UserDoc>({
   email: {type: String, unique: true, required: true},
@@ -36,6 +42,16 @@ const UserSchema = new Schema<UserDoc>({
       resolution: '720p',
       multideviceViewing: true
     },
+  },
+  watchLaterMovies: {
+    type: [movieSchema],
+    default: [],
+    required: true,
+  },
+  likedMovies: {
+    type: [movieSchema],
+    default: [],
+    required: true,
   }
 });
 
