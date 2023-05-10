@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { movieFetcher } from 'api/api';
-import { Movie, MovieAPIResponse } from 'types/MovieAPI';
+import { Movie, MovieAPIResponse} from 'types/MovieAPI';
 
 const MOVIE_API_KEY = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 

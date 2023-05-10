@@ -5,6 +5,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { AnimationOnScroll} from 'react-animation-on-scroll';
 import { useInView } from 'react-intersection-observer';
+import { CSSTransition } from 'react-transition-group';
 import { instance } from 'api/api';
 import { fetchMovies } from 'api/moviesFetching';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -19,6 +20,7 @@ import { Container } from 'components/Container';
 import styles from 'styles/pages/main.module.scss';
 
 const DynamicMovieRow = dynamic(() => import('components/MoviesRow').then((res) => res.MoviesRow));
+const DynamicMoviePopup = dynamic(() => import('components/MoviePopup').then((res) => res.MoviePopup));
 const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res) => res.MainFooter));
 
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
@@ -28,6 +30,7 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const isActivated = useAppSelector((state) => state.authorization.user?.isActivated);
   const userEmail = useAppSelector((state) => state.authorization.user?.email);
+  const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
   const router = useRouter();
 
   const { ref: firstPartTunnelsRef, inView: firstPartTunnelsView } = useInView({
@@ -127,6 +130,14 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
                 }} type="button">Log out</button>
               </div>
             </Container>
+            <CSSTransition
+              classNames="popup"
+              in={isMoviePopupActive}
+              timeout={300}
+              unmountOnExit
+            >
+              <DynamicMoviePopup />
+            </CSSTransition>
           </section>
         </main>
         {footerLinksList ? (

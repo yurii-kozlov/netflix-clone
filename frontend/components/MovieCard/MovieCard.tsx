@@ -1,5 +1,8 @@
 import React, { ReactElement } from 'react';
 import Image from 'next/image';
+import { useAppDispatch } from 'store/hooks';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { actions as moviePreviewActions } from 'features/moviePreview';
 import { Movie } from 'types/MovieAPI';
 import styles from 'components/MovieCard/MovieCard.module.scss';
 
@@ -16,11 +19,17 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }): ReactElement => 
     (max-width: 768px) 50vw,
     30vw`;
 
+  const dispatch = useAppDispatch();
+  const openMoviePopup = (): PayloadAction<Movie> => dispatch(
+    moviePreviewActions.openMoviePopup(movie)
+  );
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.imageWrapper}>
         <button
           className={styles.button}
+          onClick={openMoviePopup}
           type="button"
         >
           <Image
