@@ -16,5 +16,7 @@ router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
 router.patch('/setPlan', userController.setPlan);
+router.patch('/addMovieToWatchLaterList', userController.addMovieToWatchLaterList);
+router.patch('/addMovieToLikedList', userController.addMovieToLikedList);
 
 export default router;
