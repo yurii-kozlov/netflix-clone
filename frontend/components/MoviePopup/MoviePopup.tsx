@@ -3,12 +3,15 @@ import Image from 'next/image';
 import cn from 'classnames';
 import ReactPlayer from 'react-player';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
+import * as userActions from 'features/authorization';
 import { actions as moviePreviewActions } from 'features/moviePreview';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Element, ElementType, Genre, ProductionCountry } from 'types/MovieAPI';
 import { movieFetcher } from 'api/api';
+import { RiThumbUpFill } from 'react-icons/ri';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { HiOutlineX } from 'react-icons/hi';
+import { ImCheckmark } from 'react-icons/im';
 import { BiVolumeFull, BiVolumeMute } from 'react-icons/bi';
 import { GoThumbsup } from 'react-icons/go';
 import playIcon from 'images/play.svg';
@@ -17,17 +20,62 @@ import styles from 'components/MoviePopup/MoviePopup.module.scss';
 const MoviePopup: React.FC = (): ReactElement => {
   const [trailer, setTrailer] = useState<string>('');
   const [genres, setGenres] = useState<Genre[]>([]);
+  const [isMovieInWatchLaterList, setIsMovieInWatchLaterList] = useState<boolean>(false);
+  const [isMovieInLikedList, setIsMovieInLikedList] = useState<boolean>(false);
   const [isVolumeMuted, setIsMuted] = useState<boolean>(false);
   const [productionCountries, setProductionCountries] = useState<ProductionCountry[]>([]);
 
   const dispatch = useAppDispatch();
   const previewMovie = useAppSelector((state) => state.moviePreview.movieForPreview);
+  const watchLaterMoviesList = useAppSelector((state) => state.authorization.user?.watchLaterMovies);
+  const likedMoviesList = useAppSelector((state) => state.authorization.user?.likedMovies);
+  const userEmail = useAppSelector((state) => state.authorization.user?.email);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === 'Escape') {
       dispatch(moviePreviewActions.closeMoviePopup());
     }
   }
+
+  const addMovieToWatchLaterList = (): void => {
+    if (!userEmail || !previewMovie || isMovieInWatchLaterList) {
+      return;
+    }
+
+    setIsMovieInWatchLaterList(true);
+
+    dispatch(userActions.addMovieToWatchLaterList({
+      email: userEmail,
+      watchLaterMovie: previewMovie,
+    }));
+  }
+
+  const addMovieToLikedList = (): void => {
+    if (!userEmail || !previewMovie || isMovieInLikedList) {
+      return;
+    }
+
+    setIsMovieInLikedList(true);
+
+    dispatch(userActions.addMovieToLikedList({
+      email: userEmail,
+      likedMovie: previewMovie,
+    }))
+  }
+
+  useEffect(() => {
+    const isMovieInWatchLaterListAlready = watchLaterMoviesList?.some((movie) => movie.title === previewMovie?.title);
+    const isMovieInLikedListAlready = likedMoviesList?.some((movie) => movie.title === previewMovie?.title);
+
+    if (isMovieInWatchLaterListAlready) {
+      setIsMovieInWatchLaterList(true);
+    }
+
+    if (isMovieInLikedListAlready) {
+      setIsMovieInLikedList(true);
+    }
+
+  }, [isMovieInWatchLaterList, isMovieInLikedList])
 
   useEffect(() => {
     if (!previewMovie) return;
@@ -113,16 +161,24 @@ const MoviePopup: React.FC = (): ReactElement => {
                 <span>Play</span>
               </button>
               <button
-                className={styles.userButton}
-                type="button"
-                  >
-                <AiOutlinePlus color='fff' size={23}/>
-              </button>
-              <button
-                className={styles.userButton}
+                className={cn(styles.userButton, styles.buttonAddToWatchLater)}
+                onClick={addMovieToWatchLaterList}
                 type="button"
               >
-                <GoThumbsup color='fff' size={23}/>
+                {isMovieInWatchLaterList
+                  ? <ImCheckmark color='fff' size={23}/>
+                  : <AiOutlinePlus color='fff' size={23}/>
+                }
+              </button>
+              <button
+                className={cn(styles.userButton, styles.buttonAddToLikedList)}
+                onClick={addMovieToLikedList}
+                type="button"
+              >
+                {isMovieInLikedList
+                  ? <RiThumbUpFill color='fff' size={23}/>
+                  : <GoThumbsup color='fff' size={23}/>
+                }
               </button>
             </div>
             <ReactPlayer

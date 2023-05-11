@@ -3,6 +3,7 @@ import $api, { $apiRefresh }from 'api/api';
 import { AuthResponse } from 'types/models/apiResponse/AuthResponse';
 import { User } from 'types/models/User';
 import { Plan } from 'types/Plan';
+import { Movie } from 'types/MovieAPI';
 
 export default class AuthService {
   static async login (email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
@@ -23,5 +24,13 @@ export default class AuthService {
 
   static async setPlan(email: string, plan: Plan): Promise<AxiosResponse<User>>{
     return $api.patch<User>('/setPlan', {email, plan});
+  }
+
+  static async addMovieToWatchLaterList(email: string, watchLaterMovie: Movie): Promise<AxiosResponse<Movie>> {
+    return $api.patch<Movie>('/addMovieToWatchLaterList', {email, watchLaterMovie});
+  }
+
+  static async addMovieToLikedList(email: string, likedMovie: Movie): Promise<AxiosResponse<Movie>> {
+    return $api.patch<Movie>('/addMovieToLikedList', {likedMovie, email});
   }
 }
