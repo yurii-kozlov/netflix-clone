@@ -3,6 +3,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AuthService from 'services/AuthService';
 import { User } from 'types/models/User'
 import { Plan } from 'types/Plan';
+import { Movie } from 'types/MovieAPI';
 
 export interface InitialState {
   user: User | null;
@@ -81,6 +82,40 @@ export const subscriptionPlan = createAsyncThunk(
   async ({ email, plan }: {email: string, plan: Plan}, thunkAPI) => {
     try {
         const response = await AuthService.setPlan(email, plan);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+)
+
+export const addMovieToWatchLaterList = createAsyncThunk(
+  'auth/addingMovieToWatchLaterList',
+  async ({ email, watchLaterMovie }: {email: string, watchLaterMovie: Movie}, thunkAPI) => {
+    try {
+        const response = await AuthService.addMovieToWatchLaterList(email, watchLaterMovie);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+)
+
+export const addMovieToLikedList = createAsyncThunk(
+  'auth/addingMovieToLikedList',
+  async ({ email, likedMovie }: {email: string, likedMovie: Movie}, thunkAPI) => {
+    try {
+        const response = await AuthService.addMovieToLikedList(email, likedMovie);
 
         return response.data;
     } catch (error: unknown) {
@@ -174,6 +209,29 @@ const authSlice = createSlice({
         state.user = action.payload as User;
         state.isAuth = true;
       })
+      .addCase(addMovieToWatchLaterList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addMovieToWatchLaterList.fulfilled, (state, action) => {
+        state.user?.watchLaterMovies.push(action.payload as Movie);
+        state.isLoading = false;
+      })
+      .addCase(addMovieToWatchLaterList.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isLoading = false;
+      })
+      .addCase(addMovieToLikedList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addMovieToLikedList.fulfilled, (state, action) => {
+        state.user?.likedMovies.push(action.payload as Movie);
+        state.isLoading = false;
+      })
+      .addCase(addMovieToLikedList.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isLoading = false;
+      })
+
   }
 });
 
