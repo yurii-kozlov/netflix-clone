@@ -8,7 +8,7 @@ import { SubscriptionForm } from 'components/SubscriptionForm';
 import styles from 'components/FAQ/FAQ.module.scss';
 
 type FAQprops = {
-  faq: [FAQblock]
+  faq: FAQblock[]
 }
 
 export const FAQ: React.FC<FAQprops> = ({ faq }): ReactElement => (
