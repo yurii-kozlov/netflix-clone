@@ -139,7 +139,7 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
                 </button>
               </li>
               <li className={styles.buttonsListItem}>
-                <button className={cn(styles.button, styles.buttonProfile)} type="button">
+                <Link className={styles.LinkProfile} href="/personalAccount" type="button">
                   <Image
                     alt="avatar"
                     className={styles.avatar}
@@ -147,7 +147,7 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
                     src={avatar || ''}
                     width={35}
                   />
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

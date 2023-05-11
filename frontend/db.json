@@ -224,7 +224,7 @@
         },
         {
           "title": "My List",
-          "link": "#privacy"
+          "link": "/myList"
         }
       ]
     },
@@ -292,6 +292,206 @@
       {
         "title": "Only on Netflix",
         "link": "#onlyOnNetflix"
+      }
+    ]
+  },
+  "personalAccount": {
+    "header": {
+      "images": {
+        "netflixLogo": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/netflix-logo_dqyblo.png",
+        "avatar": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/avatar_lkppyx.png"
+      },
+      "headerLinksList": [
+        {
+          "title": "Home",
+          "link": "/main"
+        },
+        {
+          "title": "TV Shows",
+          "link": "#tvShows"
+        },
+        {
+          "title": "Movies",
+          "link": "#movies"
+        },
+        {
+          "title": "New & Popular",
+          "link": "#newAndPopular"
+        },
+        {
+          "title": "My List",
+          "link": "/myList"
+        }
+      ]
+    },
+    "footerLinksList": [
+      {
+        "title": "FAQ",
+        "link": "#faq"
+      },
+      {
+        "title": "Help Center",
+        "link": "#helpCenter"
+      },
+      {
+        "title": "Media Center",
+        "link": "#mediaCenter"
+      },
+      {
+        "title": "Jobs",
+        "link": "#jobs"
+      },
+      {
+        "title": "Terms of Use",
+        "link": "#terms"
+      },
+      {
+        "title": "Cookie Preferences",
+        "link": "#cookiePreferences"
+      },
+      {
+        "title": "Contact us",
+        "link": "#contact"
+      },
+      {
+        "title": "Legal Notices",
+        "link": "#legalNotices"
+      },
+      {
+        "title": "Gift Card Terms",
+        "link": "#giftCardTerms"
+      },
+      {
+        "title": "Account",
+        "link": "#account"
+      },
+      {
+        "title": "Investor Relations",
+        "link": "#investorRelations"
+      },
+      {
+        "title": "Ways to Watch",
+        "link": "#waysToWatch"
+      },
+      {
+        "title": "Privacy",
+        "link": "#privacy"
+      },
+      {
+        "title": "Corporate Information",
+        "link": "#corporateInformation"
+      },
+      {
+        "title": "Speed Test",
+        "link": "#speedTest"
+      },
+      {
+        "title": "Only on Netflix",
+        "link": "#onlyOnNetflix"
+      },
+      {
+        "title": "My List",
+        "link": "/mylist"
+      }
+    ]
+  },
+  "myList": {
+    "header": {
+      "images": {
+        "netflixLogo": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/netflix-logo_dqyblo.png",
+        "avatar": "https://res.cloudinary.com/docve4syp/image/upload/v1679567438/netflix-clone/avatar_lkppyx.png"
+      },
+      "headerLinksList": [
+        {
+          "title": "Home",
+          "link": "/main"
+        },
+        {
+          "title": "TV Shows",
+          "link": "#tvShows"
+        },
+        {
+          "title": "Movies",
+          "link": "#movies"
+        },
+        {
+          "title": "New & Popular",
+          "link": "#newAndPopular"
+        },
+        {
+          "title": "My List",
+          "link": "/myList"
+        }
+      ]
+    },
+    "footerLinksList": [
+      {
+        "title": "FAQ",
+        "link": "#faq"
+      },
+      {
+        "title": "Help Center",
+        "link": "#helpCenter"
+      },
+      {
+        "title": "Media Center",
+        "link": "#mediaCenter"
+      },
+      {
+        "title": "Jobs",
+        "link": "#jobs"
+      },
+      {
+        "title": "Terms of Use",
+        "link": "#terms"
+      },
+      {
+        "title": "Cookie Preferences",
+        "link": "#cookiePreferences"
+      },
+      {
+        "title": "Contact us",
+        "link": "#contact"
+      },
+      {
+        "title": "Legal Notices",
+        "link": "#legalNotices"
+      },
+      {
+        "title": "Gift Card Terms",
+        "link": "#giftCardTerms"
+      },
+      {
+        "title": "Account",
+        "link": "#account"
+      },
+      {
+        "title": "Investor Relations",
+        "link": "#investorRelations"
+      },
+      {
+        "title": "Ways to Watch",
+        "link": "#waysToWatch"
+      },
+      {
+        "title": "Privacy",
+        "link": "#privacy"
+      },
+      {
+        "title": "Corporate Information",
+        "link": "#corporateInformation"
+      },
+      {
+        "title": "Speed Test",
+        "link": "#speedTest"
+      },
+      {
+        "title": "Only on Netflix",
+        "link": "#onlyOnNetflix"
+      },
+      {
+        "title": "My List",
+        "link": "/mylist"
       }
     ]
   }

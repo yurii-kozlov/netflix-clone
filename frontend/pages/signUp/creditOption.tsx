@@ -1,4 +1,6 @@
 import React, { ReactElement, useState } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -25,6 +27,8 @@ const CreditOption: React.FC<SignUpStaticProps> = ({ error, signUpData }): React
     resolver: yupResolver(creditCardValidation)
   })
 
+  const router = useRouter();
+
   const onSubmit = (): void => {
     reset();
     setIsCardNumberActive(!isCardNumberLabelActive);
@@ -36,6 +40,7 @@ const CreditOption: React.FC<SignUpStaticProps> = ({ error, signUpData }): React
     setValue('cardNumber', '');
     setValue('CVVcode', '');
     setValue('expirationDate', '');
+    router.push('/main');
   }
 
   const cardNumber = watch('cardNumber');
@@ -87,6 +92,9 @@ const CreditOption: React.FC<SignUpStaticProps> = ({ error, signUpData }): React
 
   return (
     <>
+      <Head>
+        <title>Netflix</title>
+      </Head>
       <SignUpContainer error={error || null} signUpData={signUpData || null}>
         <Container>
           <section
