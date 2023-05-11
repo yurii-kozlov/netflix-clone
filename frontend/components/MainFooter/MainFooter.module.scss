@@ -96,6 +96,7 @@
 .detailedinfo {
   display: flex;
   align-items: center;
+  color: $colorWhite;
 }
 
 .detailedinfo:not(:last-child) {

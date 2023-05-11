@@ -276,6 +276,7 @@
 
 .overview {
   @extend %smooth-transition;
+  color: $colorWhite;
   width: 90%;
   font-size: 1.2rem;
   font-weight: $fontWeightRegular;
@@ -296,8 +297,10 @@
   @extend %smooth-transition;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   font-size: 1.1rem;
   font-weight: $fontWeightRegular;
+  color: $colorWhite;
 
   @include onTablet {
     font-size: 1.3rem;

@@ -8,8 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import { CSSTransition } from 'react-transition-group';
 import { instance } from 'api/api';
 import { fetchMovies } from 'api/moviesFetching';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import * as authActions from 'features/authorization';
+import { useAppSelector } from 'store/hooks';
 import { MainPageData } from 'types/mainPage/MainPage';
 import { Movies } from 'types/MovieAPI';
 import { MainHeader } from 'components/MainHeader';
@@ -26,10 +25,7 @@ const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
   const { header, footerLinksList } = mainPageData || {};
 
-  const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
-  const isActivated = useAppSelector((state) => state.authorization.user?.isActivated);
-  const userEmail = useAppSelector((state) => state.authorization.user?.email);
   const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
   const router = useRouter();
 
@@ -86,11 +82,11 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
             <Container>
               <div className={styles.moviesRows}>
                 <div className={styles.moviesRowsWrapper} ref={firstPartTunnelsRef}>
+                  <div className={styles.movieRowWrapper}>
+                    <DynamicMovieRow movies={trendingNow} rowTitle="Trending Now"/>
+                  </div>
                   {firstPartTunnelsView && (
                     <>
-                      <div className={styles.movieRowWrapper}>
-                        <DynamicMovieRow movies={trendingNow} rowTitle="Trending Now"/>
-                      </div>
                       <div className={styles.movieRowWrapper}>
                         <DynamicMovieRow movies={topRated} rowTitle="Top Rated"/>
                       </div>
@@ -118,16 +114,6 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
                     </>
                   )}
                 </div>
-              </div>
-              <div className={styles.temporaryAuth}>
-                <h1>Hi, you are authorized</h1>
-                <h1>
-                  {isActivated ? `The account has been verified via email ${userEmail}`: 'VERIFY YOUR ACCOUNT'}
-                </h1>
-                <button onClick={(): void => {
-                dispatch(authActions.logout());
-                router.push('/');
-                }} type="button">Log out</button>
               </div>
             </Container>
             <CSSTransition

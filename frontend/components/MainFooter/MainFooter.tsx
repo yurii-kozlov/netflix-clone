@@ -21,16 +21,16 @@ export const MainFooter: React.FC<MainFooterProps> = ({ footerLinksList }): Reac
       <Container>
         <div className={styles.socialMediaBlock}>
           <a className={styles.link} href={facebookLink} target="_blank">
-            <BsFacebook className={styles.socialNetworklogo} size={25}/>
+            <BsFacebook className={styles.socialNetworklogo} color="#fff" size={25}/>
           </a>
           <a className={styles.link} href={instagramLink} target="_blank">
-            <BsInstagram className={styles.socialNetworklogo} size={30}/>
+            <BsInstagram className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
           <a className={styles.link} href={twitterLink} target="_blank">
-            <BsTwitter className={styles.socialNetworklogo} size={30}/>
+            <BsTwitter className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
           <a className={styles.link} href={youtubeLink}target="_blank">
-            <BsYoutube className={styles.socialNetworklogo} size={30}/>
+            <BsYoutube className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
         </div>
         <ul className={styles.linksList}>
