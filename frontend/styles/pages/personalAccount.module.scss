@@ -1,0 +1,299 @@
+.accountInfoBlock {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.accountInfoWrapper {
+  @extend %smooth-transition;
+  margin-bottom: 3rem;
+
+  @include onTablet {
+    margin-bottom: 5rem;
+  }
+}
+
+.accountInfoTable {
+  width: 100%;
+}
+
+.tableFirstCell {
+  @extend %smooth-transition;
+  width: 100%;
+
+  @include onTablet {
+    width: 30%;
+  }
+}
+
+.tableMiddleCell {
+  @extend %smooth-transition;
+  width: 100%;
+
+  @include onTablet {
+    flex-grow: 1;
+    width: fit-content;
+  }
+}
+
+.tableLastCell {
+  @extend %smooth-transition;
+  width: 100%;
+  @include onTablet {
+    width: 30%;
+  }
+}
+
+.accountVerificationStatus {
+  color: $colorWhite;
+  font-size: 1.3rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+  }
+  white-space: pre;
+}
+
+.memberShipButtonWrapper {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.4rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 80%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+.buttonDescription {
+  color: $colorGrey9;
+  font-size: 1.2rem;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.3rem;
+  }
+
+  @include onDesktop {
+    font-size: 1.5rem;
+  }
+}
+
+.buttonMembership {
+  min-width: 11rem;
+  padding: 0.6rem;
+  border: none;
+  outline: transparent;
+  border-radius: 0.4rem;
+  font-family: $mainFontFamily;
+  font-size: 1.2rem;
+  font-weight: $fontWeightBold;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    padding: 0.8rem;
+    font-size: 1.4rem;
+    max-width: 85%;
+  }
+}
+
+.buttonMembership:hover {
+  background-color: $colorGrey7;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profileicon {
+  width: 2.5rem;
+  height: 2.5rem;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.accountInfoTableRow {
+  border-bottom: 0.1rem solid $colorWhite;
+  min-width: 100%;
+  padding: 2rem 0;
+  display: flex;
+}
+
+.planDetails {
+  color: $colorGrey9;
+  font-size: 1.3rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+  }
+}
+
+.planInfoWrapper {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+
+  @include onTablet {
+    display: block;
+  }
+}
+
+.planInfoWrapper:not(:last-child) {
+  margin-bottom: 1.3rem;
+}
+
+.planSectionName {
+  color: $colorGrey9;
+  font-size: 1.3rem;
+  font-weight: $fontWeightRegular;
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.planSectionInfo {
+  font-size: 1.3rem;
+  color: $colorWhite;
+  font-weight: $fontWeightBold;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+  }
+}
+
+.accountInfoSecondTableRow {
+  flex-direction: column;
+  gap: 2rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    flex-direction: row;
+  }
+}
+
+.headerWrapper {
+  margin-bottom: 2rem;
+  @extend %smooth-transition;
+  position: sticky;
+  top: 0;
+
+  @include onTablet {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.emailInfo {
+  margin-bottom: 0.3rem;
+  color: $colorGrey9;
+}
+
+.emailWrapper {
+  color: $colorWhite;
+  font-size: 1.3rem;
+  display: flex;
+  gap: 1rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+    display: inline-block;
+    gap: 0;
+  }
+}
+
+.changeAuthDataLinksWrapper {
+  display: flex;
+  flex-direction: column;
+  color: $colorBlue2;
+  gap: 0.8rem;
+
+
+  font-size: 1.3rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+}
+
+.changeAuthDataLink {
+  @extend %smooth-transition;
+
+  @include onTablet {
+    text-align: end;
+  }
+}
+
+.changeAuthDataLink:hover {
+  @include onTablet {
+    text-decoration: underline;
+    transform: translateX(-10%);
+  }
+}
+
+.title {
+  color: $colorWhite;
+  font-size: 3rem;
+  font-weight: $fontWeightBold;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 4rem;
+  }
+}
+
+.signOutButton {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: $colorBlue2;
+  font-size: 1.3rem;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.5rem;
+  }
+}
+
+.signOutButton:is(:hover, :focus) {
+  text-decoration: underline;
+}
+
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
