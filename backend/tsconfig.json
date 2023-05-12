@@ -11,8 +11,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": false,
   },
   "include": ["src/**/*"],
   "plugins": [
