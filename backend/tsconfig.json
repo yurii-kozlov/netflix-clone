@@ -3,10 +3,11 @@
     "module": "NodeNext",
     "moduleResolution": "node",
     "baseUrl": "./src",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "paths": {
       "@/*": ["*"]
     },
-    "outDir": "./dist",
     "sourceMap": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
