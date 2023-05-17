@@ -8,9 +8,11 @@ import { useInView } from 'react-intersection-observer';
 import { CSSTransition } from 'react-transition-group';
 import { instance } from 'api/api';
 import { fetchMovies } from 'api/moviesFetching';
-import { useAppSelector } from 'store/hooks';
+import * as authActions from 'features/authorization';
+import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { MainPageData } from 'types/mainPage/MainPage';
 import { Movies } from 'types/MovieAPI';
+import { startTokenUpdater, intervalForUpdate } from 'api/updateTokens';
 import { MainHeader } from 'components/MainHeader';
 import { Loader } from 'components/Loader';
 import { Banner } from 'components/Banner';
@@ -27,6 +29,7 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
 
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
+  const isError = useAppSelector((state) => state.authorization.error);
   const router = useRouter();
 
   const { ref: firstPartTunnelsRef, inView: firstPartTunnelsView } = useInView({
@@ -44,11 +47,32 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
     threshold: 0.5,
   });
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (!isAuthorized) {
-      router.replace('/signIn');
+    const job = startTokenUpdater(dispatch, intervalForUpdate, router);
+
+    return () => {
+      job.cancel();
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const accesToken = localStorage.getItem('token');
+
+    if (accesToken) {
+      dispatch(authActions.checkAuth());
     }
-  }, [])
+
+    if (!accesToken) {
+        dispatch(authActions.checkAuth());
+
+        if (isError) {
+          router.replace('/signIn');
+        }
+      }
+  }, [isError])
 
   if (!isAuthorized || !movies) {
     return <div className={styles.loaderWrapper}><Loader /></div>

@@ -1,11 +1,13 @@
 import { GetStaticProps, NextPage } from 'next';
 import { ReactElement, useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { CSSTransition } from 'react-transition-group';
 import { v4 as uuid_v4 } from 'uuid';
 import { instance } from 'api/api';
 import * as authActions from 'features/authorization';
 import { MyListPageData } from 'types/MyList';
+import { startTokenUpdater, intervalForUpdate } from 'api/updateTokens';
 import { PersonalAccountHeader } from 'components/PersonalAccountHeader';
 import { MainFooter } from 'components/MainFooter';
 import { MovieCard } from 'components/MovieCard';
@@ -18,16 +20,38 @@ import styles from 'styles/pages/myList.module.scss';
 
 const MyList: NextPage<MyListStaticProps> = ({ error, myListData }): ReactElement => {
   const {header, footerLinksList} = myListData || {};
+  const isError = useAppSelector((state) => state.authorization.error);
   const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
-  const dispatch = useAppDispatch();
   const watchLaterMovies = useAppSelector((state) => state.authorization.user?.watchLaterMovies);
   const likedMovies = useAppSelector((state) => state.authorization.user?.likedMovies);
 
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    const job = startTokenUpdater(dispatch, intervalForUpdate, router);
+
+    return () => {
+      job.cancel();
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const accesToken = localStorage.getItem('token');
+
+    if (accesToken) {
       dispatch(authActions.checkAuth());
     }
-  }, [])
+
+    if (!accesToken) {
+        dispatch(authActions.checkAuth());
+
+        if (isError) {
+          router.replace('/signIn');
+        }
+      }
+  }, [isError])
 
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
 
