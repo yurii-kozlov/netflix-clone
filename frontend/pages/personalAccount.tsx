@@ -8,6 +8,7 @@ import { instance } from 'api/api';
 import * as authActions from 'features/authorization';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { PersonalAccountPageData } from 'types/PersonalAccountPage';
+import { startTokenUpdater, intervalForUpdate } from 'api/updateTokens';
 import { PersonalAccountHeader } from 'components/PersonalAccountHeader';
 import { Loader } from 'components/Loader';
 import { MainFooter } from 'components/MainFooter';
@@ -24,6 +25,8 @@ const PersonalAccount: NextPage<PersonalAccountStaticProps> = ({ personalAccount
   const userEmail = useAppSelector((state) => state.authorization.user?.email);
   const usersPlan = useAppSelector((state) => state.authorization.user?.plan);
   const isAccountVerified = useAppSelector((state) => state.authorization.user?.isActivated);
+  const isError = useAppSelector((state) => state.authorization.error);
+  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const {name, monthlyPrice, videoQuality, resolution, multideviceViewing } = usersPlan || {};
 
   const router = useRouter();
@@ -34,13 +37,31 @@ const PersonalAccount: NextPage<PersonalAccountStaticProps> = ({ personalAccount
     router.push('/');
   };
 
+
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    const job = startTokenUpdater(dispatch, intervalForUpdate, router);
+
+    return () => {
+      job.cancel();
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const accesToken = localStorage.getItem('token');
+
+    if (accesToken) {
       dispatch(authActions.checkAuth());
     }
-  }, [])
 
-  const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
+    if (!accesToken) {
+        dispatch(authActions.checkAuth());
+
+        if (isError) {
+          router.replace('/signIn');
+        }
+      }
+  }, [isError])
 
   if (!isAuthorized) {
     return <div className={styles.loaderWrapper}><Loader /></div>

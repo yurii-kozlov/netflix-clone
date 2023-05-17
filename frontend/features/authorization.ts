@@ -205,9 +205,17 @@ const authSlice = createSlice({
         state.user = {} as User;
         state.isAuth = false;
       })
+      .addCase(checkAuth.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload as User;
         state.isAuth = true;
+        state.isLoading = false;
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        state.error = 'The user is not authorized'
+        state.isLoading = false;
       })
       .addCase(addMovieToWatchLaterList.pending, (state) => {
         state.isLoading = true;
