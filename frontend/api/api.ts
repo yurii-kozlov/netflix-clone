@@ -29,7 +29,7 @@ $api.interceptors.request.use((config: InternalAxiosRequestConfig): InternalAxio
   return config;
 })
 
-$apiRefresh.interceptors.response.use((config: AxiosResponse) => config,
+$api.interceptors.response.use((config: AxiosResponse) => config,
   async (error: AxiosError): Promise<AxiosResponse<AuthResponse>> => {
     const originalRequest = error.config as ExtendedInternalAxiosRequestConfig;
 
