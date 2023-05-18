@@ -1,21 +1,27 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
-import ReactPlayer from 'react-player';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import * as userActions from 'features/authorization';
 import { actions as moviePreviewActions } from 'features/moviePreview';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Element, ElementType, Genre, ProductionCountry } from 'types/MovieAPI';
 import { movieFetcher } from 'api/api';
-import { RiThumbUpFill } from 'react-icons/ri';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { HiOutlineX } from 'react-icons/hi';
-import { ImCheckmark } from 'react-icons/im';
-import { BiVolumeFull, BiVolumeMute } from 'react-icons/bi';
-import { GoThumbsup } from 'react-icons/go';
 import playIcon from 'images/play.svg';
 import styles from 'components/MoviePopup/MoviePopup.module.scss';
+import dynamic from 'next/dynamic';
+
+const RiThumbUpFill = dynamic(() => import('react-icons/ri').then((module) => module.RiThumbUpFill));
+const AiOutlinePlus = dynamic(() => import('react-icons/ai').then((module) => module.AiOutlinePlus));
+const HiOutlineX = dynamic(() => import('react-icons/hi').then((module) => module.HiOutlineX));
+const ImCheckmark = dynamic(() => import('react-icons/im').then((module) => module.ImCheckmark));
+const BiVolumeFull = dynamic(() => import('react-icons/bi').then((module) => module.BiVolumeFull));
+const BiVolumeMute = dynamic(() => import('react-icons/bi').then((module) => module.BiVolumeMute));
+const GoThumbsup = dynamic(() => import('react-icons/go').then((module) => module.GoThumbsup));
+
+const ReactPlayer = dynamic(() => import('react-player'), {
+  ssr: true,
+});
 
 const MoviePopup: React.FC = (): ReactElement => {
   const [trailer, setTrailer] = useState<string>('');
