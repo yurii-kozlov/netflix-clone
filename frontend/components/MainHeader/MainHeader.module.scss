@@ -208,3 +208,27 @@
 .scrolledHeader {
   background-color: $mainBackgroundColor;
 }
+
+.icon {
+  // color: $colorWhite;
+  width: 2.5rem;
+  height: 2.5rem;
+  // background-color: white;
+  @extend %smooth-transition;
+}
+
+
+.searchIconActive {
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconHamburger {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.iconNotification {
+  width: 2.2rem;
+  height: 2.2rem;
+}

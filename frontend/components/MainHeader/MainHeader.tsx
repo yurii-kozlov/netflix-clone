@@ -3,12 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import cn from 'classnames';
 import { v4 as uuid_v4 } from 'uuid';
-import { BiSearchAlt2 } from 'react-icons/bi';
-import { IoIosNotifications } from 'react-icons/io';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import { MainHeader as MainHeaderData } from 'types/mainPage/MainHeader';
 import { Container } from 'components/Container';
 import { NavMenuListItem } from 'components/MainHeader/NavMenuListItem';
+import hamburgerMenuIcon from 'images/hamburgerMenu.svg';
+import searchIcon from 'images/search.svg';
+import notificationIcon from 'images/notification.svg';
 import styles from 'components/MainHeader/MainHeader.module.scss';
 
 type MainHeaderProps = {
@@ -74,7 +74,7 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
             styles.contentWrapper,
             {[styles.contentWrapperWithActiveSearch]: isSearchInputVisible}
           )}>
-            <Link className={styles.mainPageLink} href="/main">
+            <Link className={styles.mainPageLink} href="/main" prefetch={false}>
               <Image
                 alt='Netflix'
                 className={styles.logo}
@@ -86,11 +86,12 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
             </Link>
             <div className={styles.navMenuOnMobileAndTabletWrapper}>
               <button
+                aria-label='menu'
                 className={cn(styles.button, styles.navMenuButton)}
                 onClick={handleNavMenuButtonClick}
                 type="button"
               >
-                <GiHamburgerMenu color='#fff' size={24}/>
+                <Image alt='hamburger menu' className={styles.iconHamburger} src={hamburgerMenuIcon}/>
               </button>
               <ul className={cn(
                   styles.navMenOnMobileAndTablet,
@@ -120,11 +121,16 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
               )}
               >
                 <button
+                  aria-label='search'
                   className={cn(styles.button, styles.buttonSearch)}
                   onClick={handleSearchButtonClick}
                   type="button"
                 >
-                  <BiSearchAlt2 color='#fff' size={isSearchInputVisible ? 20 : 24}/>
+                  <Image
+                    alt='search'
+                    className={cn(styles.icon,{[styles.searchIconActive]: isSearchInputVisible})}
+                    src={searchIcon}
+                  />
                 </button>
                 <input
                   className={cn(styles.searchInput, {[styles.searchInputActive]: isSearchInputVisible})}
@@ -134,12 +140,16 @@ export const MainHeader: FC<MainHeaderProps> = ({ error, headerData }): ReactEle
                 />
               </li>
               <li className={styles.buttonsListItem}>
-                <button className={cn(styles.button, styles.buttonNotification)} type="button">
-                  <IoIosNotifications color='#fff' size={24}/>
+                <button
+                  aria-label='show notifications'
+                  className={cn(styles.button, styles.buttonNotification)}
+                  type="button"
+                >
+                  <Image alt='notification' className={styles.iconNotification} src={notificationIcon}/>
                 </button>
               </li>
               <li className={styles.buttonsListItem}>
-                <Link className={styles.LinkProfile} href="/personalAccount" type="button">
+                <Link className={styles.LinkProfile} href="/personalAccount" type="button" prefetch={false}>
                   <Image
                     alt="avatar"
                     className={styles.avatar}

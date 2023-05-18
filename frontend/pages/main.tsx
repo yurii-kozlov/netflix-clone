@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { AnimationOnScroll} from 'react-animation-on-scroll';
 import { useInView } from 'react-intersection-observer';
-import { CSSTransition } from 'react-transition-group';
 import { instance } from 'api/api';
 import { fetchMovies } from 'api/moviesFetching';
 import * as authActions from 'features/authorization';
@@ -13,7 +11,6 @@ import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { MainPageData } from 'types/mainPage/MainPage';
 import { Movies } from 'types/MovieAPI';
 import { startTokenUpdater, intervalForUpdate } from 'api/updateTokens';
-import { MainHeader } from 'components/MainHeader';
 import { Loader } from 'components/Loader';
 import { Banner } from 'components/Banner';
 import { Error } from 'components/Error';
@@ -21,6 +18,12 @@ import { Container } from 'components/Container';
 import { MoviePopup } from 'components/MoviePopup';
 import styles from 'styles/pages/main.module.scss';
 
+
+const CSSTransition = dynamic(() => import('react-transition-group/CSSTransition'), {
+  ssr: false
+});
+const AnimationOnScroll = dynamic(() => import('react-animation-on-scroll').then((mod) => mod.AnimationOnScroll));
+const DynamicMainHeader = dynamic(() => import('components/MainHeader').then((res) => res.MainHeader));
 const DynamicMovieRow = dynamic(() => import('components/MoviesRow').then((res) => res.MoviesRow));
 const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res) => res.MainFooter));
 
@@ -95,7 +98,7 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
         <title>Netflix</title>
       </Head>
       <div className={styles.section}>
-        <MainHeader error={error || null} headerData={header || null}/>
+        <DynamicMainHeader error={error || null} headerData={header || null}/>
         <main>
           {netflixOriginals ? (
             <div className={styles.bannerWrapper}>

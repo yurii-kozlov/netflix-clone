@@ -8,6 +8,7 @@ export const SliderArrowNext = (props: CustomArrowProps): ReactElement => {
 
   return (
     <button
+      aria-label='show next slides'
       className={cn(styles.arrowWrapper, styles.nextArrowWrapper)}
       onClick={onClick}
       type="button"
@@ -22,6 +23,7 @@ export const SliderArrowPrev = (props: CustomArrowProps): ReactElement => {
 
   return (
     <button
+      aria-label='show previous slides'
       className={cn(styles.arrowWrapper, styles.prevArrowWrapper)}
       onClick={onClick}
       type="button"

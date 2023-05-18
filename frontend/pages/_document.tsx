@@ -25,6 +25,7 @@ export default function Document(): ReactElement {
         <link href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" rel="apple-touch-icon" />
         <link href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" rel="shortcut icon" />
         <link href="/favicon.ico" rel="icon" />
+        <link crossOrigin="" href="https://assets.nflxext.com" rel="preconnect" />
       </Head>
       <body>
         <Main />
