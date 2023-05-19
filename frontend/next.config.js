@@ -1,4 +1,8 @@
-module.exports = {
+const withPWA = require('next-pwa')({
+  dest: 'public',
+})
+
+module.exports = withPWA({
   images: {
     domains: [
       'res.cloudinary.com', 'assets.nflxext.com', 'occ-0-6308-3467.1.nflxso.net',
@@ -13,4 +17,4 @@ module.exports = {
     additionalData: `@import "styles/utils/variables.scss"; @import "styles/utils/mixins.scss";
     @import "styles/utils/placeholders.scss";`,
  }
-}
+})

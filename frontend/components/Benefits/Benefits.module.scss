@@ -150,6 +150,10 @@
     width: 100%;
   }
 
+  @include onExtraSmallMobile {
+    min-width: 28rem;
+  }
+
   @include onDesktop {
     max-width: 100%;
   }

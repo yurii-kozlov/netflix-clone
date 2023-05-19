@@ -18,7 +18,6 @@ import { Container } from 'components/Container';
 import { MoviePopup } from 'components/MoviePopup';
 import styles from 'styles/pages/main.module.scss';
 
-
 const CSSTransition = dynamic(() => import('react-transition-group/CSSTransition'), {
   ssr: false
 });
@@ -29,6 +28,7 @@ const DynamicMainFooter = dynamic(() =>import('components/MainFooter').then((res
 
 const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): ReactElement => {
   const { header, footerLinksList } = mainPageData || {};
+
 
   const isAuthorized = useAppSelector((state) => state.authorization.isAuth);
   const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
@@ -120,7 +120,10 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
                     </>
                   )}
                 </div>
-                <div className={styles.moviesRowsWrapper} ref={secondPartTunnelsRef}>
+                <div
+                  className={styles.moviesRowsWrapper}
+                  ref={secondPartTunnelsRef}
+                >
                   {secondPartTunnelsView && (
                     <>
                       <div className={styles.movieRowWrapper}>
@@ -160,7 +163,10 @@ const Main: FC<MainPageServerSideProps> = ({ mainPageData, error, movies }): Rea
           </section>
         </main>
         {footerLinksList ? (
-          <div className={styles.footerWrapper} ref={footerRef}>
+          <div
+            className={styles.footerWrapper}
+            ref={footerRef}
+          >
             {footerInView && (
               <AnimationOnScroll animateIn="animate__fadeInUp" >
                 <DynamicMainFooter footerLinksList={footerLinksList}/>
