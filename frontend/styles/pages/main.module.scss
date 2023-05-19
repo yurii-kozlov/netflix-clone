@@ -21,11 +21,15 @@
 }
 
 .movieRowWrapper:not(:last-child) {
-  margin-bottom: 2rem;
+  @include onTablet {
+    margin-bottom: 2rem;
+  }
 }
 
 .moviesRowsWrapper {
-  margin-bottom: 2rem;
+  @include onTablet {
+    margin-bottom: 2rem;
+  }
 }
 
 .enterActive, .enterDone{
