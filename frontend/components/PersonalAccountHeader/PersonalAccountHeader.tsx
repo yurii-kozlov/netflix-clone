@@ -69,6 +69,7 @@ export const PersonalAccountHeader: FC<PersonalAccountHeaderProps> = ({ error, h
             </Link>
             <div className={styles.navMenuOnMobileAndTabletWrapper}>
               <button
+                aria-label='menu'
                 className={cn(styles.button, styles.navMenuButton)}
                 onClick={handleNavMenuButtonClick}
                 type="button"
@@ -97,12 +98,17 @@ export const PersonalAccountHeader: FC<PersonalAccountHeaderProps> = ({ error, h
             </ul>
             <ul className={styles.buttonsList}>
               <li className={styles.buttonsListItem}>
-                <button className={styles.button} type="button">
+                <button
+                  aria-label="notification"
+                  className={styles.button}
+                  type="button"
+                >
                   <IoIosNotifications color='#fff' size={24}/>
                 </button>
               </li>
               <li className={styles.buttonsListItem}>
                 <button
+                  aria-label="log out"
                   className={cn(styles.button, styles.buttonLogout)}
                   onClick={logout}
                   type="button"

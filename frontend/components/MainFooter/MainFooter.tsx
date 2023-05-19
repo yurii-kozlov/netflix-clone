@@ -20,16 +20,34 @@ export const MainFooter: React.FC<MainFooterProps> = ({ footerLinksList }): Reac
     <footer className={styles.section}>
       <Container>
         <div className={styles.socialMediaBlock}>
-          <a className={styles.link} href={facebookLink} target="_blank">
+          <a
+            aria-label="Visit our Netflix page on Facebook"
+            className={styles.link}
+            href={facebookLink} target="_blank"
+          >
             <BsFacebook className={styles.socialNetworklogo} color="#fff" size={25}/>
           </a>
-          <a className={styles.link} href={instagramLink} target="_blank">
+          <a
+            aria-label="Visit our Netflix page on Instagram"
+            className={styles.link}
+            href={instagramLink} target="_blank"
+          >
             <BsInstagram className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
-          <a className={styles.link} href={twitterLink} target="_blank">
+          <a
+            aria-label="Visit our Netflix page on Twitter"
+            className={styles.link}
+            href={twitterLink}
+            target="_blank"
+          >
             <BsTwitter className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
-          <a className={styles.link} href={youtubeLink}target="_blank">
+          <a
+            aria-label="Visit our Netflix page on Youtube"
+            className={styles.link}
+            href={youtubeLink}
+            target="_blank"
+          >
             <BsYoutube className={styles.socialNetworklogo} color="#fff" size={30}/>
           </a>
         </div>

@@ -22,6 +22,8 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
     <>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link href="/manifest.json" rel="manifest" />
+        <link href="/apple-icon.png" rel="apple-touch-icon" sizes="128x128" />
       </Head>
       <Provider store={store}>
         <main className={roboto.className}>

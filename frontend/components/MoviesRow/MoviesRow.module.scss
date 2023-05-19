@@ -11,5 +11,8 @@
   }
 }
 
-
-
+.wrapper {
+  @include onMobile {
+    min-height: 15rem;
+  }
+}
