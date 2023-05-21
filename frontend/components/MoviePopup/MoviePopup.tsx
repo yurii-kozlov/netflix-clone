@@ -198,7 +198,7 @@ const MoviePopup: React.FC = (): ReactElement => {
           </div>
           <div className={styles.detailedInfo}>
             <div className={styles.releaseInfoAndMatchWrapper}>
-              {vote_average && (<p className={styles.matchRank}>{vote_average * 10}% Match</p>)}
+              {vote_average && (<p className={styles.matchRank}>{Math.round(vote_average * 10)}% Match</p>)}
               <p className={styles.releaseData}>{release_date || first_air_date}</p>
               <div className={styles.qualityWrapper}>
                 <span className={styles.quality}>HD</span>
