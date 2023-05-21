@@ -16,7 +16,7 @@
 .content {
   @extend %smooth-transition;
   position: fixed;
-  max-width: 80vw;
+  max-width: 90vw;
 
   @include onTablet {
     min-width: 65%;
