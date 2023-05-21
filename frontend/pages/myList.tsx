@@ -36,6 +36,8 @@ const MyList: NextPage<MyListStaticProps> = ({ error, myListData }): ReactElemen
   const [watchLaterMovies, setWatchLaterMovies] = useState<Movie[]>([]);
   const [likedMovies, setLikedMovies] = useState<Movie[]>([]);
 
+  const [isInitialRender, setIsInitialRender] = useState<boolean>(true);
+
   const {header, footerLinksList} = myListData || {};
   const isError = useAppSelector((state) => state.authorization.error);
   const isMoviePopupActive = useAppSelector((state) => state.moviePreview.isMoviePopupVisible);
@@ -96,10 +98,22 @@ const MyList: NextPage<MyListStaticProps> = ({ error, myListData }): ReactElemen
   }, [likedMoviesFromTheStore]);
 
   useEffect(() => {
+    if (isInitialRender) {
+      setIsInitialRender(false);
+
+      return;
+    }
+
     setWatchLaterMovies(sortMovies(watchListSortingType, watchLaterMovies))
   }, [watchListSortingType])
 
   useEffect(() => {
+    if (isInitialRender) {
+      setIsInitialRender(false);
+
+      return;
+    }
+
     setLikedMovies(sortMovies(likedListSortingType, likedMovies));
   }, [likedListSortingType])
 
@@ -154,7 +168,7 @@ const MyList: NextPage<MyListStaticProps> = ({ error, myListData }): ReactElemen
         <Container>
           <section className={styles.listsSection}>
             <div className={styles.listSubsection}>
-              {watchLaterMovies?.length === 0 ? (
+              {watchLaterMoviesFromStore?.length === 0 ? (
                 <h1 className={styles.subsectionTitle}>
                   Your watchlist is empty
                 </h1>

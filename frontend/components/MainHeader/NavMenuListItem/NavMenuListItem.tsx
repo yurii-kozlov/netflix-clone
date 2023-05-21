@@ -18,7 +18,9 @@ export const NavMenuListItem: React.FC<NavMenuListItemProps> = ({ mainHeaderNavL
     <li className={styles.listItem}>
       <Link
         className={cn(styles.link, {[styles.activeLink]: currentPath === link})}
-        href={link}>
+        href={link}
+        prefetch
+      >
         {title}
       </Link>
     </li>
