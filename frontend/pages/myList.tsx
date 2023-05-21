@@ -270,7 +270,7 @@ const MyList: NextPage<MyListStaticProps> = ({ error, myListData }): ReactElemen
                               onClick={handleLikedListSortingMenuVisibility}
                               type="button"
                             >
-                              Sort
+                              {`Sort by: ${likedListSortingType}`}
                             </button>
                             <ul className={cn(
                               styles.sortingMenu,
