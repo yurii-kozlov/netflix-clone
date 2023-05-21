@@ -2,6 +2,10 @@
   padding: 4rem;
   @extend %smooth-transition;
 
+  @include onExtraSmallMobile {
+    padding: 3rem;
+  }
+
   @include onTablet {
     padding: 8rem;
   }
@@ -14,6 +18,7 @@
   @include onTablet {
     margin-bottom: 4rem;
   }
+  animation: listsSubsectionAppearance 0.5s ease-in-out;
 }
 
 .moviesRowWrapper {
@@ -27,10 +32,75 @@
   color: $colorWhite;
   font-size: 2rem;
   @extend %smooth-transition;
-  margin-bottom: 1.5rem;
 
   @include onTablet {
     font-size: 2.5rem;
+  }
+
+  flex-grow: 1;
+  animation: subsectionTitleAppearance 0.5s ease-in-out;
+}
+
+@keyframes subsectionTitleAppearance{
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.button {
+  display: inline-block;
+  width: 11rem;
+  height: 3.2rem;
+  background-color: $colorRed;
+  color: $colorWhite;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  position: relative;
+
+  @extend %smooth-transition;
+
+  @include onTablet {
+    font-size: 1.6rem;
+    width: 13rem;
+    height: 3.8rem;
+    padding: 1rem 2rem;
+  }
+}
+
+.buttonDisabled {
+  background-color: $colorRed6;
+}
+
+.button:hover{
+  background-color: $colorRed6;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: $shadowRed;
+}
+
+.buttonsAndSubsectionTitleWrapper {
+  @extend %smooth-transition;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.1rem solid $colorWhite;
+  border-radius: 0.4rem;
+  padding-bottom: 1rem;
+
+  @include onTablet {
     margin-bottom: 2rem;
   }
 }
@@ -51,6 +121,17 @@
   }
   100% {
     transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes listsSubsectionAppearance {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
     opacity: 1;
   }
 }

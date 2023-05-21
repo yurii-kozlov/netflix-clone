@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import UserService from 'services/UserService';
 import AuthService from 'services/AuthService';
 import { User } from 'types/models/User'
 import { Plan } from 'types/Plan';
@@ -128,6 +129,40 @@ export const addMovieToLikedList = createAsyncThunk(
   }
 )
 
+export const clearWatchLaterList = createAsyncThunk(
+  'auth/clearWatchLaterList',
+  async({email}: {email: string}, thunkAPI) => {
+    try {
+        const response = await UserService.clearWatchLaterList(email);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+)
+
+export const clearLikedMoviesList = createAsyncThunk(
+  'auth/clearLikedMoviesList',
+  async({email}: {email: string}, thunkAPI) => {
+    try {
+        const response = await UserService.clearLikedMoviesList(email);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+)
+
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_args, thunkAPI) => {
@@ -239,7 +274,32 @@ const authSlice = createSlice({
         state.error = action.payload as string;
         state.isLoading = false;
       })
-
+      .addCase(clearWatchLaterList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(clearWatchLaterList.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.watchLaterMovies = action.payload as [];
+        }
+        state.isLoading = false;
+      })
+      .addCase(clearWatchLaterList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(clearLikedMoviesList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(clearLikedMoviesList.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.likedMovies = action.payload as [];
+        }
+        state.isLoading = false;
+      })
+      .addCase(clearLikedMoviesList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
   }
 });
 
