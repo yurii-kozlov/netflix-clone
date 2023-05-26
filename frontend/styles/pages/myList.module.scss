@@ -233,13 +233,13 @@
   width: 100%;
   height: 100%;
   padding: 1rem 1.3rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-family: $mainFontFamily;
   background-color: $colorGrey12;
   color: $colorWhite;
 
   @include onTablet {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 }
 
