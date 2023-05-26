@@ -14,4 +14,18 @@ export default class UserService {
   static async clearLikedMoviesList(email: string): Promise<AxiosResponse<[]>> {
     return $api.patch<[]>('/clearLikedMoviesList', {email});
   }
+
+  static async deleteMovieFromWatchlist(
+    email: string,
+    movieTitle: string
+  ): Promise<AxiosResponse<string>> {
+    return $api.patch<string>('/deleteMovieFromWatchList', {email, movieTitle})
+  }
+
+  static async deleteMovieFromLikedList(
+    email: string,
+    movieTitle: string
+  ): Promise<AxiosResponse<string>> {
+    return $api.patch<string>('/deleteMovieFromLikedList', {email, movieTitle})
+  }
 };

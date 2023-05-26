@@ -31,11 +31,20 @@ const MoviePopup: React.FC = (): ReactElement => {
   const [isVolumeMuted, setIsMuted] = useState<boolean>(false);
   const [productionCountries, setProductionCountries] = useState<ProductionCountry[]>([]);
 
+  const [isDeleteFromWatchlistPopupVisible, setIsDeleteFromWatchlistPopupVisible] = useState<boolean>(false);
+  const [isDeleteFromLikedlistPopupVisible, setIsDeleteFromLikedlistPopupVisible] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const previewMovie = useAppSelector((state) => state.moviePreview.movieForPreview);
   const watchLaterMoviesList = useAppSelector((state) => state.authorization.user?.watchLaterMovies);
   const likedMoviesList = useAppSelector((state) => state.authorization.user?.likedMovies);
   const userEmail = useAppSelector((state) => state.authorization.user?.email);
+
+  const handleDeleteFromWatchlistPopupVisibility = (): void =>
+    setIsDeleteFromWatchlistPopupVisible(!isDeleteFromWatchlistPopupVisible);
+
+  const handleDeleteFromLikedlistPopupVisibility = (): void =>
+  setIsDeleteFromLikedlistPopupVisible(!isDeleteFromLikedlistPopupVisible);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === 'Escape') {
@@ -44,6 +53,11 @@ const MoviePopup: React.FC = (): ReactElement => {
   }
 
   const addMovieToWatchLaterList = (): void => {
+    if (isMovieInWatchLaterList) {
+      handleDeleteFromWatchlistPopupVisibility();
+      setIsDeleteFromLikedlistPopupVisible(false);
+    }
+
     if (!userEmail || !previewMovie || isMovieInWatchLaterList) {
       return;
     }
@@ -57,6 +71,11 @@ const MoviePopup: React.FC = (): ReactElement => {
   }
 
   const addMovieToLikedList = (): void => {
+    if (isMovieInLikedList) {
+      handleDeleteFromLikedlistPopupVisibility();
+      setIsDeleteFromWatchlistPopupVisible(false);
+    }
+
     if (!userEmail || !previewMovie || isMovieInLikedList) {
       return;
     }
@@ -66,6 +85,34 @@ const MoviePopup: React.FC = (): ReactElement => {
     dispatch(userActions.addMovieToLikedList({
       email: userEmail,
       likedMovie: previewMovie,
+    }))
+  }
+
+  const deleteMovieFromWatchList = (): void => {
+    if (!userEmail || !previewMovie || !isMovieInWatchLaterList) {
+      return;
+    }
+
+    setIsMovieInWatchLaterList(false);
+    setIsDeleteFromWatchlistPopupVisible(false);
+
+    dispatch(userActions.deleteMovieFromWatchList({
+      email: userEmail,
+      movieTitle: previewMovie.title,
+    }));
+  }
+
+  const deleteMovieFromLikedList = (): void => {
+    if (!userEmail || !previewMovie || !isMovieInLikedList) {
+      return;
+    }
+
+    setIsMovieInLikedList(false);
+    setIsDeleteFromWatchlistPopupVisible(false);
+
+    dispatch(userActions.deleteMovieFromLikedList({
+      email: userEmail,
+      movieTitle: previewMovie.title
     }))
   }
 
@@ -81,7 +128,7 @@ const MoviePopup: React.FC = (): ReactElement => {
       setIsMovieInLikedList(true);
     }
 
-  }, [isMovieInWatchLaterList, isMovieInLikedList])
+  }, [])
 
   useEffect(() => {
     if (!previewMovie) return;
@@ -128,6 +175,7 @@ const MoviePopup: React.FC = (): ReactElement => {
 
   return (
     <div
+      aria-label="handle popup visibility"
       className={styles.block}
       onClick={closeMoviePopup}
       onKeyDown={handleKeyDown}
@@ -176,6 +224,32 @@ const MoviePopup: React.FC = (): ReactElement => {
                   : <AiOutlinePlus color='fff' size={23}/>
                 }
               </button>
+              <div
+                className={cn(
+                  styles.deleteMovieConfirmationWrapper,
+                  styles.deleteFromWatchlistConfirmationWrapper,
+                  {[styles.deleteFromWatchlistConfirmationWrapperActive]: isDeleteFromWatchlistPopupVisible}
+                )}
+                onClick={(): void => setIsDeleteFromWatchlistPopupVisible(false)}
+                onKeyDown={handleKeyDown}
+                role="button"
+                tabIndex={0}
+              >
+                <p className={styles.deleteMovieDescription}>
+                  Please click
+                  <button
+                    aria-label="delete the movie from watchlist"
+                    className={cn(
+                      styles.deleteFromListButton,
+                      styles.deleteFromWatchlistButton
+                    )}
+                    onClick={deleteMovieFromWatchList}
+                    type="button">
+                    here
+                  </button>
+                  to delete the movie from your watchlist
+                </p>
+              </div>
               <button
                 className={cn(styles.userButton, styles.buttonAddToLikedList)}
                 onClick={addMovieToLikedList}
@@ -186,6 +260,32 @@ const MoviePopup: React.FC = (): ReactElement => {
                   : <GoThumbsup color='fff' size={23}/>
                 }
               </button>
+              <div
+                className={cn(
+                  styles.deleteMovieConfirmationWrapper,
+                  styles.deleteFromLikedListConfirmationWrapper,
+                  {[styles.deleteFromLikedListConfirmationWrapperActive]: isDeleteFromLikedlistPopupVisible}
+                )}
+                onClick={(): void => setIsDeleteFromLikedlistPopupVisible(false)}
+                onKeyDown={handleKeyDown}
+                role="button"
+                tabIndex={0}
+              >
+                <p className={styles.deleteMovieDescription}>
+                  Please click
+                  <button
+                    aria-label="delete the movie from liked list"
+                    className={cn(
+                      styles.deleteFromListButton,
+                      styles.deleteFromWatchlistButton
+                    )}
+                    onClick={deleteMovieFromLikedList}
+                    type="button">
+                    here
+                  </button>
+                  to delete the movie from your liked list
+                </p>
+              </div>
             </div>
             <ReactPlayer
               className={styles.reactPlayer}

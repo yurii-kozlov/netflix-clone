@@ -129,6 +129,40 @@ export const addMovieToLikedList = createAsyncThunk(
   }
 )
 
+export const deleteMovieFromWatchList = createAsyncThunk(
+  'auth/deletingMovieFromWatchList',
+  async({email, movieTitle}: {email: string, movieTitle: string}, thunkAPI) => {
+    try {
+        const response = await UserService.deleteMovieFromWatchlist(email, movieTitle);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+);
+
+export const deleteMovieFromLikedList = createAsyncThunk(
+  'auth/deletingMovieFromLikedList',
+  async({email, movieTitle}: {email: string, movieTitle: string}, thunkAPI) => {
+    try {
+        const response = await UserService.deleteMovieFromLikedList(email, movieTitle);
+
+        return response.data;
+    } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          return thunkAPI.rejectWithValue(error.response?.data.message);
+        }
+
+        throw new Error('Something went wrong');
+    }
+  }
+);
+
 export const clearWatchLaterList = createAsyncThunk(
   'auth/clearWatchLaterList',
   async({email}: {email: string}, thunkAPI) => {
@@ -297,6 +331,36 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(clearLikedMoviesList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteMovieFromWatchList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMovieFromWatchList.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.watchLaterMovies = state.user.watchLaterMovies
+            .filter((movie) => movie.title !== action.payload);
+        }
+
+        state.isLoading = false;
+      })
+      .addCase(deleteMovieFromWatchList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteMovieFromLikedList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMovieFromLikedList.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.likedMovies= state.user.likedMovies
+            .filter((movie) => movie.title !== action.payload);
+        }
+
+        state.isLoading = false;
+      })
+      .addCase(deleteMovieFromLikedList.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
       })
