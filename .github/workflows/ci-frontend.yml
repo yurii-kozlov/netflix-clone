@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: ['**']
     paths: ['frontend/**']
-  push: 
-    branches: ['**']
+  push:
+    branches: [main]
     paths: ['frontend/**']
 jobs:
   build-and-test-frontend:
@@ -39,6 +39,7 @@ jobs:
         run: npm run build
 
       - name: Build and Push Docker Image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: yuriikozlov/netflix-clone
